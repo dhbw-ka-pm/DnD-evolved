@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+    <xs:complexType name="map">
+        <xs:sequence>
+            <xs:element name="serial" type="xs:string"/>
+            <xs:element name="name" type="xs:string"/>
+            <xs:element name="description" type="xs:string"/>
+            <xs:element name="imagePath" type="xs:string"/>
+            <xs:element name="events" type="event" maxOccurs="unbounded"/>
+            <xs:element name="sizeX" type="xs:integer"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="event">
+        <xs:sequence>
+            <xs:element name="serial" type="xs:string"/>
+            <xs:element name="name" type="xs:string"/>
+            <xs:element name="description" type="xs:string"/>
+            <xs:element name="locationX" type="xs:integer"/>
+            <xs:element name="locationY" type="xs:integer"/>
+            <xs:element name="leadsToMapSerial" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
