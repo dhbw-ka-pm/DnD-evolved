@@ -4,6 +4,7 @@ Allgemeine Informationen über das Projekt und wie man es zum laufen bringt soll
 ## Frontend Resources:
 Links zu Dokumentationen und verwendeten Guides und Videos:
 - https://www.youtube.com/watch?v=DaE_RpWRlJI
+- https://web.dev/progressive-web-apps/
 - https://angular.io/docs
 - https://material.angular.io
 insbesondere:
