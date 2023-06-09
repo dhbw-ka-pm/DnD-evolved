@@ -1,14 +1,14 @@
-:host {
-  display: flex;
-  flex-direction: row;
-  align-items: stretch;
+.grid-container {
+  margin: 10px;
+}
+.event-card {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  right: 15px;
+  bottom: 15px;
 }
 
-.grid-container{
-    margin: 2em;
-}
-.formfield {
-  display: flex;
-  flex-direction: column;
-  margin: 1em;
+.event-form-field {
+    margin: 1em;
 }
