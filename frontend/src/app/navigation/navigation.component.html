@@ -1,27 +1,78 @@
 <mat-sidenav-container class="sidenav-container">
-  <mat-sidenav #drawer class="sidenav" fixedInViewport
-      [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
-      [mode]="(isHandset$ | async) ? 'over' : 'side'"
-      [opened]="(isHandset$ | async) === false">
-    <mat-toolbar>Menu</mat-toolbar>
-    <mat-nav-list>
-      <a mat-list-item href="#">Link 1</a>
-      <a mat-list-item href="#">Link 2</a>
-      <a mat-list-item href="#">Link 3</a>
-    </mat-nav-list>
-  </mat-sidenav>
-  <mat-sidenav-content>
-    <mat-toolbar color="primary">
-      <button
-        type="button"
-        aria-label="Toggle sidenav"
-        mat-icon-button
-        (click)="drawer.toggle()"
-        *ngIf="isHandset$ | async">
-        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
-      </button>
-      <span>DnD-Evolved</span>
-    </mat-toolbar>
-    <!-- Add Content Here -->
-  </mat-sidenav-content>
+    <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+        [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
+        <mat-toolbar>Menu</mat-toolbar>
+        <mat-nav-list>
+            <a mat-list-item href="#">Link 1</a>
+            <a mat-list-item href="#">Link 2</a>
+            <a mat-list-item href="#">Link 3</a>
+        </mat-nav-list>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+        <mat-toolbar color="primary">
+            <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
+                <!-- *ngIf="isHandset$ | async" -->
+                <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+            </button>
+            <span>DnD-Evolved</span>
+        </mat-toolbar>
+        <!-- Add Content Here -->
+        <mat-drawer-container class="sidenav-container">
+            <mat-drawer #eventdrawer class="sidenav" position="end" mode="side" opened>
+                <mat-toolbar color="accent">
+                    <span>Events</span>
+                </mat-toolbar>
+                <mat-divider></mat-divider>
+
+                <!-- <mat-form-field>
+                                    <mat-label>Filter Events</mat-label>
+                                </mat-form-field> -->
+
+                <input type="text" name="filter" value="Filter Events" />
+                <mat-divider></mat-divider>
+                <mat-accordion>
+                    <mat-expansion-panel>
+                        <mat-expansion-panel-header>
+                            Dreadlands
+                        </mat-expansion-panel-header>
+                    </mat-expansion-panel>
+
+                    <mat-expansion-panel>
+                        <mat-expansion-panel-header>
+                            Abandoned Hut
+                        </mat-expansion-panel-header>
+                    </mat-expansion-panel>
+                    <mat-expansion-panel>
+                        <mat-expansion-panel-header>
+                            Hidden Shrine
+                        </mat-expansion-panel-header>
+                    </mat-expansion-panel>
+                    <mat-expansion-panel>
+                        <mat-expansion-panel-header>
+                            Forbidden Forest
+                        </mat-expansion-panel-header>
+                    </mat-expansion-panel>
+                    <mat-expansion-panel>
+                        <mat-expansion-panel-header>
+                            Deadman's Cave
+                        </mat-expansion-panel-header>
+                    </mat-expansion-panel>
+
+                </mat-accordion>
+            </mat-drawer>
+            <mat-drawer-content>
+
+                <mat-toolbar color="accent">
+                  <span>Dreadlands</span>
+                <span style="flex: 1 1 auto;"></span>
+                    <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="eventdrawer.toggle()">
+                        <!-- *ngIf="isHandset$ | async" -->
+                        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+                    </button>
+                </mat-toolbar>
+
+            </mat-drawer-content>
+        </mat-drawer-container>
+    </mat-sidenav-content>
 </mat-sidenav-container>

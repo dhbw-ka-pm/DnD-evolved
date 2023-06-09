@@ -7,11 +7,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { MaterialDesignModule } from './material-design/material-design.module';
 import { NavigationComponent } from './navigation/navigation.component';
+import { StoryManagementComponent } from './story-management/story-management.component';
+import { EventEditingComponent } from './event-editing/event-editing.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavigationComponent
+    NavigationComponent,
+    StoryManagementComponent,
+    EventEditingComponent
   ],
   imports: [
     BrowserModule,
