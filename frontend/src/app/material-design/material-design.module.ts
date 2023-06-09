@@ -14,6 +14,8 @@ import { MatTreeModule } from '@angular/material/tree';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatExpansionModule } from '@angular/material/expansion';
+import {MatSelectModule} from '@angular/material/select';
+import {MatInputModule} from '@angular/material/input';
 // needed Material components get added in th exports array
 @NgModule({
   declarations: [],
@@ -29,6 +31,8 @@ import { MatExpansionModule } from '@angular/material/expansion';
     MatCardModule,
     MatFormFieldModule,
     MatExpansionModule,
+    MatSelectModule,
+    MatInputModule,
 
   ]
 })
