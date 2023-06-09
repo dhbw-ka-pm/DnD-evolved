@@ -9,13 +9,20 @@ import { MaterialDesignModule } from './material-design/material-design.module';
 import { NavigationComponent } from './navigation/navigation.component';
 import { StoryManagementComponent } from './story-management/story-management.component';
 import { EventEditingComponent } from './event-editing/event-editing.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatCardModule } from '@angular/material/card';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavigationComponent,
     StoryManagementComponent,
-    EventEditingComponent
+    EventEditingComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
@@ -28,6 +35,11 @@ import { EventEditingComponent } from './event-editing/event-editing.component';
       // or after 30 seconds (whichever comes first).
       registrationStrategy: 'registerWhenStable:30000'
     }),
+    MatGridListModule,
+    MatCardModule,
+    MatMenuModule,
+    MatIconModule,
+    MatButtonModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
