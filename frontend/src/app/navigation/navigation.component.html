@@ -25,11 +25,10 @@
                 </mat-toolbar>
                 <mat-divider></mat-divider>
 
-                <!-- <mat-form-field>
-                                    <mat-label>Filter Events</mat-label>
-                                </mat-form-field> -->
+                <mat-form-field color="accent">
+                    <input matInput placeholder="Search">
+                </mat-form-field>
 
-                <input type="text" name="filter" value="Filter Events" />
                 <mat-divider></mat-divider>
                 <mat-accordion>
                     <mat-expansion-panel>
@@ -64,8 +63,8 @@
             <mat-drawer-content>
 
                 <mat-toolbar color="accent">
-                  <span>Dreadlands</span>
-                <span style="flex: 1 1 auto;"></span>
+                    <span>Dreadlands</span>
+                    <span style="flex: 1 1 auto;"></span>
                     <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="eventdrawer.toggle()">
                         <!-- *ngIf="isHandset$ | async" -->
                         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
