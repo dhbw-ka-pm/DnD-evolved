@@ -1,22 +1,24 @@
 package io.swagger.model;
 
+import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import io.swagger.model.Event;
 import io.swagger.v3.oas.annotations.media.Schema;
-import org.springframework.validation.annotation.Validated;
-
-import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
+import org.springframework.validation.annotation.Validated;
+import javax.validation.Valid;
+import javax.validation.constraints.*;
 
 /**
  * Map
  */
 @Validated
-@javax.annotation.processing.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-06-11T16:16:55.027943953Z[GMT]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-06-11T16:16:55.027943953Z[GMT]")
 
 
-public class Map {
+public class Map   {
   @JsonProperty("serial")
   private String serial = null;
 
@@ -46,12 +48,11 @@ public class Map {
 
   /**
    * Get serial
-   *
    * @return serial
    **/
   @Schema(description = "")
-
-  public String getSerial() {
+  
+    public String getSerial() {
     return serial;
   }
 
@@ -66,12 +67,11 @@ public class Map {
 
   /**
    * Get name
-   *
    * @return name
    **/
   @Schema(description = "")
-
-  public String getName() {
+  
+    public String getName() {
     return name;
   }
 
@@ -86,12 +86,11 @@ public class Map {
 
   /**
    * Get description
-   *
    * @return description
    **/
   @Schema(description = "")
-
-  public String getDescription() {
+  
+    public String getDescription() {
     return description;
   }
 
@@ -106,12 +105,11 @@ public class Map {
 
   /**
    * Get imagePath
-   *
    * @return imagePath
    **/
   @Schema(description = "")
-
-  public String getImagePath() {
+  
+    public String getImagePath() {
     return imagePath;
   }
 
@@ -126,12 +124,11 @@ public class Map {
 
   /**
    * Get sizeX
-   *
    * @return sizeX
    **/
   @Schema(description = "")
-
-  public Integer getSizeX() {
+  
+    public Integer getSizeX() {
     return sizeX;
   }
 
@@ -146,12 +143,11 @@ public class Map {
 
   /**
    * Get sizeY
-   *
    * @return sizeY
    **/
   @Schema(description = "")
-
-  public Integer getSizeY() {
+  
+    public Integer getSizeY() {
     return sizeY;
   }
 
@@ -174,12 +170,11 @@ public class Map {
 
   /**
    * Get events
-   *
    * @return events
    **/
   @Schema(description = "")
-  @Valid
-  public List<Event> getEvents() {
+      @Valid
+    public List<Event> getEvents() {
     return events;
   }
 
@@ -198,12 +193,12 @@ public class Map {
     }
     Map map = (Map) o;
     return Objects.equals(this.serial, map.serial) &&
-            Objects.equals(this.name, map.name) &&
-            Objects.equals(this.description, map.description) &&
-            Objects.equals(this.imagePath, map.imagePath) &&
-            Objects.equals(this.sizeX, map.sizeX) &&
-            Objects.equals(this.sizeY, map.sizeY) &&
-            Objects.equals(this.events, map.events);
+        Objects.equals(this.name, map.name) &&
+        Objects.equals(this.description, map.description) &&
+        Objects.equals(this.imagePath, map.imagePath) &&
+        Objects.equals(this.sizeX, map.sizeX) &&
+        Objects.equals(this.sizeY, map.sizeY) &&
+        Objects.equals(this.events, map.events);
   }
 
   @Override
@@ -215,7 +210,7 @@ public class Map {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class Map {\n");
-
+    
     sb.append("    serial: ").append(toIndentedString(serial)).append("\n");
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("    description: ").append(toIndentedString(description)).append("\n");

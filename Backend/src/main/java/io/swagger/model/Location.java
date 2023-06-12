@@ -1,19 +1,21 @@
 package io.swagger.model;
 
+import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
 import io.swagger.v3.oas.annotations.media.Schema;
 import org.springframework.validation.annotation.Validated;
-
-import java.util.Objects;
+import javax.validation.Valid;
+import javax.validation.constraints.*;
 
 /**
  * Location
  */
 @Validated
-@javax.annotation.processing.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-06-11T16:16:55.027943953Z[GMT]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-06-11T16:16:55.027943953Z[GMT]")
 
 
-public class Location {
+public class Location   {
   @JsonProperty("X")
   private Integer X = null;
 
@@ -27,12 +29,11 @@ public class Location {
 
   /**
    * Get X
-   *
    * @return X
    **/
   @Schema(description = "")
-
-  public Integer getX() {
+  
+    public Integer getX() {
     return X;
   }
 
@@ -47,12 +48,11 @@ public class Location {
 
   /**
    * Get Y
-   *
    * @return Y
    **/
   @Schema(description = "")
-
-  public Integer getY() {
+  
+    public Integer getY() {
     return Y;
   }
 
@@ -71,7 +71,7 @@ public class Location {
     }
     Location location = (Location) o;
     return Objects.equals(this.X, location.X) &&
-            Objects.equals(this.Y, location.Y);
+        Objects.equals(this.Y, location.Y);
   }
 
   @Override
@@ -83,7 +83,7 @@ public class Location {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class Location {\n");
-
+    
     sb.append("    X: ").append(toIndentedString(X)).append("\n");
     sb.append("    Y: ").append(toIndentedString(Y)).append("\n");
     sb.append("}");

@@ -1,20 +1,22 @@
 package io.swagger.model;
 
+import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import io.swagger.model.Location;
 import io.swagger.v3.oas.annotations.media.Schema;
 import org.springframework.validation.annotation.Validated;
-
 import javax.validation.Valid;
-import java.util.Objects;
+import javax.validation.constraints.*;
 
 /**
  * Event
  */
 @Validated
-@javax.annotation.processing.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-06-11T16:16:55.027943953Z[GMT]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-06-11T16:16:55.027943953Z[GMT]")
 
 
-public class Event {
+public class Event   {
   @JsonProperty("serial")
   private String serial = null;
 
@@ -37,12 +39,11 @@ public class Event {
 
   /**
    * Get serial
-   *
    * @return serial
    **/
   @Schema(description = "")
-
-  public String getSerial() {
+  
+    public String getSerial() {
     return serial;
   }
 
@@ -57,12 +58,11 @@ public class Event {
 
   /**
    * Get name
-   *
    * @return name
    **/
   @Schema(description = "")
-
-  public String getName() {
+  
+    public String getName() {
     return name;
   }
 
@@ -77,12 +77,11 @@ public class Event {
 
   /**
    * Get description
-   *
    * @return description
    **/
   @Schema(description = "")
-
-  public String getDescription() {
+  
+    public String getDescription() {
     return description;
   }
 
@@ -97,13 +96,12 @@ public class Event {
 
   /**
    * Get location
-   *
    * @return location
    **/
   @Schema(description = "")
-
-  @Valid
-  public Location getLocation() {
+  
+    @Valid
+    public Location getLocation() {
     return location;
   }
 
@@ -118,12 +116,11 @@ public class Event {
 
   /**
    * Get leadsToMapSerial
-   *
    * @return leadsToMapSerial
    **/
   @Schema(description = "")
-
-  public String getLeadsToMapSerial() {
+  
+    public String getLeadsToMapSerial() {
     return leadsToMapSerial;
   }
 
@@ -142,10 +139,10 @@ public class Event {
     }
     Event event = (Event) o;
     return Objects.equals(this.serial, event.serial) &&
-            Objects.equals(this.name, event.name) &&
-            Objects.equals(this.description, event.description) &&
-            Objects.equals(this.location, event.location) &&
-            Objects.equals(this.leadsToMapSerial, event.leadsToMapSerial);
+        Objects.equals(this.name, event.name) &&
+        Objects.equals(this.description, event.description) &&
+        Objects.equals(this.location, event.location) &&
+        Objects.equals(this.leadsToMapSerial, event.leadsToMapSerial);
   }
 
   @Override
@@ -157,7 +154,7 @@ public class Event {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class Event {\n");
-
+    
     sb.append("    serial: ").append(toIndentedString(serial)).append("\n");
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("    description: ").append(toIndentedString(description)).append("\n");
