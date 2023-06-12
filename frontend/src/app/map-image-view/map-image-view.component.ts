@@ -1,7 +1,7 @@
-import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 
 
-const maxLocations = 5;
+// const maxLocations = 5;
 
 
 @Component({

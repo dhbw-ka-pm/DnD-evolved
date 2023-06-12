@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MapImageViewComponent } from './map-image-view.component';
+import { MapImageViewComponent } from "./MapImageViewComponent";
 
 describe('MapImageViewComponent', () => {
   let component: MapImageViewComponent;
