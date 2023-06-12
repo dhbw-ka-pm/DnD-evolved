@@ -1,12 +1,12 @@
 plugins {
     id 'java'
-    id 'org.springframework.boot' version '3.1.0'
+    id 'org.springframework.boot' version '2.1.7.RELEASE'
     id 'io.spring.dependency-management' version '1.1.0'
 }
 
-group = 'com.example'
+group = 'com.dhbw.dndevolved'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '17'
+sourceCompatibility = '11'
 
 repositories {
     mavenCentral()
@@ -23,7 +23,8 @@ dependencies {
     implementation "javax.validation:validation-api:2.0.1.Final"
     implementation "org.springframework.plugin:spring-plugin-core:2.0.0.RELEASE"
     implementation 'javax.xml.bind:jaxb-api:2.2.4'
-    compileOnly 'javax.servlet:javax.servlet-api:4.0.1'
+    implementation 'org.springframework.data:spring-data-jpa:3.1.0'
+    implementation 'javax.servlet:javax.servlet-api:4.0.1'
 
 
 }
