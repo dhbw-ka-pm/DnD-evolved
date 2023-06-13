@@ -5,6 +5,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import org.springframework.validation.annotation.Validated;
 
 import javax.validation.Valid;
+import javax.xml.bind.annotation.*;
 import java.util.Objects;
 
 /**
@@ -14,26 +15,37 @@ import java.util.Objects;
 @javax.annotation.processing.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-06-11T16:16:55.027943953Z[GMT]")
 
 
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "Event", propOrder = {
+        "serial",
+        "name",
+        "description",
+        "location",
+        "leadsToMapSerial"
+})
+@XmlRootElement(name = "event")
 public class Event {
+
+  @XmlElement(name = "serial")
   @JsonProperty("serial")
-  private String serial = null;
+  private String serial;
 
+  @XmlElement(name = "name")
   @JsonProperty("name")
-  private String name = null;
+  private String name;
 
+  @XmlElement(name = "description")
   @JsonProperty("description")
-  private String description = null;
+  private String description;
 
+  @XmlElement(name = "location")
   @JsonProperty("location")
-  private Location location = null;
+  @Valid
+  private Location location;
 
+  @XmlElement(name = "leadsToMapSerial")
   @JsonProperty("leadsToMapSerial")
-  private String leadsToMapSerial = null;
-
-  public Event serial(String serial) {
-    this.serial = serial;
-    return this;
-  }
+  private String leadsToMapSerial;
 
   /**
    * Get serial

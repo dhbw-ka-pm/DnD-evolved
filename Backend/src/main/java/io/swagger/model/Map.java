@@ -5,40 +5,57 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import org.springframework.validation.annotation.Validated;
 
 import javax.validation.Valid;
+import javax.xml.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-/**
- * Map
- */
 @Validated
-@javax.annotation.processing.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-06-11T16:16:55.027943953Z[GMT]")
-
-
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "Map", propOrder = {
+        "serial",
+        "name",
+        "description",
+        "imagePath",
+        "sizeX",
+        "sizeY",
+        "events"
+})
+@XmlRootElement(name = "Map")
 public class Map {
+  @XmlElement(name = "Serial")
   @JsonProperty("serial")
   private String serial = null;
 
+  @XmlElement(name = "Name")
   @JsonProperty("name")
   private String name = null;
 
+  @XmlElement(name = "Description")
   @JsonProperty("description")
   private String description = null;
 
+  @XmlElement(name = "ImagePath")
   @JsonProperty("imagePath")
   private String imagePath = null;
 
+  @XmlElement(name = "SizeX")
   @JsonProperty("sizeX")
   private Integer sizeX = null;
 
+  @XmlElement(name = "SizeY")
   @JsonProperty("sizeY")
   private Integer sizeY = null;
 
+  @XmlElementWrapper(name = "Events")
+  @XmlElement(name = "Event")
   @JsonProperty("events")
   @Valid
   private List<Event> events = null;
 
+  // Getters and setters omitted for brevity
+
+  // Equals, hashCode, and toString methods omitted for brevity
   public Map serial(String serial) {
     this.serial = serial;
     return this;
