@@ -49,7 +49,7 @@ public class EventsApiController implements EventsApi {
 
     public ResponseEntity<List<Event>> eventsGet(@NotNull @Parameter(in = ParameterIn.QUERY, description = "", required = true, schema = @Schema()) @Valid @RequestParam(value = "map", required = true) String map) {
         String accept = request.getHeader("Accept");
-        if (accept != null && accept.contains("application/json")) {
+        if (accept != null && accept.contains("application/xml")) {
             try {
                 return new ResponseEntity<List<Event>>(objectMapper.readValue("[ {\n  \"leadsToMapSerial\" : \"leadsToMapSerial\",\n  \"serial\" : \"serial\",\n  \"name\" : \"name\",\n  \"description\" : \"description\",\n  \"location\" : {\n    \"X\" : 0,\n    \"Y\" : 6\n  }\n}, {\n  \"leadsToMapSerial\" : \"leadsToMapSerial\",\n  \"serial\" : \"serial\",\n  \"name\" : \"name\",\n  \"description\" : \"description\",\n  \"location\" : {\n    \"X\" : 0,\n    \"Y\" : 6\n  }\n} ]", List.class), HttpStatus.NOT_IMPLEMENTED);
             } catch (IOException e) {
