@@ -30,6 +30,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.io.IOException;
 import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 
 @javax.annotation.processing.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-06-11T16:16:55.027943953Z[GMT]")
@@ -78,14 +79,9 @@ public interface MapsApi {
         sampleMap.setSizeX(10);
         sampleMap.setSizeY(8);
 
-        // Create a sample Event and add it to the map
-        Event sampleEvent = new Event();
-        sampleEvent.setSerial("eventSerial");
-        sampleEvent.setName("Sample Event");
-        sampleEvent.setDescription("This is a sample event");
-        sampleEvent.setLocation(new Location().X(5).Y(5));
+        // Create a sample Event and add it to the ma
 
-        sampleMap.setEvents(Collections.singletonList(sampleEvent));
+        sampleMap.setEvents(List.of("sampleEvent"));
 
         // Return the sample map in the response
         return new ResponseEntity<>(sampleMap, HttpStatus.OK);
