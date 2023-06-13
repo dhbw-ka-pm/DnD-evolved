@@ -10,7 +10,6 @@ import io.swagger.model.Event;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
-import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -26,7 +25,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import java.io.IOException;
-import java.util.List;
 import java.util.Optional;
 
 @javax.annotation.processing.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-06-11T16:16:55.027943953Z[GMT]")
@@ -53,11 +51,11 @@ public interface EventsApi {
     @RequestMapping(value = "/events",
             produces = {"application/xml"},
             method = RequestMethod.GET)
-    default ResponseEntity<List<Event>> eventsGet(@NotNull @Parameter(in = ParameterIn.QUERY, description = "", required = true, schema = @Schema()) @Valid @RequestParam(value = "map", required = true) String map) {
+    default ResponseEntity<Event> eventsGet(@NotNull @Parameter(in = ParameterIn.QUERY, description = "", required = true, schema = @Schema()) @Valid @RequestParam(value = "map", required = true) String map) {
         if (getObjectMapper().isPresent() && getAcceptHeader().isPresent()) {
             if (getAcceptHeader().get().contains("application/xml")) {
                 try {
-                    return new ResponseEntity<>(getObjectMapper().get().readValue("[ {\n  \"leadsToMapSerial\" : \"leadsToMapSerial\",\n  \"serial\" : \"serial\",\n  \"name\" : \"name\",\n  \"description\" : \"description\",\n  \"location\" : {\n    \"X\" : 0,\n    \"Y\" : 6\n  }\n}, {\n  \"leadsToMapSerial\" : \"leadsToMapSerial\",\n  \"serial\" : \"serial\",\n  \"name\" : \"name\",\n  \"description\" : \"description\",\n  \"location\" : {\n    \"X\" : 0,\n    \"Y\" : 6\n  }\n} ]", List.class), HttpStatus.NOT_IMPLEMENTED);
+                    return new ResponseEntity<>(getObjectMapper().get().readValue("[ {\n  \"leadsToMapSerial\" : \"leadsToMapSerial\",\n  \"serial\" : \"serial\",\n  \"name\" : \"name\",\n  \"description\" : \"description\",\n  \"location\" : {\n    \"X\" : 0,\n    \"Y\" : 6\n  }\n}, {\n  \"leadsToMapSerial\" : \"leadsToMapSerial\",\n  \"serial\" : \"serial\",\n  \"name\" : \"name\",\n  \"description\" : \"description\",\n  \"location\" : {\n    \"X\" : 0,\n    \"Y\" : 6\n  }\n} ]", Event.class), HttpStatus.NOT_IMPLEMENTED);
                 } catch (IOException e) {
                     log.error("Couldn't serialize response for content type application/xml", e);
                     return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);

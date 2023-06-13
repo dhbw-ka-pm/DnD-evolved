@@ -1,6 +1,7 @@
 package io.swagger.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.swagger.model.Map;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -14,9 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.io.File;
 import java.io.IOException;
 import java.util.Optional;
-import io.swagger.model.Map;
 
 @javax.annotation.processing.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-06-11T16:16:55.027943953Z[GMT]")
 @RestController
@@ -46,6 +47,7 @@ public class MapsApiController implements MapsApi {
 
     public ResponseEntity<Void> mapsPost(@Parameter(in = ParameterIn.DEFAULT, description = "", required = true, schema = @Schema()) @Valid @RequestBody Map body) {
         String accept = request.getHeader("Accept");
+        File map = new File("Backend/storage");
         return new ResponseEntity<Void>(HttpStatus.OK);
     }
 
