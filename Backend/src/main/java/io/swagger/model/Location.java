@@ -1,33 +1,53 @@
 package io.swagger.model;
 
+import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
 import io.swagger.v3.oas.annotations.media.Schema;
 import org.springframework.validation.annotation.Validated;
-
-import java.util.Objects;
+import javax.validation.Valid;
+import javax.validation.constraints.*;
 
 /**
  * Location
  */
 @Validated
-@javax.annotation.processing.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-06-11T16:16:55.027943953Z[GMT]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-06-11T16:16:55.027943953Z[GMT]")
 
 
-public class Location {
+public class Location   {
   @JsonProperty("X")
   private Integer X = null;
 
   @JsonProperty("Y")
   private Integer Y = null;
 
-  public Location (Integer X, Integer Y) {
+  public Location X(Integer X) {
     this.X = X;
+    return this;
+  }
+
+  /**
+   * Get X
+   * @return X
+   **/
+  @Schema(description = "")
+
+  public Integer getX() {
+    return X;
+  }
+
+  public void setX(Integer X) {
+    this.X = X;
+  }
+
+  public Location Y(Integer Y) {
     this.Y = Y;
+    return this;
   }
 
   /**
    * Get Y
-   *
    * @return Y
    **/
   @Schema(description = "")
@@ -38,14 +58,6 @@ public class Location {
 
   public void setY(Integer Y) {
     this.Y = Y;
-  }
-
-  public Integer getX() {
-    return X;
-  }
-
-  public void setX(Integer X) {
-    this.X = X;
   }
 
 

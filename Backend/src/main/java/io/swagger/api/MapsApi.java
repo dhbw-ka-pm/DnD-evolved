@@ -83,7 +83,7 @@ public interface MapsApi {
         sampleEvent.setSerial("eventSerial");
         sampleEvent.setName("Sample Event");
         sampleEvent.setDescription("This is a sample event");
-        sampleEvent.setLocation(new Location(5, 5));
+        sampleEvent.setLocation(new Location().X(5).Y(5));
 
         sampleMap.setEvents(Collections.singletonList(sampleEvent));
 
