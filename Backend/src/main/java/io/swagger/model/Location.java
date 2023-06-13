@@ -20,10 +20,9 @@ public class Location {
   @JsonProperty("Y")
   private Integer Y = null;
 
-  public Location Y(Integer X, Integer Y) {
+  public Location (Integer X, Integer Y) {
     this.X = X;
     this.Y = Y;
-    return this;
   }
 
   /**
