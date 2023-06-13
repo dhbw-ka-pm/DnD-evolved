@@ -59,7 +59,7 @@ public interface EventsApi {
                 try {
                     return new ResponseEntity<>(getObjectMapper().get().readValue("[ {\n  \"leadsToMapSerial\" : \"leadsToMapSerial\",\n  \"serial\" : \"serial\",\n  \"name\" : \"name\",\n  \"description\" : \"description\",\n  \"location\" : {\n    \"X\" : 0,\n    \"Y\" : 6\n  }\n}, {\n  \"leadsToMapSerial\" : \"leadsToMapSerial\",\n  \"serial\" : \"serial\",\n  \"name\" : \"name\",\n  \"description\" : \"description\",\n  \"location\" : {\n    \"X\" : 0,\n    \"Y\" : 6\n  }\n} ]", List.class), HttpStatus.NOT_IMPLEMENTED);
                 } catch (IOException e) {
-                    log.error("Couldn't serialize response for content type application/json", e);
+                    log.error("Couldn't serialize response for content type application/xml", e);
                     return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
                 }
             }
