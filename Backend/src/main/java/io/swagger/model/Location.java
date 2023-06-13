@@ -7,31 +7,21 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import org.springframework.validation.annotation.Validated;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
+import javax.xml.bind.annotation.XmlElement;
 
 /**
  * Location
  */
 @Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-06-11T16:16:55.027943953Z[GMT]")
-
 
 public class Location   {
-  @JsonProperty("X")
+  @JsonProperty("x")
+  @XmlElement(name = "x")
   private Integer X = null;
 
-  @JsonProperty("Y")
+  @JsonProperty("y")
+  @XmlElement(name = "y")
   private Integer Y = null;
-
-  public Location X(Integer X) {
-    this.X = X;
-    return this;
-  }
-
-  /**
-   * Get X
-   * @return X
-   **/
-  @Schema(description = "")
 
   public Integer getX() {
     return X;
@@ -40,17 +30,6 @@ public class Location   {
   public void setX(Integer X) {
     this.X = X;
   }
-
-  public Location Y(Integer Y) {
-    this.Y = Y;
-    return this;
-  }
-
-  /**
-   * Get Y
-   * @return Y
-   **/
-  @Schema(description = "")
 
   public Integer getY() {
     return Y;

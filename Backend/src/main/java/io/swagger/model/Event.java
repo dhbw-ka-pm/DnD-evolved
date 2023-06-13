@@ -107,13 +107,6 @@ public class Event {
     return this;
   }
 
-  /**
-   * Get location
-   *
-   * @return location
-   **/
-  @Schema(description = "")
-
   @Valid
   public Location getLocation() {
     return location;

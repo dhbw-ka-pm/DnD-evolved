@@ -6,8 +6,6 @@
 package io.swagger.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.swagger.model.Event;
-import io.swagger.model.Location;
 import io.swagger.model.Map;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -33,7 +31,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
-@javax.annotation.processing.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-06-11T16:16:55.027943953Z[GMT]")
 @Validated
 public interface MapsApi {
 
