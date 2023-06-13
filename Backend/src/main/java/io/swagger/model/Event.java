@@ -51,7 +51,6 @@ public class Event {
    *
    * @return serial
    **/
-  @Schema(description = "")
 
   public String getSerial() {
     return serial;
@@ -71,7 +70,6 @@ public class Event {
    *
    * @return name
    **/
-  @Schema(description = "")
 
   public String getName() {
     return name;

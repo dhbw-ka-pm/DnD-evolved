@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+    <xs:element name="serial" type="xs:string"/>
+    <xs:element name="name" type="xs:string"/>
+    <xs:element name="description" type="xs:string"/>
+    <xs:element name="location" type="location"/>
+    <xs:element name="leadsToMapSerial" type="xs:string"/>
+
+    <xs:complexType name="location">
+    <xs:sequence>
+        <xs:element name="X" type="xs:integer"/>
+        <xs:element name="Y" type="xs:integer"/>
+    </xs:sequence>
+    </xs:complexType>
+</xs:schema>
