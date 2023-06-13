@@ -20,27 +20,8 @@ public class Location {
   @JsonProperty("Y")
   private Integer Y = null;
 
-  public Location X(Integer X) {
+  public Location Y(Integer X, Integer Y) {
     this.X = X;
-    return this;
-  }
-
-  /**
-   * Get X
-   *
-   * @return X
-   **/
-  @Schema(description = "")
-
-  public Integer getX() {
-    return X;
-  }
-
-  public void setX(Integer X) {
-    this.X = X;
-  }
-
-  public Location Y(Integer Y) {
     this.Y = Y;
     return this;
   }
@@ -58,6 +39,14 @@ public class Location {
 
   public void setY(Integer Y) {
     this.Y = Y;
+  }
+
+  public Integer getX() {
+    return X;
+  }
+
+  public void setX(Integer X) {
+    this.X = X;
   }
 
 
