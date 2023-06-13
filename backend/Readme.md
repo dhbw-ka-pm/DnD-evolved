@@ -1,2 +1,5 @@
 # Readme for DnD-Evolved Backend
-Hier sollen Informationen hin, wie man das Backend zum laufen bringt, welcher Port konfiguriert ist etc...
+
+This Project was built based on a  [swagger.io](https://swagger.io) API wirh version 3.0.0
+
+
