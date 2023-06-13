@@ -49,13 +49,13 @@ public interface EventsApi {
 
     @Operation(summary = "Retrieve events by map", description = "", tags = {})
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "OK", content = @Content(mediaType = "application/xml", array = @ArraySchema(schema = @Schema(implementation = Event.class))))})
+            @ApiResponse(responseCode = "200", description = "OK", content = @Content(mediaType = "application/xml", schema = @Schema(implementation = Event.class)))})
     @RequestMapping(value = "/events",
             produces = {"application/xml"},
             method = RequestMethod.GET)
     default ResponseEntity<List<Event>> eventsGet(@NotNull @Parameter(in = ParameterIn.QUERY, description = "", required = true, schema = @Schema()) @Valid @RequestParam(value = "map", required = true) String map) {
         if (getObjectMapper().isPresent() && getAcceptHeader().isPresent()) {
-            if (getAcceptHeader().get().contains("application/json")) {
+            if (getAcceptHeader().get().contains("application/xml")) {
                 try {
                     return new ResponseEntity<>(getObjectMapper().get().readValue("[ {\n  \"leadsToMapSerial\" : \"leadsToMapSerial\",\n  \"serial\" : \"serial\",\n  \"name\" : \"name\",\n  \"description\" : \"description\",\n  \"location\" : {\n    \"X\" : 0,\n    \"Y\" : 6\n  }\n}, {\n  \"leadsToMapSerial\" : \"leadsToMapSerial\",\n  \"serial\" : \"serial\",\n  \"name\" : \"name\",\n  \"description\" : \"description\",\n  \"location\" : {\n    \"X\" : 0,\n    \"Y\" : 6\n  }\n} ]", List.class), HttpStatus.NOT_IMPLEMENTED);
                 } catch (IOException e) {
