@@ -1,22 +1,22 @@
-package com.dhbw.dndEvolved.configuration;
+package io.swagger.configuration;
 
 import org.springframework.core.convert.converter.Converter;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class LocalDateTimeConverter implements Converter<String, LocalDateTime> {
+public class LocalDateConverter implements Converter<String, LocalDate> {
     private final DateTimeFormatter formatter;
 
-    public LocalDateTimeConverter(String dateFormat) {
+    public LocalDateConverter(String dateFormat) {
         this.formatter = DateTimeFormatter.ofPattern(dateFormat);
     }
 
     @Override
-    public LocalDateTime convert(String source) {
+    public LocalDate convert(String source) {
         if (source == null || source.isEmpty()) {
             return null;
         }
-        return LocalDateTime.parse(source, this.formatter);
+        return LocalDate.parse(source, this.formatter);
     }
 }

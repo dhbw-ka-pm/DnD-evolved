@@ -1,10 +1,9 @@
-package com.dhbw.dndEvolved.Persistance;
+package io.swagger.Persistance;
 
-import com.dhbw.dndEvolved.model.Event;
+import io.swagger.model.Event;
 
 import javax.xml.bind.JAXB;
 import java.io.File;
-import java.net.URI;
 
 public class EventFileSaver extends FileSaver<Event>{
     public static String getPathBySerial(String serial){

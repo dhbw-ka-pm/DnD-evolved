@@ -1,8 +1,6 @@
-package com.dhbw.dndEvolved.Persistance;
+package io.swagger.Persistance;
 
-import com.dhbw.dndEvolved.model.XMLModel;
-
-import javax.swing.plaf.metal.MetalIconFactory;
+import io.swagger.model.XMLModel;
 
 public abstract class FileSaver<T extends XMLModel> {
     private static String BASEPATH  = "XMLDocs/Files";

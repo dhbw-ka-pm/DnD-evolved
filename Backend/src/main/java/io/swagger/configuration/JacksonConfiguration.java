@@ -1,4 +1,4 @@
-package com.dhbw.dndEvolved.configuration;
+package io.swagger.configuration;
 
 import com.fasterxml.jackson.datatype.threetenbp.ThreeTenModule;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;

@@ -1,4 +1,4 @@
-package com.dhbw.dndEvolved.configuration;
+package io.swagger.configuration;
 
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;

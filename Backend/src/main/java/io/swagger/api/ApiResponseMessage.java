@@ -1,4 +1,4 @@
-package com.dhbw.dndEvolved.api;
+package io.swagger.api;
 
 import javax.xml.bind.annotation.XmlTransient;
 

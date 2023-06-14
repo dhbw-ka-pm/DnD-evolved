@@ -3,9 +3,9 @@
  * https://github.com/swagger-api/swagger-codegen
  * Do not edit the class manually.
  */
-package com.dhbw.dndEvolved.api;
+package io.swagger.api;
 
-import com.dhbw.dndEvolved.model.Map;
+import io.swagger.model.Map;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;

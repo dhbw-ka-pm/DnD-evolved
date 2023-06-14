@@ -1,4 +1,4 @@
-package com.dhbw.dndEvolved.api;
+package io.swagger.api;
 
 public class NotFoundException extends ApiException {
     private int code;
