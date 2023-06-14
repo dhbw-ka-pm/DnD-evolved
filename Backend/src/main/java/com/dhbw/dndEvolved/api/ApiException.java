@@ -1,4 +1,4 @@
-package io.swagger.api;
+package com.dhbw.dndEvolved.api;
 
 public class ApiException extends Exception {
     private int code;
