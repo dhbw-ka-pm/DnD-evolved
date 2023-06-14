@@ -24,7 +24,7 @@ import java.util.Objects;
         "leadsToMapSerial"
 })
 @XmlRootElement(name = "event")
-public class Event {
+public class Event implements XMLModel {
 
   @XmlElement(name = "serial")
   @JsonProperty("serial")
