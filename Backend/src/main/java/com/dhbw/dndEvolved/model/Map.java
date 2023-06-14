@@ -1,4 +1,4 @@
-package io.swagger.model;
+package com.dhbw.dndEvolved.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -6,6 +6,7 @@ import org.springframework.validation.annotation.Validated;
 
 import javax.validation.Valid;
 import javax.xml.bind.annotation.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -22,7 +23,7 @@ import java.util.Objects;
         "events"
 })
 @XmlRootElement(name = "Map")
-public class Map {
+public class Map implements XMLModel {
   @XmlElement(name = "Serial")
   @JsonProperty("serial")
   private String serial = null;

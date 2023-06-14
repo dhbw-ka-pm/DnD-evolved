@@ -1,7 +1,7 @@
-package io.swagger;
+package com.dhbw.dndEvolved;
 
-import io.swagger.configuration.LocalDateConverter;
-import io.swagger.configuration.LocalDateTimeConverter;
+import com.dhbw.dndEvolved.configuration.LocalDateConverter;
+import com.dhbw.dndEvolved.configuration.LocalDateTimeConverter;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.ExitCodeGenerator;
 import org.springframework.boot.SpringApplication;

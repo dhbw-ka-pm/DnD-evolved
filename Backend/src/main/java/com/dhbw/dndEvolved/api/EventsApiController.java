@@ -1,7 +1,7 @@
-package io.swagger.api;
+package com.dhbw.dndEvolved.api;
 
+import com.dhbw.dndEvolved.model.Event;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.swagger.model.Event;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.media.Schema;

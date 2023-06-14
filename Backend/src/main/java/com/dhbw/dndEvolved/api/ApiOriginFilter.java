@@ -1,4 +1,4 @@
-package io.swagger.api;
+package com.dhbw.dndEvolved.api;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletResponse;

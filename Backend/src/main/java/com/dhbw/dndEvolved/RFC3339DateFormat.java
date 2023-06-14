@@ -1,4 +1,4 @@
-package io.swagger;
+package com.dhbw.dndEvolved;
 
 import com.fasterxml.jackson.databind.util.ISO8601DateFormat;
 import com.fasterxml.jackson.databind.util.ISO8601Utils;
