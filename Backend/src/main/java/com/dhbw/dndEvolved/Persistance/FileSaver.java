@@ -13,7 +13,7 @@ public abstract class FileSaver<T extends XMLModel> {
 
     protected abstract String getFolderName();
 
-    private String getPath(){
+    public String getPath(){
         return BASEPATH + "/" + getFolderName();
     }
 
