@@ -6,7 +6,6 @@
     <xs:element name="description" type="xs:string"/>
     <xs:element name="location" type="location"/>
     <xs:element name="leadsToMapSerial" type="xs:string"/>
-
     <xs:complexType name="location">
     <xs:sequence>
         <xs:element name="X" type="xs:integer"/>

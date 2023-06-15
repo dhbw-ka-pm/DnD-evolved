@@ -3,7 +3,7 @@ package io.swagger.Persistance;
 import io.swagger.model.XMLModel;
 
 public abstract class FileSaver<T extends XMLModel> {
-    private static String BASEPATH  = "XMLDocs/Files";
+    private static String BASEPATH  = "Backend/src/main/resources/XMLDocs/Files";
 
     public abstract void saveFile(T model);
 
