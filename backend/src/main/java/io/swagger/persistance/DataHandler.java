@@ -22,8 +22,8 @@ public class DataHandler {
     public static void init() throws IOException, JAXBException {
         JAXBContext mapContext = JAXBContext.newInstance(io.swagger.model.Map.class);
         Unmarshaller mapUnmarshaller = mapContext.createUnmarshaller();
-        File folder = new File(DATA_DIR + "maps");
-        File[] listOfMaps = folder.listFiles();
+        File mapsFolder = new File(DATA_DIR + "maps");
+        File[] listOfMaps = mapsFolder.listFiles();
         if (null != listOfMaps) {
             for (File file : listOfMaps) {
                 if (file.isFile()) {
@@ -33,6 +33,28 @@ public class DataHandler {
             }
             System.out.println(maps);
         }
+        JAXBContext eventContext = JAXBContext.newInstance(Event.class);
+        Unmarshaller eventUnmarshaller = eventContext.createUnmarshaller();
+        File eventsFolder = new File(DATA_DIR + "events");
+        File[] listOfEvents = eventsFolder.listFiles();
+        if (null != listOfEvents) {
+            for (File file : listOfEvents) {
+                if (file.isFile()) {
+                    Event e = (Event) eventUnmarshaller.unmarshal(file);
+                    events.put(e.getSerial(), e);
+                }
+            }
+            System.out.println(events);
+        }
     }
+
+    public static void putMap(io.swagger.model.Map map) {
+        maps.put(map.getSerial(), map);
+    }
+
+    public static void putEvent(Event event) {
+        events.put(event.getSerial(), event);
+    }
+
 
 }
