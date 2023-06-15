@@ -1,6 +1,5 @@
 package io.swagger.persistance;
 
-import io.swagger.model.Map;
 import io.swagger.model.XMLModel;
 
 import javax.xml.bind.JAXBContext;
@@ -15,11 +14,11 @@ public class FileSaver<T extends XMLModel> {
 
     private static final String XML_ENDING = ".xml";
 
-    private static final String DIR = "backend/persistence/xmlDocs/files/";
+    static final String DATA_DIR = "backend/persistence/xmlDocs/files/";
 
     public FileSaver(String folderName) {
         this.folderName = folderName;
-        File dir = new File(DIR + "/" + folderName);
+        File dir = new File(DATA_DIR + "/" + folderName);
         if (!dir.exists())
             dir.mkdirs();
     }
@@ -45,10 +44,10 @@ public class FileSaver<T extends XMLModel> {
 
 
     public static String getDirectoryPath(){
-        return DIR;
+        return DATA_DIR;
     }
     public String getFolderPath() {
-        return DIR + "/" + getFolderName() + "/";
+        return DATA_DIR + "/" + getFolderName() + "/";
     }
 
 

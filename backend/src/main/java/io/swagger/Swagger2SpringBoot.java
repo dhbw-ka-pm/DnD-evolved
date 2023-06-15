@@ -2,6 +2,7 @@ package io.swagger;
 
 import io.swagger.configuration.LocalDateConverter;
 import io.swagger.configuration.LocalDateTimeConverter;
+import io.swagger.persistance.DataHandler;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.ExitCodeGenerator;
 import org.springframework.boot.SpringApplication;
@@ -18,6 +19,7 @@ import springfox.documentation.oas.annotations.EnableOpenApi;
 public class Swagger2SpringBoot implements CommandLineRunner {
 
     public static void main(String[] args) throws Exception {
+        DataHandler.init();
         new SpringApplication(Swagger2SpringBoot.class).run(args);
     }
 

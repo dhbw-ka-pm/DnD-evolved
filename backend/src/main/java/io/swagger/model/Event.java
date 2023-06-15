@@ -12,8 +12,6 @@ import java.util.Objects;
  * Event
  */
 @Validated
-
-
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Event", propOrder = {
         "serial",
