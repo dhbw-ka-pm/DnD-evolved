@@ -22,7 +22,7 @@ import java.util.Objects;
         "location",
         "leadsToMapSerial"
 })
-@XmlRootElement(name = "event")
+@XmlRootElement(name = "Event")
 public class Event implements XMLModel {
 
   @XmlElement(name = "serial")

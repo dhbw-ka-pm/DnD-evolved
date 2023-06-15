@@ -2,6 +2,7 @@ package io.swagger.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.model.Event;
+import io.swagger.persistance.FileSaver;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -18,8 +19,10 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import javax.xml.bind.JAXBException;
 import java.io.IOException;
 import java.util.Optional;
+import java.util.UUID;
 
 @RestController
 public class EventsApiController implements EventsApi {
@@ -60,9 +63,18 @@ public class EventsApiController implements EventsApi {
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
     }
 
-    public ResponseEntity<Void> eventsMapSerialPost(@Parameter(in = ParameterIn.PATH, description = "", required = true, schema = @Schema()) @PathVariable("mapSerial") String mapSerial, @Parameter(in = ParameterIn.DEFAULT, description = "", required = true, schema = @Schema()) @Valid @RequestBody Event body) {
+    public ResponseEntity<Void> eventsMapSerialPost(@Parameter(in = ParameterIn.PATH, description = "", required = true, schema = @Schema()) @PathVariable("mapSerial") String mapSerial, @Parameter(in = ParameterIn.DEFAULT, description = "", required = true, schema = @Schema()) @Valid @RequestBody Event body){
         String accept = request.getHeader("Accept");
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+        body.setSerial(UUID.randomUUID().toString());
+        FileSaver<Event> fileSaver = new FileSaver<>("events");
+        try {
+            fileSaver.saveFile(body);
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+        catch (JAXBException e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
+        }
     }
 
 }
