@@ -1,27 +1,54 @@
 package io.swagger.persistance;
 
+import io.swagger.model.Map;
 import io.swagger.model.XMLModel;
 
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
 import java.io.File;
 
-public abstract class FileSaver<T extends XMLModel> {
+
+public class FileSaver<T extends XMLModel> {
+
+    private final String folderName;
+
+    private static final String XML_ENDING = ".xml";
 
     private static final String DIR = "backend/persistence/xmlDocs/files/";
 
-    public FileSaver() {
-        File dir = new File(DIR);
+    public FileSaver(String folderName) {
+        this.folderName = folderName;
+        File dir = new File(DIR + "/" + folderName);
         if (!dir.exists())
             dir.mkdirs();
     }
 
-    public abstract void saveFile(T model);
+    public void saveFile(T model) throws JAXBException {
+        File file = new File(getFolderPath() + model.getSerial() + XML_ENDING);
+        JAXBContext jaxbContext = JAXBContext.newInstance(Map.class);
+        Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
 
-    public abstract T getFromFile(String filename);
+        // output pretty printed
+        jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 
-    protected abstract String getFolderName();
+        jaxbMarshaller.marshal(model, file);
+    };
 
-    public String getPath() {
+    public  T getFromFile(String filename){
+        return null;
+    };
+
+    private String getFolderName(){
+        return folderName;
+    };
+
+
+    public static String getDirectoryPath(){
         return DIR;
+    }
+    public String getFolderPath() {
+        return DIR + "/" + getFolderName() + "/";
     }
 
 
