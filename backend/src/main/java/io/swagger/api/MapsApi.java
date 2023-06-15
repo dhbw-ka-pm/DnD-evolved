@@ -5,8 +5,8 @@
  */
 package io.swagger.api;
 
-import io.swagger.model.Map;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.swagger.model.Map;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
@@ -48,7 +48,9 @@ public interface MapsApi {
 
     @Operation(summary = "Add a new map", description = "", tags = {})
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "OK")})
+            @ApiResponse(responseCode = "200", description = "OK"),
+            @ApiResponse(responseCode = "409", description = "Not OK")
+    })
     @RequestMapping(value = "/maps",
             consumes = {"application/xml"},
             method = RequestMethod.POST)

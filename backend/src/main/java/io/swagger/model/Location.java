@@ -1,10 +1,10 @@
 package io.swagger.model;
 
-import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.validation.annotation.Validated;
 
 import javax.xml.bind.annotation.XmlElement;
+import java.util.Objects;
 
 /**
  * Location
