@@ -1,5 +1,6 @@
 package io.swagger.persistance;
 
+import io.swagger.model.Event;
 import io.swagger.model.XMLModel;
 
 import javax.xml.bind.JAXBContext;
@@ -14,9 +15,9 @@ import static io.swagger.persistance.FileSaver.DATA_DIR;
 
 public class DataHandler {
 
-    private static final HashMap<String, XMLModel> maps = new HashMap<>();
-    private static final HashMap<String, XMLModel> events = new HashMap<>();
-    private static final Map<String, HashMap<String, XMLModel>> model = Map.of("maps", maps, "events", events);
+    private static final HashMap<String, io.swagger.model.Map> maps = new HashMap<>();
+    private static final HashMap<String, Event> events = new HashMap<>();
+    private static final Map<String, HashMap<String, ? extends XMLModel>> model = Map.of("maps", maps, "events", events);
 
     public static void init() throws IOException, JAXBException {
         JAXBContext mapContext = JAXBContext.newInstance(io.swagger.model.Map.class);
