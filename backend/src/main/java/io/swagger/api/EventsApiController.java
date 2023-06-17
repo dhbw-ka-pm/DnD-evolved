@@ -63,18 +63,19 @@ public class EventsApiController implements EventsApi {
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
     }
 
-    public ResponseEntity<Void> eventsMapSerialPost(@Parameter(in = ParameterIn.PATH, description = "", required = true, schema = @Schema()) @PathVariable("mapSerial") String mapSerial, @Parameter(in = ParameterIn.DEFAULT, description = "", required = true, schema = @Schema()) @Valid @RequestBody Event body){
+    public ResponseEntity<String> eventsMapSerialPost(@Parameter(in = ParameterIn.PATH, description = "", required = true, schema = @Schema()) @PathVariable("mapSerial") String mapSerial, @Parameter(in = ParameterIn.DEFAULT, description = "", required = true, schema = @Schema()) @Valid @RequestBody Event body){
         String accept = request.getHeader("Accept");
-        body.setSerial(UUID.randomUUID().toString());
+        String serial = UUID.randomUUID().toString();
+        body.setSerial(serial);
         FileSaver<Event> fileSaver = new FileSaver<>("events");
         try {
             fileSaver.saveFile(body);
-            return new ResponseEntity<>(HttpStatus.OK);
         }
         catch (JAXBException e) {
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.CONFLICT);
         }
+        return new ResponseEntity<>(serial, HttpStatus.OK);
     }
 
 }

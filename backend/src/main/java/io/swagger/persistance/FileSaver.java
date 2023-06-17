@@ -34,10 +34,6 @@ public class FileSaver<T extends XMLModel> {
         jaxbMarshaller.marshal(model, file);
     };
 
-    public  T getFromFile(String filename){
-        return null;
-    };
-
     private String getFolderName(){
         return folderName;
     };

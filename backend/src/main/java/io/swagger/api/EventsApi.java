@@ -76,7 +76,7 @@ public interface EventsApi {
     @RequestMapping(value = "/events/{mapSerial}",
             consumes = {"application/xml"},
             method = RequestMethod.POST)
-    default ResponseEntity<Void> eventsMapSerialPost(@Parameter(in = ParameterIn.PATH, description = "", required = true, schema = @Schema()) @PathVariable("mapSerial") String mapSerial, @Parameter(in = ParameterIn.DEFAULT, description = "", required = true, schema = @Schema()) @Valid @RequestBody Event body) throws JAXBException {
+    default ResponseEntity<String> eventsMapSerialPost(@Parameter(in = ParameterIn.PATH, description = "", required = true, schema = @Schema()) @PathVariable("mapSerial") String mapSerial, @Parameter(in = ParameterIn.DEFAULT, description = "", required = true, schema = @Schema()) @Valid @RequestBody Event body) throws JAXBException {
         if (getObjectMapper().isPresent() && getAcceptHeader().isPresent()) {
         } else {
             log.warn("ObjectMapper or HttpServletRequest not configured in default EventsApi interface so no example is generated");

@@ -49,10 +49,11 @@ public class MapsApiController implements MapsApi {
         return Optional.ofNullable(request);
     }
 
-    public ResponseEntity<Void> mapsPost(@Parameter(in = ParameterIn.DEFAULT, description = "", required = true, schema = @Schema()) @Valid @RequestBody Map body) {
+    public ResponseEntity<String> mapsPost(@Parameter(in = ParameterIn.DEFAULT, description = "", required = true, schema = @Schema()) @Valid @RequestBody Map body) {
         String accept = request.getHeader("Accept");
 
-        body.setSerial(UUID.randomUUID().toString());
+        String serial = UUID.randomUUID().toString();
+        body.setSerial(serial);
         FileSaver<Map> es = new FileSaver<>("maps");
         try {
             es.saveFile(body);
@@ -61,7 +62,7 @@ public class MapsApiController implements MapsApi {
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.CONFLICT);
         }
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(serial, HttpStatus.OK);
     }
 
     public ResponseEntity<Map> mapsSerialGet(@Parameter(in = ParameterIn.PATH, description = "", required = true, schema = @Schema()) @PathVariable("serial") String serial) {
