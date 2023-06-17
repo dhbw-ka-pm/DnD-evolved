@@ -2,10 +2,12 @@ package io.swagger.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
+import org.apache.tomcat.util.buf.ByteChunk;
 import org.springframework.validation.annotation.Validated;
 
 import javax.validation.Valid;
 import javax.xml.bind.annotation.*;
+import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -17,37 +19,42 @@ import java.util.Objects;
         "name",
         "description",
         "imagePath",
+        "imageFile",
         "sizeX",
         "sizeY",
         "events"
 })
 @XmlRootElement(name = "Map")
 public class Map implements XMLModel {
-  @XmlElement(name = "Serial")
+  @XmlElement(name = "Serial", required = false)
   @JsonProperty("serial")
   private String serial = null;
 
-  @XmlElement(name = "Name")
+  @XmlElement(name = "Name", required = true)
   @JsonProperty("name")
   private String name = null;
 
-  @XmlElement(name = "Description")
+  @XmlElement(name = "Description", required = true)
   @JsonProperty("description")
   private String description = null;
 
-  @XmlElement(name = "ImagePath")
+  @XmlElement(name = "ImagePath", required = false)
   @JsonProperty("imagePath")
   private String imagePath = null;
 
-  @XmlElement(name = "SizeX")
+  @XmlElement(name = "imageFile", required = false)
+  @JsonProperty("imageFile")
+  private ByteArrayInputStream imageFile;
+
+  @XmlElement(name = "SizeX", required = true)
   @JsonProperty("sizeX")
   private Integer sizeX = null;
 
-  @XmlElement(name = "SizeY")
+  @XmlElement(name = "SizeY", required = true)
   @JsonProperty("sizeY")
   private Integer sizeY = null;
 
-  @XmlElementWrapper(name = "Events")
+  @XmlElementWrapper(name = "Events", required = true)
   @XmlElement(name = "Event")
   @JsonProperty("events")
   @Valid

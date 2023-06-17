@@ -1,14 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
-    <xs:element name="serial" type="xs:string"/>
-    <xs:element name="name" type="xs:string"/>
-    <xs:element name="description" type="xs:string"/>
-    <xs:element name="imagePath" type="xs:string"/>
-    <xs:element name="sizeX" type="xs:integer"/>
-    <xs:element name="sizeY" type="xs:integer"/>
-    <xs:element name="events">
-        <xs:simpleType>
-            <xs:list itemType="xs:string"/>
-        </xs:simpleType>
+    <xs:element name="map">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="serial" type="xs:string" />
+                <xs:element name="name" type="xs:string"/>
+                <xs:element name="description" type="xs:string"/>
+                <xs:element name="imagePath" type="xs:string" />
+                <xs:element name="sizeX" type="xs:integer" default="1920"/>
+                <xs:element name="sizeY" type="xs:integer" default="1080" />
+                <xs:element name="events">
+                    <xs:simpleType>
+                       <xs:list itemType="xs:string"/>
+                    </xs:simpleType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
     </xs:element>
 </xs:schema>
