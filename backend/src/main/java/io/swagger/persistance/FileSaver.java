@@ -38,13 +38,11 @@ public class FileSaver<T extends XMLModel> {
         return folderName;
     };
 
-
     public static String getDirectoryPath(){
         return DATA_DIR;
     }
     public String getFolderPath() {
         return getDirectoryPath() + "/" + getFolderName();
     }
-
 
 }
