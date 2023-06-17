@@ -19,7 +19,6 @@ import springfox.documentation.oas.annotations.EnableOpenApi;
 public class Swagger2SpringBoot implements CommandLineRunner {
 
     public static void main(String[] args) throws Exception {
-        DataHandler.init();
         new SpringApplication(Swagger2SpringBoot.class).run(args);
     }
 

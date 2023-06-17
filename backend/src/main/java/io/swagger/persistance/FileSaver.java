@@ -43,7 +43,7 @@ public class FileSaver<T extends XMLModel> {
         return DATA_DIR;
     }
     public String getFolderPath() {
-        return DATA_DIR + "/" + getFolderName() + "/";
+        return DATA_DIR + "/" + getFolderName();
     }
 
 
