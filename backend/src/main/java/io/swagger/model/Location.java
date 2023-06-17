@@ -3,7 +3,6 @@ package io.swagger.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.validation.annotation.Validated;
 
-import javax.xml.bind.annotation.XmlElement;
 import java.util.Objects;
 
 /**
@@ -13,11 +12,9 @@ import java.util.Objects;
 
 public class Location   {
   @JsonProperty("x")
-  @XmlElement(name = "x")
   private Integer X = null;
 
   @JsonProperty("y")
-  @XmlElement(name = "y")
   private Integer Y = null;
 
   public Integer getX() {
@@ -57,13 +54,11 @@ public class Location   {
 
   @Override
   public String toString() {
-    StringBuilder sb = new StringBuilder();
-    sb.append("class Location {\n");
 
-    sb.append("    X: ").append(toIndentedString(X)).append("\n");
-    sb.append("    Y: ").append(toIndentedString(Y)).append("\n");
-    sb.append("}");
-    return sb.toString();
+    return "class Location {\n" +
+            "    X: " + toIndentedString(X) + "\n" +
+            "    Y: " + toIndentedString(Y) + "\n" +
+            "}";
   }
 
   /**

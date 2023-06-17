@@ -24,7 +24,7 @@ public class FileSaver<T extends XMLModel> {
     }
 
     public void saveFile(T model) throws JAXBException {
-        File file = new File(getFolderPath() + model.getSerial() + XML_ENDING);
+        File file = new File(getFolderPath() +"/" + model.getSerial() + XML_ENDING);
         JAXBContext jaxbContext = JAXBContext.newInstance(model.getClass());
         Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
 
@@ -43,7 +43,7 @@ public class FileSaver<T extends XMLModel> {
         return DATA_DIR;
     }
     public String getFolderPath() {
-        return DATA_DIR + "/" + getFolderName();
+        return getDirectoryPath() + "/" + getFolderName();
     }
 
 
