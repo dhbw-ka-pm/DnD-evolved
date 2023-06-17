@@ -2,6 +2,7 @@ package io.swagger.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.model.Map;
+import io.swagger.persistance.DataHandler;
 import io.swagger.persistance.FileSaver;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
@@ -33,10 +34,12 @@ public class MapsApiController implements MapsApi {
 
     private final HttpServletRequest request;
 
+    private final DataHandler handler;
     @Autowired
-    public MapsApiController(ObjectMapper objectMapper, HttpServletRequest request) {
+    public MapsApiController(ObjectMapper objectMapper, HttpServletRequest request, DataHandler dataHandler) {
         this.objectMapper = objectMapper;
         this.request = request;
+        this.handler = dataHandler;
     }
 
     @Override
