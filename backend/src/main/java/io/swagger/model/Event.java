@@ -12,9 +12,6 @@ import java.util.Objects;
  * Event
  */
 @Validated
-@javax.annotation.processing.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-06-11T16:16:55.027943953Z[GMT]")
-
-
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Event", propOrder = {
         "serial",
@@ -23,8 +20,8 @@ import java.util.Objects;
         "location",
         "leadsToMapSerial"
 })
-@XmlRootElement(name = "event")
-public class Event {
+@XmlRootElement(name = "Event")
+public class Event implements XMLModel {
 
   @XmlElement(name = "serial")
   @JsonProperty("serial")
@@ -52,7 +49,6 @@ public class Event {
    *
    * @return serial
    **/
-  @Schema(description = "")
 
   public String getSerial() {
     return serial;
@@ -72,7 +68,6 @@ public class Event {
    *
    * @return name
    **/
-  @Schema(description = "")
 
   public String getName() {
     return name;
@@ -106,13 +101,6 @@ public class Event {
     this.location = location;
     return this;
   }
-
-  /**
-   * Get location
-   *
-   * @return location
-   **/
-  @Schema(description = "")
 
   @Valid
   public Location getLocation() {

@@ -2,11 +2,14 @@ package io.swagger.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.model.Map;
+import io.swagger.persistance.DataHandler;
+import io.swagger.persistance.FileSaver;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.media.Schema;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,13 +18,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-import java.io.File;
+import javax.xml.bind.JAXBException;
 import java.io.IOException;
 import java.util.Optional;
+import java.util.UUID;
 
-@javax.annotation.processing.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-06-11T16:16:55.027943953Z[GMT]")
 @RestController
 public class MapsApiController implements MapsApi {
+
+
 
     private static final Logger log = LoggerFactory.getLogger(MapsApiController.class);
 
@@ -29,10 +34,12 @@ public class MapsApiController implements MapsApi {
 
     private final HttpServletRequest request;
 
-    @org.springframework.beans.factory.annotation.Autowired
-    public MapsApiController(ObjectMapper objectMapper, HttpServletRequest request) {
+    private final DataHandler handler;
+    @Autowired
+    public MapsApiController(ObjectMapper objectMapper, HttpServletRequest request, DataHandler dataHandler) {
         this.objectMapper = objectMapper;
         this.request = request;
+        this.handler = dataHandler;
     }
 
     @Override
@@ -45,10 +52,20 @@ public class MapsApiController implements MapsApi {
         return Optional.ofNullable(request);
     }
 
-    public ResponseEntity<Void> mapsPost(@Parameter(in = ParameterIn.DEFAULT, description = "", required = true, schema = @Schema()) @Valid @RequestBody Map body) {
+    public ResponseEntity<String> mapsPost(@Parameter(in = ParameterIn.DEFAULT, description = "", required = true, schema = @Schema()) @Valid @RequestBody Map body) {
         String accept = request.getHeader("Accept");
-        File map = new File("Backend/storage");
-        return new ResponseEntity<Void>(HttpStatus.OK);
+
+        String serial = UUID.randomUUID().toString();
+        body.setSerial(serial);
+        FileSaver<Map> es = new FileSaver<>("maps");
+        try {
+            es.saveFile(body);
+
+        } catch (JAXBException e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
+        }
+        return new ResponseEntity<>(serial, HttpStatus.OK);
     }
 
     public ResponseEntity<Map> mapsSerialGet(@Parameter(in = ParameterIn.PATH, description = "", required = true, schema = @Schema()) @PathVariable("serial") String serial) {
