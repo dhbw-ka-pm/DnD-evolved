@@ -22,7 +22,7 @@ import java.util.Objects;
         "events"
 })
 @XmlRootElement(name = "Map")
-public class Map {
+public class Map implements XMLModel {
   @XmlElement(name = "Serial")
   @JsonProperty("serial")
   private String serial = null;
@@ -51,7 +51,7 @@ public class Map {
   @XmlElement(name = "Event")
   @JsonProperty("events")
   @Valid
-  private List<Event> events = null;
+  private List<String> events = null;
 
   // Getters and setters omitted for brevity
 
@@ -176,16 +176,16 @@ public class Map {
     this.sizeY = sizeY;
   }
 
-  public Map events(List<Event> events) {
+  public Map events(List<String> events) {
     this.events = events;
     return this;
   }
 
-  public Map addEventsItem(Event eventsItem) {
+  public Map addEventsItem(String eventSerial) {
     if (this.events == null) {
-      this.events = new ArrayList<Event>();
+      this.events = new ArrayList<String>();
     }
-    this.events.add(eventsItem);
+    this.events.add(eventSerial);
     return this;
   }
 
@@ -196,11 +196,11 @@ public class Map {
    **/
   @Schema(description = "")
   @Valid
-  public List<Event> getEvents() {
+  public List<String> getEvents() {
     return events;
   }
 
-  public void setEvents(List<Event> events) {
+  public void setEvents(List<String> events) {
     this.events = events;
   }
 

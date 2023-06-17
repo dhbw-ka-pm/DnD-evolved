@@ -1,37 +1,21 @@
 package io.swagger.model;
 
-import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import io.swagger.v3.oas.annotations.media.Schema;
 import org.springframework.validation.annotation.Validated;
-import javax.validation.Valid;
-import javax.validation.constraints.*;
+
+import java.util.Objects;
 
 /**
  * Location
  */
 @Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-06-11T16:16:55.027943953Z[GMT]")
-
 
 public class Location   {
-  @JsonProperty("X")
+  @JsonProperty("x")
   private Integer X = null;
 
-  @JsonProperty("Y")
+  @JsonProperty("y")
   private Integer Y = null;
-
-  public Location X(Integer X) {
-    this.X = X;
-    return this;
-  }
-
-  /**
-   * Get X
-   * @return X
-   **/
-  @Schema(description = "")
 
   public Integer getX() {
     return X;
@@ -40,17 +24,6 @@ public class Location   {
   public void setX(Integer X) {
     this.X = X;
   }
-
-  public Location Y(Integer Y) {
-    this.Y = Y;
-    return this;
-  }
-
-  /**
-   * Get Y
-   * @return Y
-   **/
-  @Schema(description = "")
 
   public Integer getY() {
     return Y;
@@ -81,13 +54,11 @@ public class Location   {
 
   @Override
   public String toString() {
-    StringBuilder sb = new StringBuilder();
-    sb.append("class Location {\n");
 
-    sb.append("    X: ").append(toIndentedString(X)).append("\n");
-    sb.append("    Y: ").append(toIndentedString(Y)).append("\n");
-    sb.append("}");
-    return sb.toString();
+    return "class Location {\n" +
+            "    X: " + toIndentedString(X) + "\n" +
+            "    Y: " + toIndentedString(Y) + "\n" +
+            "}";
   }
 
   /**

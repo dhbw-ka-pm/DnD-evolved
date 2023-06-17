@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="serial" type="xs:string"/>
+    <xs:element name="name" type="xs:string"/>
+    <xs:element name="description" type="xs:string"/>
+    <xs:element name="imagePath" type="xs:string"/>
+    <xs:element name="sizeX" type="xs:integer"/>
+    <xs:element name="sizeY" type="xs:integer"/>
+    <xs:element name="events">
+        <xs:simpleType>
+            <xs:list itemType="xs:string"/>
+        </xs:simpleType>
+    </xs:element>
+</xs:schema>
