@@ -67,14 +67,15 @@ public class EventsApiController implements EventsApi {
 
     public ResponseEntity<String> eventsMapSerialPost(@Parameter(in = ParameterIn.PATH, description = "", required = true, schema = @Schema()) @PathVariable("mapSerial") String mapSerial, @Parameter(in = ParameterIn.DEFAULT, description = "", required = true, schema = @Schema()) @Valid @RequestBody Event body){
         String accept = request.getHeader("Accept");
-        Map map;
 
 
-        String serial = UUID.randomUUID().toString();
-        body.setSerial(serial);
         try {
-            map = dataHandler.getMap(mapSerial);
-            map.getEvents().add(serial);
+            Map map = dataHandler.getMap(mapSerial);
+            if(body.getSerial() == null) {
+                String serial = UUID.randomUUID().toString();
+                body.setSerial(serial);
+                map.getEvents().add(serial);
+            }
             dataHandler.putMap(map);
             dataHandler.putEvent(body);
         }
@@ -85,7 +86,7 @@ public class EventsApiController implements EventsApi {
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<>(serial, HttpStatus.OK);
+        return new ResponseEntity<>(body.getSerial(), HttpStatus.OK);
     }
 
 }
