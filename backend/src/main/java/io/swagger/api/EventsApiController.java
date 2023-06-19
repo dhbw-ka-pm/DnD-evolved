@@ -2,7 +2,7 @@ package io.swagger.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.model.Event;
-import io.swagger.persistance.FileSaver;
+import io.swagger.persistance.DataHandler;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -32,11 +32,13 @@ public class EventsApiController implements EventsApi {
     private final ObjectMapper objectMapper;
 
     private final HttpServletRequest request;
+    private final DataHandler dataHandler;
 
     @Autowired
-    public EventsApiController(ObjectMapper objectMapper, HttpServletRequest request) {
+    public EventsApiController(ObjectMapper objectMapper, HttpServletRequest request, DataHandler dataHandler) {
         this.objectMapper = objectMapper;
         this.request = request;
+        this.dataHandler = dataHandler;
     }
 
     @Override
@@ -67,9 +69,8 @@ public class EventsApiController implements EventsApi {
         String accept = request.getHeader("Accept");
         String serial = UUID.randomUUID().toString();
         body.setSerial(serial);
-        FileSaver<Event> fileSaver = new FileSaver<>("events");
         try {
-            fileSaver.saveFile(body);
+            dataHandler.putEvent(body);
         }
         catch (JAXBException e) {
             e.printStackTrace();

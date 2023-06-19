@@ -3,7 +3,6 @@ package io.swagger.api;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.model.Map;
 import io.swagger.persistance.DataHandler;
-import io.swagger.persistance.FileSaver;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -57,9 +56,8 @@ public class MapsApiController implements MapsApi {
 
         String serial = UUID.randomUUID().toString();
         body.setSerial(serial);
-        FileSaver<Map> es = new FileSaver<>("maps");
         try {
-            es.saveFile(body);
+            handler.putMap(body);
 
         } catch (JAXBException e) {
             e.printStackTrace();
