@@ -2,6 +2,7 @@ package io.swagger.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.model.Event;
+import io.swagger.model.Map;
 import io.swagger.persistance.DataHandler;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
@@ -66,14 +67,23 @@ public class EventsApiController implements EventsApi {
 
     public ResponseEntity<String> eventsMapSerialPost(@Parameter(in = ParameterIn.PATH, description = "", required = true, schema = @Schema()) @PathVariable("mapSerial") String mapSerial, @Parameter(in = ParameterIn.DEFAULT, description = "", required = true, schema = @Schema()) @Valid @RequestBody Event body){
         String accept = request.getHeader("Accept");
+        Map map;
+
+
         String serial = UUID.randomUUID().toString();
         body.setSerial(serial);
         try {
+            map = dataHandler.getMap(mapSerial);
+            map.getEvents().add(serial);
+            dataHandler.putMap(map);
             dataHandler.putEvent(body);
         }
         catch (JAXBException e) {
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.CONFLICT);
+        } catch (DataHandler.SerialNotFoundException e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(serial, HttpStatus.OK);
     }

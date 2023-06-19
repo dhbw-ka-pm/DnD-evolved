@@ -15,6 +15,8 @@ import java.util.Map;
 @Service
 public class DataHandler {
 
+    public static boolean FILEPERSISTANCE = true;
+
     private final HashMap<String, io.swagger.model.Map> maps = new HashMap<>();
     private final HashMap<String, Event> events = new HashMap<>();
     private final Map<String, HashMap<String, ? extends XMLModel>> model = Map.of("maps", maps, "events", events);
@@ -68,12 +70,14 @@ public class DataHandler {
     }
 
     public void putMap(io.swagger.model.Map map) throws JAXBException {
-        mapXMLSaver.saveFile(map);
+        if(FILEPERSISTANCE)
+            mapXMLSaver.saveFile(map);
         maps.put(map.getSerial(), map);
     }
 
     public void putEvent(Event event) throws JAXBException {
-        eventXMLSaver.saveFile(event);
+        if(FILEPERSISTANCE)
+            eventXMLSaver.saveFile(event);
         events.put(event.getSerial(), event);
     }
 
