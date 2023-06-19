@@ -77,9 +77,28 @@ public class DataHandler {
         events.put(event.getSerial(), event);
     }
 
-    public void saveImage(io.swagger.model.Map map){
-        File f = null;
+    public Event getEvent(String serial) throws SerialNotFoundException {
+        if (!events.containsKey(serial))
+            throw new SerialNotFoundException("this Serial does not lead to any existent Event.");
+        else
+            return events.get(serial);
     }
+
+    public io.swagger.model.Map getMap(String serial) throws SerialNotFoundException {
+        if (!maps.containsKey(serial))
+            throw new SerialNotFoundException("this Serial does not lead to any existent Map.");
+        else
+            return maps.get(serial);
+    }
+
+    public void saveImage(io.swagger.model.Map map){
+    }
+
+    public class SerialNotFoundException extends Exception{
+        public SerialNotFoundException(String serial){
+            super(serial);
+        }
+    };
 
 
 }

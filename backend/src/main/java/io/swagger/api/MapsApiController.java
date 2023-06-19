@@ -33,12 +33,12 @@ public class MapsApiController implements MapsApi {
 
     private final HttpServletRequest request;
 
-    private final DataHandler handler;
+    private final DataHandler dataHandler;
     @Autowired
     public MapsApiController(ObjectMapper objectMapper, HttpServletRequest request, DataHandler dataHandler) {
         this.objectMapper = objectMapper;
         this.request = request;
-        this.handler = dataHandler;
+        this.dataHandler = dataHandler;
     }
 
     @Override
@@ -57,7 +57,7 @@ public class MapsApiController implements MapsApi {
         String serial = UUID.randomUUID().toString();
         body.setSerial(serial);
         try {
-            handler.putMap(body);
+            dataHandler.putMap(body);
 
         } catch (JAXBException e) {
             e.printStackTrace();
@@ -70,14 +70,14 @@ public class MapsApiController implements MapsApi {
         String accept = request.getHeader("Accept");
         if (accept != null && accept.contains("application/xml")) {
             try {
-                return new ResponseEntity<Map>(objectMapper.readValue("{\n  \"sizeX\" : 0,\n  \"serial\" : \"serial\",\n  \"imagePath\" : \"imagePath\",\n  \"name\" : \"name\",\n  \"description\" : \"description\",\n  \"sizeY\" : 6,\n  \"events\" : [ {\n    \"leadsToMapSerial\" : \"leadsToMapSerial\",\n    \"serial\" : \"serial\",\n    \"name\" : \"name\",\n    \"description\" : \"description\",\n    \"location\" : {\n      \"X\" : 0,\n      \"Y\" : 6\n    }\n  }, {\n    \"leadsToMapSerial\" : \"leadsToMapSerial\",\n    \"serial\" : \"serial\",\n    \"name\" : \"name\",\n    \"description\" : \"description\",\n    \"location\" : {\n      \"X\" : 0,\n      \"Y\" : 6\n    }\n  } ]\n}", Map.class), HttpStatus.NOT_IMPLEMENTED);
-            } catch (IOException e) {
-                log.error("Couldn't serialize response for content type application/xml", e);
-                return new ResponseEntity<Map>(HttpStatus.INTERNAL_SERVER_ERROR);
+                return new ResponseEntity<>(dataHandler.getMap(serial), HttpStatus.OK);
+            } catch (DataHandler.SerialNotFoundException e) {
+                log.error(e.getMessage(), e);
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             }
         }
+        return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 
-        return new ResponseEntity<Map>(HttpStatus.NOT_IMPLEMENTED);
     }
 
 }

@@ -53,16 +53,15 @@ public class EventsApiController implements EventsApi {
 
     public ResponseEntity<Event> eventsGet(@NotNull @Parameter(in = ParameterIn.QUERY, description = "", required = true, schema = @Schema()) @Valid @RequestParam(value = "serial", required = true) String serial) {
         String accept = request.getHeader("Accept");
-        if (accept != null && accept.contains("application/xml")) {
-            try {
-                return new ResponseEntity<>(objectMapper.readValue("{\n  \"serial\" : \"serial\",\n  \"serial\" : \"serial\",\n  \"name\" : \"name\",\n  \"description\" : \"description\",\n  \"location\" : {\n    \"X\" : 0,\n    \"Y\" : 6\n  }\n}", Event.class), HttpStatus.NOT_IMPLEMENTED);
-            } catch (IOException e) {
-                log.error("Couldn't serialize response for content type application/xml", e);
-                return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            if (accept != null && accept.contains("application/xml")) {
+                try {
+                    return new ResponseEntity<>(dataHandler.getEvent(serial), HttpStatus.OK);
+                } catch (DataHandler.SerialNotFoundException e) {
+                    log.error(e.getMessage(), e);
+                    return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+                }
             }
-        }
-
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     public ResponseEntity<String> eventsMapSerialPost(@Parameter(in = ParameterIn.PATH, description = "", required = true, schema = @Schema()) @PathVariable("mapSerial") String mapSerial, @Parameter(in = ParameterIn.DEFAULT, description = "", required = true, schema = @Schema()) @Valid @RequestBody Event body){
