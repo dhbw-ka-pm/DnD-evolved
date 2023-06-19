@@ -53,8 +53,7 @@ public class MapsApiController implements MapsApi {
 
     public ResponseEntity<String> mapsPost(@Parameter(in = ParameterIn.DEFAULT, description = "", required = true, schema = @Schema()) @Valid @RequestBody Map body) {
         String accept = request.getHeader("Accept");
-
-        String serial = UUID.randomUUID().toString();
+        String serial = body.getSerial() == null?UUID.randomUUID().toString(): body.getSerial();
         body.setSerial(serial);
         try {
             dataHandler.putMap(body);

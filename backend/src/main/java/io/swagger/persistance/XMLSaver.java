@@ -30,6 +30,9 @@ public class XMLSaver<T extends XMLModel>{
         // output pretty printed
         jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 
+        if(file.exists()){
+            file.delete();
+        }
         jaxbMarshaller.marshal(model, file);
     };
 
