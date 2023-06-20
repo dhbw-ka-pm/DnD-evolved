@@ -62,7 +62,7 @@ public class MapsApiController implements MapsApi {
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.CONFLICT);
         }
-        return new ResponseEntity<>(serial, HttpStatus.OK);
+        return new ResponseEntity<>(serial, HttpStatus.CREATED);
     }
 
     public ResponseEntity<Map> mapsSerialGet(@Parameter(in = ParameterIn.PATH, description = "", required = true, schema = @Schema()) @PathVariable("serial") String serial) {

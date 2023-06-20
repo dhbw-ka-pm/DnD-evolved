@@ -86,7 +86,7 @@ public class EventsApiController implements EventsApi {
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<>(body.getSerial(), HttpStatus.OK);
+        return new ResponseEntity<>(body.getSerial(), HttpStatus.CREATED);
     }
 
 }
