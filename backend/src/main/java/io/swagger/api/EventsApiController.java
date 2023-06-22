@@ -2,7 +2,8 @@ package io.swagger.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.model.Event;
-import io.swagger.persistance.FileSaver;
+import io.swagger.model.Map;
+import io.swagger.persistance.DataHandler;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -32,11 +33,13 @@ public class EventsApiController implements EventsApi {
     private final ObjectMapper objectMapper;
 
     private final HttpServletRequest request;
+    private final DataHandler dataHandler;
 
     @Autowired
-    public EventsApiController(ObjectMapper objectMapper, HttpServletRequest request) {
+    public EventsApiController(ObjectMapper objectMapper, HttpServletRequest request, DataHandler dataHandler) {
         this.objectMapper = objectMapper;
         this.request = request;
+        this.dataHandler = dataHandler;
     }
 
     @Override
@@ -51,31 +54,39 @@ public class EventsApiController implements EventsApi {
 
     public ResponseEntity<Event> eventsGet(@NotNull @Parameter(in = ParameterIn.QUERY, description = "", required = true, schema = @Schema()) @Valid @RequestParam(value = "serial", required = true) String serial) {
         String accept = request.getHeader("Accept");
-        if (accept != null && accept.contains("application/xml")) {
-            try {
-                return new ResponseEntity<>(objectMapper.readValue("{\n  \"serial\" : \"serial\",\n  \"serial\" : \"serial\",\n  \"name\" : \"name\",\n  \"description\" : \"description\",\n  \"location\" : {\n    \"X\" : 0,\n    \"Y\" : 6\n  }\n}", Event.class), HttpStatus.NOT_IMPLEMENTED);
-            } catch (IOException e) {
-                log.error("Couldn't serialize response for content type application/xml", e);
-                return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            if (accept != null && accept.contains("application/xml")) {
+                try {
+                    return new ResponseEntity<>(dataHandler.getEvent(serial), HttpStatus.OK);
+                } catch (DataHandler.SerialNotFoundException e) {
+                    log.error(e.getMessage(), e);
+                    return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+                }
             }
-        }
-
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     public ResponseEntity<String> eventsMapSerialPost(@Parameter(in = ParameterIn.PATH, description = "", required = true, schema = @Schema()) @PathVariable("mapSerial") String mapSerial, @Parameter(in = ParameterIn.DEFAULT, description = "", required = true, schema = @Schema()) @Valid @RequestBody Event body){
         String accept = request.getHeader("Accept");
-        String serial = UUID.randomUUID().toString();
-        body.setSerial(serial);
-        FileSaver<Event> fileSaver = new FileSaver<>("events");
+
+
         try {
-            fileSaver.saveFile(body);
+            Map map = dataHandler.getMap(mapSerial);
+            if(body.getSerial() == null) {
+                String serial = UUID.randomUUID().toString();
+                body.setSerial(serial);
+                map.addEvent(serial);
+            }
+            dataHandler.putMap(map);
+            dataHandler.putEvent(body);
         }
         catch (JAXBException e) {
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.CONFLICT);
+        } catch (DataHandler.SerialNotFoundException e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<>(serial, HttpStatus.OK);
+        return new ResponseEntity<>(body.getSerial(), HttpStatus.CREATED);
     }
 
 }
