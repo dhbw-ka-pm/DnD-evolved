@@ -84,5 +84,6 @@ public interface EventsApi {
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
     }
 
+
 }
 
