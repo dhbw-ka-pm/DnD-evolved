@@ -8,15 +8,14 @@ import javax.xml.bind.Marshaller;
 import java.io.File;
 
 
-public class FileSaver<T extends XMLModel> {
+public class XMLSaver<T extends XMLModel>{
 
     private final String folderName;
 
-    private static final String XML_ENDING = ".xml";
-
+    private final static String XML_ENDING = ".xml";
     static final String DATA_DIR = "backend/persistence/xmlDocs/files/";
 
-    public FileSaver(String folderName) {
+    public XMLSaver(String folderName) {
         this.folderName = folderName;
         File dir = new File(DATA_DIR + "/" + folderName);
         if (!dir.exists())
@@ -31,6 +30,9 @@ public class FileSaver<T extends XMLModel> {
         // output pretty printed
         jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 
+        if(file.exists()){
+            file.delete();
+        }
         jaxbMarshaller.marshal(model, file);
     };
 
@@ -38,13 +40,11 @@ public class FileSaver<T extends XMLModel> {
         return folderName;
     };
 
-
     public static String getDirectoryPath(){
         return DATA_DIR;
     }
     public String getFolderPath() {
         return getDirectoryPath() + "/" + getFolderName();
     }
-
 
 }

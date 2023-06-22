@@ -200,6 +200,14 @@ public class Map implements XMLModel {
     return events;
   }
 
+  public void addEvent(String event){
+    if(events == null){
+      events = new ArrayList<>();
+    }
+    events.remove(event);
+    events.add(event);
+  }
+
   public void setEvents(List<String> events) {
     this.events = events;
   }
