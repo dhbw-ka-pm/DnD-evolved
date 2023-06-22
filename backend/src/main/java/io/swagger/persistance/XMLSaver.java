@@ -6,6 +6,7 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import java.io.File;
+import java.io.FileNotFoundException;
 
 
 public class XMLSaver<T extends XMLModel>{
@@ -23,7 +24,7 @@ public class XMLSaver<T extends XMLModel>{
     }
 
     public void saveFile(T model) throws JAXBException {
-        File file = new File(getFolderPath() +"/" + model.getSerial() + XML_ENDING);
+        File file = findFile(model.getSerial());
         JAXBContext jaxbContext = JAXBContext.newInstance(model.getClass());
         Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
 
@@ -36,9 +37,20 @@ public class XMLSaver<T extends XMLModel>{
         jaxbMarshaller.marshal(model, file);
     };
 
+    public void removeFile(String serial){
+        File file = findFile(serial);
+        if(file.exists()){
+            file.delete();
+        }
+    }
+
     private String getFolderName(){
         return folderName;
     };
+
+    private File findFile(String serial){
+        return new File(getFolderPath() +"/" + serial + XML_ENDING);
+    }
 
     public static String getDirectoryPath(){
         return DATA_DIR;

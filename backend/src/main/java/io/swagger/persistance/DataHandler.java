@@ -15,6 +15,7 @@ import java.util.Map;
 @Service
 public class DataHandler {
 
+
     public static boolean FILEPERSISTANCE = true;
 
     private final HashMap<String, io.swagger.model.Map> maps = new HashMap<>();
@@ -88,21 +89,43 @@ public class DataHandler {
             return events.get(serial);
     }
 
+    public void removeEvent(String serial) throws SerialNotFoundException{
+        checkContains(events, serial);
+        events.remove(serial);
+        mapXMLSaver.removeFile(serial);
+
+    }
+    public void removeMap(String serial) throws SerialNotFoundException{
+        checkContains(maps, serial);
+        maps.remove(serial);
+        mapXMLSaver.removeFile(serial);
+    }
+
+
     public io.swagger.model.Map getMap(String serial) throws SerialNotFoundException {
-        if (!maps.containsKey(serial))
-            throw new SerialNotFoundException("this Serial does not lead to any existent Map.");
-        else
-            return maps.get(serial);
+        checkContains(maps, serial);
+        return maps.get(serial);
     }
 
     public void saveImage(io.swagger.model.Map map){
     }
 
-    public class SerialNotFoundException extends Exception{
+    public static void checkContains(Map map, String serial) throws SerialNotFoundException{
+        if (!map.containsKey(serial))
+            throw new SerialNotFoundException("this Serial does not lead to any existent File");
+    }
+
+
+    public static class SerialNotFoundException extends Exception{
         public SerialNotFoundException(String serial){
             super(serial);
         }
+
+
     };
+
+
+
 
 
 }
