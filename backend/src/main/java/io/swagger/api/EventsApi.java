@@ -77,7 +77,7 @@ public interface EventsApi {
             @ApiResponse(responseCode = "404", description = "Map not found")})
     @RequestMapping(value = "/events/{mapSerial}",
             consumes = {"application/xml"},
-            method = RequestMethod.POST)
+            method = RequestMethod.PUT)
     default ResponseEntity<String> eventsMapSerialPost(@Parameter(in = ParameterIn.PATH, description = "", required = true, schema = @Schema()) @PathVariable("mapSerial") String mapSerial, @Parameter(in = ParameterIn.DEFAULT, description = "", required = true, schema = @Schema()) @Valid @RequestBody Event body) throws JAXBException {
         if (getObjectMapper().isPresent() && getAcceptHeader().isPresent()) {
         } else {
