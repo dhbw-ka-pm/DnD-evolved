@@ -11,7 +11,6 @@ import javax.xml.bind.Unmarshaller;
 import java.io.File;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @Service
@@ -91,13 +90,12 @@ public class DataHandler {
             return events.get(serial);
     }
 
-    public void removeEvent(String serial) throws SerialNotFoundException{
-        checkContains(events, serial);
-        events.remove(serial);
-        mapXMLSaver.removeFile(serial);
-
+    public static void checkContains(Map<String, ? extends XMLModel> map, String serial) throws SerialNotFoundException {
+        if (!map.containsKey(serial))
+            throw new SerialNotFoundException("this Serial does not lead to any existent File");
     }
-    public void removeMap(String serial) throws SerialNotFoundException{
+
+    public void removeMap(String serial) throws SerialNotFoundException {
         checkContains(maps, serial);
         maps.remove(serial);
         mapXMLSaver.removeFile(serial);
@@ -109,25 +107,27 @@ public class DataHandler {
         return maps.get(serial);
     }
 
-    public void saveImage(io.swagger.model.Map map){
+    public void saveImage(io.swagger.model.Map map) {
     }
 
     public void updateMap(String serial) throws JAXBException {
         mapXMLSaver.saveFile(maps.get(serial));
     }
 
-    public static void checkContains(Map map, String serial) throws SerialNotFoundException{
-        if (!map.containsKey(serial))
-            throw new SerialNotFoundException("this Serial does not lead to any existent File");
+    public void removeEvent(String serial) throws SerialNotFoundException {
+        checkContains(events, serial);
+        events.remove(serial);
+        eventXMLSaver.removeFile(serial);
+
     }
 
-    public Collection<io.swagger.model.Map> getAllMaps(){
+    public Collection<io.swagger.model.Map> getAllMaps() {
         return maps.values();
     }
 
 
-    public static class SerialNotFoundException extends Exception{
-        public SerialNotFoundException(String serial){
+    public static class SerialNotFoundException extends Exception {
+        public SerialNotFoundException(String serial) {
             super(serial);
         }
 

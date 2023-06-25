@@ -22,7 +22,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.JAXBException;
-import java.io.IOException;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -98,6 +97,26 @@ public class EventsApiController implements EventsApi {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } catch (JAXBException e) {
             return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+        }
+    }
+
+    @Override
+    public ResponseEntity<Void> overwriteEvent(@Parameter(in = ParameterIn.PATH, description = "", required = true, schema = @Schema()) @PathVariable("eventSerial") String eventSerial,
+                                               @Parameter(in = ParameterIn.PATH, description = "", required = true, schema = @Schema()) @PathVariable("mapSerial") String mapSerial,
+                                               @Parameter(in = ParameterIn.DEFAULT, description = "", required = true, schema = @Schema()) @Valid @RequestBody Event body) {
+        try {
+            Event event = body;
+            event.setSerial(eventSerial);
+            dataHandler.removeEvent(eventSerial);
+            dataHandler.putEvent(body);
+            //TODO Events have to hold their location information. Currently they are not linked
+            dataHandler.getMap(mapSerial).getEvents().put(mapSerial, new Location());
+            dataHandler.updateMap(mapSerial);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (DataHandler.SerialNotFoundException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } catch (JAXBException e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 

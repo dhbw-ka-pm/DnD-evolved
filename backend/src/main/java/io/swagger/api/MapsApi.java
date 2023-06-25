@@ -6,7 +6,6 @@
 package io.swagger.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sun.xml.txw2.annotation.XmlNamespace;
 import io.swagger.model.Location;
 import io.swagger.model.Map;
 import io.swagger.v3.oas.annotations.Operation;
@@ -22,7 +21,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -94,7 +96,7 @@ public interface MapsApi {
     })
     @RequestMapping(value = "/maps/{serial}",
             method = RequestMethod.DELETE)
-    default ResponseEntity<String> mapDelete(@NotNull @Parameter(in = ParameterIn.QUERY, description = "", required = true, schema = @Schema()) @Valid @PathVariable(value = "serial") String serial) {
+    default ResponseEntity<Void> mapDelete(@NotNull @Parameter(in = ParameterIn.QUERY, description = "", required = true, schema = @Schema()) @Valid @PathVariable(value = "serial") String serial) {
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
     }
 
@@ -115,13 +117,25 @@ public interface MapsApi {
             @ApiResponse(responseCode = "200", description = "OK"),
             @ApiResponse(responseCode = "404", description = "Event not found")
     })
-    @RequestMapping(value = "/maps/{mapSerial},{eventSerial},{new x},{new y}",
-    method = RequestMethod.PATCH)
+    @RequestMapping(value = "/maps/{mapSerial},{eventSerial},{location_x},{location_y}",
+            method = RequestMethod.PATCH)
     default ResponseEntity<Void> eventLocationChange(@Parameter(in = ParameterIn.PATH, description = "", required = true, schema = @Schema()) @PathVariable("eventSerial") String eventSerial,
                                                      @Parameter(in = ParameterIn.PATH, description = "", required = true, schema = @Schema()) @PathVariable("mapSerial") String mapSerial,
-                                                     @Parameter(in = ParameterIn.PATH, description = "", required = true, schema = @Schema()) @PathVariable("location x") int locationX,
-                                                     @Parameter(in = ParameterIn.PATH, description = "", required = true, schema = @Schema()) @PathVariable("location y") int locationY
-    ){
+                                                     @Parameter(in = ParameterIn.PATH, description = "", required = true, schema = @Schema()) @PathVariable("location_x") int locationX,
+                                                     @Parameter(in = ParameterIn.PATH, description = "", required = true, schema = @Schema()) @PathVariable("location_y") int locationY
+    ) {
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+    }
+
+    @Operation(summary = "delete an event from a map", description = "", tags = {})
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "OK"),
+            @ApiResponse(responseCode = "409", description = "Not OK")
+    })
+    @RequestMapping(value = "/maps/{mapSerial}/events/{eventSerial}",
+            method = RequestMethod.DELETE)
+    default ResponseEntity<Void> mapEventDelete(@NotNull @Parameter(in = ParameterIn.QUERY, description = "", required = true, schema = @Schema()) @Valid @PathVariable(value = "mapSerial") String mapSerial,
+                                                @NotNull @Parameter(in = ParameterIn.QUERY, description = "", required = true, schema = @Schema()) @Valid @PathVariable(value = "eventSerial") String eventSerial) {
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
     }
 
