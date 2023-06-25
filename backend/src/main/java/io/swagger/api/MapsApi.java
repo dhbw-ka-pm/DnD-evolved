@@ -6,11 +6,13 @@
 package io.swagger.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.sun.xml.txw2.annotation.XmlNamespace;
 import io.swagger.model.Location;
 import io.swagger.model.Map;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -45,6 +47,7 @@ public interface MapsApi {
         return getRequest().map(r -> r.getHeader("Accept"));
     }
 
+
     @Operation(summary = "Add a new map", description = "", tags = {})
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "OK"),
@@ -52,11 +55,12 @@ public interface MapsApi {
     })
     @RequestMapping(value = "/maps",
             consumes = {"application/xml"},
-            method = RequestMethod.POST)
+            method = RequestMethod.PUT)
     default ResponseEntity<String> mapsPost(@Parameter(in = ParameterIn.DEFAULT, description = "", required = true, schema = @Schema()) @Valid @RequestBody Map body) {
         // Populate the response with a success status code
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
 
     @Operation(summary = "Retrieve a map by serial", description = "", tags = {})
     @ApiResponses(value = {
@@ -91,6 +95,33 @@ public interface MapsApi {
     @RequestMapping(value = "/maps/{serial}",
             method = RequestMethod.DELETE)
     default ResponseEntity<String> mapDelete(@NotNull @Parameter(in = ParameterIn.QUERY, description = "", required = true, schema = @Schema()) @Valid @PathVariable(value = "serial") String serial) {
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+    }
+
+    @Operation(summary = "Get a list of all existent Maps")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "OK", content = @Content(mediaType = "application/xml", array = @ArraySchema(schema = @Schema(implementation = Map.class))))
+    })
+    @RequestMapping(value = "/maps/",
+                            produces = {"application/xml"},
+    method = RequestMethod.GET)
+
+    default ResponseEntity<List<Map>> getAllMaps(){
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+    }
+
+    @Operation(summary = "change the location of an Event on a map")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "OK"),
+            @ApiResponse(responseCode = "404", description = "Event not found")
+    })
+    @RequestMapping(value = "/maps/{mapSerial},{eventSerial},{new x},{new y}",
+    method = RequestMethod.PATCH)
+    default ResponseEntity<Void> eventLocationChange(@Parameter(in = ParameterIn.PATH, description = "", required = true, schema = @Schema()) @PathVariable("eventSerial") String eventSerial,
+                                                     @Parameter(in = ParameterIn.PATH, description = "", required = true, schema = @Schema()) @PathVariable("mapSerial") String mapSerial,
+                                                     @Parameter(in = ParameterIn.PATH, description = "", required = true, schema = @Schema()) @PathVariable("location x") int locationX,
+                                                     @Parameter(in = ParameterIn.PATH, description = "", required = true, schema = @Schema()) @PathVariable("location y") int locationy
+    ){
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
     }
 
