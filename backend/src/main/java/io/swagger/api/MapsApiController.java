@@ -21,6 +21,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.JAXBException;
 import java.io.IOException;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -53,6 +54,7 @@ public class MapsApiController implements MapsApi {
         return Optional.ofNullable(request);
     }
 
+    @Override
     public ResponseEntity<String> mapsPost(@Parameter(in = ParameterIn.DEFAULT, description = "", required = true, schema = @Schema()) @Valid @RequestBody Map body) {
         String accept = request.getHeader("Accept");
         String serial = body.getSerial() == null?UUID.randomUUID().toString(): body.getSerial();
@@ -67,6 +69,7 @@ public class MapsApiController implements MapsApi {
         return new ResponseEntity<>(serial, HttpStatus.CREATED);
     }
 
+    @Override
     public ResponseEntity<Map> mapsSerialGet(@Parameter(in = ParameterIn.PATH, description = "", required = true, schema = @Schema()) @PathVariable("serial") String serial) {
         String accept = request.getHeader("Accept");
         if (accept != null && accept.contains("application/xml")) {
@@ -80,6 +83,7 @@ public class MapsApiController implements MapsApi {
         return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 
     }
+    @Override
     public ResponseEntity<String> mapDelete(@NotNull @Parameter(in = ParameterIn.QUERY, description = "", required = true, schema = @Schema()) @Valid @PathVariable(value = "serial", required = true) String serial) {
         try{
             dataHandler.removeMap(serial);
@@ -89,6 +93,19 @@ public class MapsApiController implements MapsApi {
         }
     }
 
+    @Override
+    public ResponseEntity<List<Map>> getAllMaps() {
+        return new ResponseEntity<>(List.copyOf(dataHandler.getAllMaps()), HttpStatus.OK);
+    }
 
+    @Override
+    public ResponseEntity<Void> eventLocationChange(String eventSerial, String mapSerial, int locationX, int locationY) {
 
+        try{
+            Map map = dataHandler.getMap(mapSerial);
+            } catch (DataHandler.SerialNotFoundException ex) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+    }
 }

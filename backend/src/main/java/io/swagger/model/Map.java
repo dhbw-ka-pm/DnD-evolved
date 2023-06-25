@@ -1,9 +1,7 @@
 package io.swagger.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import io.swagger.model.Utils.MapEvent;
 import io.swagger.v3.oas.annotations.media.Schema;
-import org.springframework.data.util.Pair;
 import org.springframework.validation.annotation.Validated;
 
 import javax.validation.Valid;
@@ -53,7 +51,7 @@ public class Map implements XMLModel {
   @XmlElementWrapper(name = "Event")
   @JsonProperty("events")
   @Valid
-  private List<MapEvent> events = null;
+  private HashMap<String, Location> events = null;
 
   // Getters and setters omitted for brevity
 
@@ -178,16 +176,16 @@ public class Map implements XMLModel {
     this.sizeY = sizeY;
   }
 
-  public List<MapEvent> events( List<MapEvent> events) {
+  public HashMap<String, Location> events( HashMap<String, Location> events) {
     this.events = events;
     return this.getEvents();
   }
 
   public void addEventsItem(String eventSerial, Location location) {
     if (this.events == null) {
-      this.events = new ArrayList<>();
+      this.events = new HashMap<>();
     }
-    this.events.add(MapEvent.create(eventSerial, location));
+    this.events.put(eventSerial, location);
   }
 
   /**
@@ -197,11 +195,11 @@ public class Map implements XMLModel {
    **/
   @Schema(description = "")
   @Valid
-  public List<MapEvent> getEvents() {
+  public HashMap<String, Location> getEvents() {
     return events;
   }
 
-  public void setEvents(List<MapEvent> events) {
+  public void setEvents(HashMap<String, Location> events) {
     this.events = events;
   }
 

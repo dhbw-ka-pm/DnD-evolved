@@ -120,7 +120,7 @@ public interface MapsApi {
     default ResponseEntity<Void> eventLocationChange(@Parameter(in = ParameterIn.PATH, description = "", required = true, schema = @Schema()) @PathVariable("eventSerial") String eventSerial,
                                                      @Parameter(in = ParameterIn.PATH, description = "", required = true, schema = @Schema()) @PathVariable("mapSerial") String mapSerial,
                                                      @Parameter(in = ParameterIn.PATH, description = "", required = true, schema = @Schema()) @PathVariable("location x") int locationX,
-                                                     @Parameter(in = ParameterIn.PATH, description = "", required = true, schema = @Schema()) @PathVariable("location y") int locationy
+                                                     @Parameter(in = ParameterIn.PATH, description = "", required = true, schema = @Schema()) @PathVariable("location y") int locationY
     ){
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
     }

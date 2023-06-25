@@ -9,7 +9,9 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 import java.io.File;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -117,6 +119,10 @@ public class DataHandler {
     public static void checkContains(Map map, String serial) throws SerialNotFoundException{
         if (!map.containsKey(serial))
             throw new SerialNotFoundException("this Serial does not lead to any existent File");
+    }
+
+    public Collection<io.swagger.model.Map> getAllMaps(){
+        return maps.values();
     }
 
 
