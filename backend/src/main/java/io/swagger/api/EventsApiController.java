@@ -2,6 +2,7 @@ package io.swagger.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.model.Event;
+import io.swagger.model.Location;
 import io.swagger.model.Map;
 import io.swagger.persistance.DataHandler;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -66,16 +67,14 @@ public class EventsApiController implements EventsApi {
     }
 
     public ResponseEntity<String> eventsMapSerialPost(@Parameter(in = ParameterIn.PATH, description = "", required = true, schema = @Schema()) @PathVariable("mapSerial") String mapSerial, @Parameter(in = ParameterIn.DEFAULT, description = "", required = true, schema = @Schema()) @Valid @RequestBody Event body){
-        String accept = request.getHeader("Accept");
-
-
         try {
             Map map = dataHandler.getMap(mapSerial);
             if(body.getSerial() == null) {
                 String serial = UUID.randomUUID().toString();
                 body.setSerial(serial);
-                map.addEvent(serial);
+
             }
+            map.addEventsItem(body.getSerial(), new Location(10, 10));
             dataHandler.putMap(map);
             dataHandler.putEvent(body);
         }
@@ -87,6 +86,19 @@ public class EventsApiController implements EventsApi {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(body.getSerial(), HttpStatus.CREATED);
+    }
+
+    public ResponseEntity<Void> removeEventFromMap(@Parameter(in = ParameterIn.PATH, description = "", required = true, schema = @Schema()) @PathVariable("eventSerial") String eventSerial, @Parameter(in = ParameterIn.PATH, description = "", required = true, schema = @Schema()) @PathVariable("mapSerial") String mapSerial){
+        try {
+            Map map = dataHandler.getMap(mapSerial);
+            map.getEvents().remove(eventSerial);
+            dataHandler.updateMap(eventSerial);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (DataHandler.SerialNotFoundException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } catch (JAXBException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+        }
     }
 
 }

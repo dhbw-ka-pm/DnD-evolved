@@ -1,12 +1,15 @@
 package io.swagger.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import io.swagger.model.Utils.MapEvent;
 import io.swagger.v3.oas.annotations.media.Schema;
+import org.springframework.data.util.Pair;
 import org.springframework.validation.annotation.Validated;
 
 import javax.validation.Valid;
 import javax.xml.bind.annotation.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 
@@ -47,11 +50,10 @@ public class Map implements XMLModel {
   @JsonProperty("sizeY")
   private Integer sizeY = null;
 
-  @XmlElementWrapper(name = "Events")
-  @XmlElement(name = "Event")
+  @XmlElementWrapper(name = "Event")
   @JsonProperty("events")
   @Valid
-  private List<String> events = null;
+  private List<MapEvent> events = null;
 
   // Getters and setters omitted for brevity
 
@@ -176,17 +178,16 @@ public class Map implements XMLModel {
     this.sizeY = sizeY;
   }
 
-  public Map events(List<String> events) {
+  public List<MapEvent> events( List<MapEvent> events) {
     this.events = events;
-    return this;
+    return this.getEvents();
   }
 
-  public Map addEventsItem(String eventSerial) {
+  public void addEventsItem(String eventSerial, Location location) {
     if (this.events == null) {
-      this.events = new ArrayList<String>();
+      this.events = new ArrayList<>();
     }
-    this.events.add(eventSerial);
-    return this;
+    this.events.add(MapEvent.create(eventSerial, location));
   }
 
   /**
@@ -196,19 +197,11 @@ public class Map implements XMLModel {
    **/
   @Schema(description = "")
   @Valid
-  public List<String> getEvents() {
+  public List<MapEvent> getEvents() {
     return events;
   }
 
-  public void addEvent(String event){
-    if(events == null){
-      events = new ArrayList<>();
-    }
-    events.remove(event);
-    events.add(event);
-  }
-
-  public void setEvents(List<String> events) {
+  public void setEvents(List<MapEvent> events) {
     this.events = events;
   }
 

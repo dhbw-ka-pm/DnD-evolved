@@ -110,6 +110,10 @@ public class DataHandler {
     public void saveImage(io.swagger.model.Map map){
     }
 
+    public void updateMap(String serial) throws JAXBException {
+        mapXMLSaver.saveFile(maps.get(serial));
+    }
+
     public static void checkContains(Map map, String serial) throws SerialNotFoundException{
         if (!map.containsKey(serial))
             throw new SerialNotFoundException("this Serial does not lead to any existent File");

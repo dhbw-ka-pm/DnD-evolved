@@ -6,6 +6,7 @@
 package io.swagger.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.swagger.model.Location;
 import io.swagger.model.Map;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -76,7 +77,7 @@ public interface MapsApi {
 
         // Create a sample Event and add it to the ma
 
-        sampleMap.setEvents(List.of("sampleEvent"));
+        sampleMap.addEventsItem("eventSerial", new Location(10, 10));
 
         // Return the sample map in the response
         return new ResponseEntity<>(sampleMap, HttpStatus.OK);
