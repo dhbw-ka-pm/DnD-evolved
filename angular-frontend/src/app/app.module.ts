@@ -17,6 +17,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MapViewComponent } from './map-view/map-view.component';
 import { MapImageViewComponent } from './map-image-view/map-image-view.component';
+import { InteractiveMapComponent } from './interactive-map/interactive-map.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { MapImageViewComponent } from './map-image-view/map-image-view.component
     EventEditingComponent,
     DashboardComponent,
     MapViewComponent,
-    MapImageViewComponent
+    MapImageViewComponent,
+    InteractiveMapComponent
   ],
   imports: [
     BrowserModule,
