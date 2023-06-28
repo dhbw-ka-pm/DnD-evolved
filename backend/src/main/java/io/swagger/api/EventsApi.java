@@ -49,9 +49,9 @@ public interface EventsApi {
     @Operation(summary = "Retrieve events by serial", description = "", tags = {})
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "OK", content = @Content(mediaType = "application/xml", schema = @Schema(implementation = Event.class)))})
-    @RequestMapping(value = "/events",
+    @RequestMapping(value = "/events/{serial}",
             produces = {"application/xml"},
-            method = RequestMethod.POST)
+            method = RequestMethod.GET)
     default ResponseEntity<Event> eventsGet(@NotNull @Parameter(in = ParameterIn.QUERY, description = "", required = true, schema = @Schema()) @Valid @RequestParam(value = "serial", required = true) String serial) {
         if (getObjectMapper().isPresent() && getAcceptHeader().isPresent()) {
             if (getAcceptHeader().get().contains("application/xml")) {
@@ -91,7 +91,7 @@ public interface EventsApi {
             @ApiResponse(responseCode = "200", description = "OK"),
             @ApiResponse(responseCode = "404", description = "Event not found")
     })
-    @RequestMapping(value = "/maps/{serial}",
+    @RequestMapping(value = "/events/{serial}",
             method = RequestMethod.PATCH)
     default ResponseEntity<Void> overwriteEvent(@Parameter(in = ParameterIn.PATH, description = "", required = true, schema = @Schema()) @PathVariable("serial") String serial,
                                                 @Parameter(in = ParameterIn.DEFAULT, description = "", required = true, schema = @Schema()) @Valid @RequestBody Event body
