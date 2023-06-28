@@ -2,16 +2,24 @@ package io.swagger.persistance;
 
 import io.swagger.model.Event;
 import io.swagger.model.XMLModel;
+import org.springframework.beans.FatalBeanException;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
+import java.beans.PropertyDescriptor;
 import java.io.File;
+import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+
+import static org.springframework.beans.BeanUtils.getPropertyDescriptor;
+import static org.springframework.beans.BeanUtils.getPropertyDescriptors;
 
 @Service
 public class DataHandler {
@@ -134,8 +142,49 @@ public class DataHandler {
 
     };
 
-
-
-
-
+    public static void copyNonNullProperties(
+            Object source, Object target
+    ) {
+        Assert.notNull(source, "Source must not be null");
+        Assert.notNull(target, "Target must not be null");
+        Class<?> actualEditable = target.getClass();
+        PropertyDescriptor[] targetPds = getPropertyDescriptors(actualEditable);
+        for (PropertyDescriptor targetPd : targetPds) {
+            if (targetPd.getWriteMethod() != null) {
+                PropertyDescriptor sourcePd = getPropertyDescriptor(source.getClass(), targetPd.getName());
+                if (
+                        sourcePd != null
+                                && sourcePd.getReadMethod() != null
+                ) {
+                    try {
+                        Method readMethod = sourcePd.getReadMethod();
+                        if (
+                                !Modifier.isPublic(
+                                        readMethod.getDeclaringClass()
+                                                .getModifiers())
+                        ) {
+                            readMethod.setAccessible(true);
+                        }
+                        Object value = readMethod.invoke(source);
+                        // Ignore properties with null values.
+                        if (value != null) {
+                            Method writeMethod = targetPd.getWriteMethod();
+                            if (
+                                    !Modifier.isPublic(
+                                            writeMethod.getDeclaringClass()
+                                                    .getModifiers())
+                            ) {
+                                writeMethod.setAccessible(true);
+                            }
+                            writeMethod.invoke(target, value);
+                        }
+                    } catch (Throwable ex) {
+                        throw new FatalBeanException(
+                                "Could not copy properties from source to target", ex
+                        );
+                    }
+                }
+            }
+        }
+    }
 }

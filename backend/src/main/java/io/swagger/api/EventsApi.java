@@ -51,7 +51,7 @@ public interface EventsApi {
             @ApiResponse(responseCode = "200", description = "OK", content = @Content(mediaType = "application/xml", schema = @Schema(implementation = Event.class)))})
     @RequestMapping(value = "/events",
             produces = {"application/xml"},
-            method = RequestMethod.GET)
+            method = RequestMethod.POST)
     default ResponseEntity<Event> eventsGet(@NotNull @Parameter(in = ParameterIn.QUERY, description = "", required = true, schema = @Schema()) @Valid @RequestParam(value = "serial", required = true) String serial) {
         if (getObjectMapper().isPresent() && getAcceptHeader().isPresent()) {
             if (getAcceptHeader().get().contains("application/xml")) {
@@ -76,7 +76,7 @@ public interface EventsApi {
             @ApiResponse(responseCode = "404", description = "Map not found")})
     @RequestMapping(value = "/events/{mapSerial}",
             consumes = {"application/xml"},
-            method = RequestMethod.PUT)
+            method = RequestMethod.POST)
     default ResponseEntity<String> eventsMapSerialPost(@Parameter(in = ParameterIn.PATH, description = "", required = true, schema = @Schema()) @PathVariable("mapSerial") String mapSerial, @Parameter(in = ParameterIn.DEFAULT, description = "", required = true, schema = @Schema()) @Valid @RequestBody Event body) throws JAXBException {
         if (getObjectMapper().isPresent() && getAcceptHeader().isPresent()) {
         } else {
@@ -86,26 +86,14 @@ public interface EventsApi {
     }
 
 
-    @Operation(summary = "Remove a specific event from a map", description = "", tags = {})
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "OK"),
-            @ApiResponse(responseCode = "404", description = "invalid serial")
-    })
-    @RequestMapping(value = "/events/{eventSerial},{mapSerial}",
-            method = RequestMethod.DELETE)
-    default ResponseEntity<Void> removeEventFromMap(@Parameter(in = ParameterIn.PATH, description = "", required = true, schema = @Schema()) @PathVariable("eventSerial") String eventSerial, @Parameter(in = ParameterIn.PATH, description = "", required = true, schema = @Schema()) @PathVariable("mapSerial") String mapSerial) {
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-    }
-
     @Operation(summary = "Overwrite a specific event")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "OK"),
             @ApiResponse(responseCode = "404", description = "Event not found")
     })
-    @RequestMapping(value = "/maps/{mapSerial},{eventSerial}",
+    @RequestMapping(value = "/maps/{serial}",
             method = RequestMethod.PATCH)
-    default ResponseEntity<Void> overwriteEvent(@Parameter(in = ParameterIn.PATH, description = "", required = true, schema = @Schema()) @PathVariable("eventSerial") String eventSerial,
-                                                @Parameter(in = ParameterIn.PATH, description = "", required = true, schema = @Schema()) @PathVariable("mapSerial") String mapSerial,
+    default ResponseEntity<Void> overwriteEvent(@Parameter(in = ParameterIn.PATH, description = "", required = true, schema = @Schema()) @PathVariable("serial") String serial,
                                                 @Parameter(in = ParameterIn.DEFAULT, description = "", required = true, schema = @Schema()) @Valid @RequestBody Event body
     ) {
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);

@@ -57,7 +57,7 @@ public interface MapsApi {
     })
     @RequestMapping(value = "/maps",
             consumes = {"application/xml"},
-            method = RequestMethod.PUT)
+            method = RequestMethod.POST)
     default ResponseEntity<String> mapsPost(@Parameter(in = ParameterIn.DEFAULT, description = "", required = true, schema = @Schema()) @Valid @RequestBody Map body) {
         // Populate the response with a success status code
         return new ResponseEntity<>(HttpStatus.OK);

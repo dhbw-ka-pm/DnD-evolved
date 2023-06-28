@@ -87,31 +87,15 @@ public class EventsApiController implements EventsApi {
         return new ResponseEntity<>(body.getSerial(), HttpStatus.CREATED);
     }
 
-    public ResponseEntity<Void> removeEventFromMap(@Parameter(in = ParameterIn.PATH, description = "", required = true, schema = @Schema()) @PathVariable("eventSerial") String eventSerial, @Parameter(in = ParameterIn.PATH, description = "", required = true, schema = @Schema()) @PathVariable("mapSerial") String mapSerial){
-        try {
-            Map map = dataHandler.getMap(mapSerial);
-            map.getEvents().remove(eventSerial);
-            dataHandler.updateMap(eventSerial);
-            return new ResponseEntity<>(HttpStatus.OK);
-        } catch (DataHandler.SerialNotFoundException e) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        } catch (JAXBException e) {
-            return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-        }
-    }
-
     @Override
-    public ResponseEntity<Void> overwriteEvent(@Parameter(in = ParameterIn.PATH, description = "", required = true, schema = @Schema()) @PathVariable("eventSerial") String eventSerial,
-                                               @Parameter(in = ParameterIn.PATH, description = "", required = true, schema = @Schema()) @PathVariable("mapSerial") String mapSerial,
+    public ResponseEntity<Void> overwriteEvent(@Parameter(in = ParameterIn.PATH, description = "", required = true, schema = @Schema()) @PathVariable("eventSerial") String serial,
                                                @Parameter(in = ParameterIn.DEFAULT, description = "", required = true, schema = @Schema()) @Valid @RequestBody Event body) {
         try {
-            Event event = body;
-            event.setSerial(eventSerial);
-            dataHandler.removeEvent(eventSerial);
+            Event event = dataHandler.getEvent(serial);
+            DataHandler.copyNonNullProperties(body, event);
+
             dataHandler.putEvent(body);
             //TODO Events have to hold their location information. Currently they are not linked
-            dataHandler.getMap(mapSerial).getEvents().put(mapSerial, new Location());
-            dataHandler.updateMap(mapSerial);
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (DataHandler.SerialNotFoundException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
