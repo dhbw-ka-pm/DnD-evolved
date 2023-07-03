@@ -6,6 +6,7 @@
 package io.swagger.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.swagger.model.Event;
 import io.swagger.model.Location;
 import io.swagger.model.Map;
 import io.swagger.v3.oas.annotations.Operation;
@@ -139,6 +140,17 @@ public interface MapsApi {
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
     }
 
+
+    @Operation(summary = "change the value of an Event", description = "", tags = {})
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200"),
+            @ApiResponse(responseCode = "404")
+    })
+    @RequestMapping(value = "/maps/{serial}",
+            method = RequestMethod.PATCH)
+    default ResponseEntity<Void> patchEvents(@PathVariable(value = "serial") String serial, @RequestBody Map body){
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+    }
 
 }
 

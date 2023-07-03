@@ -3,7 +3,9 @@ package io.swagger.persistance;
 import io.swagger.model.Event;
 import io.swagger.model.XMLModel;
 import org.springframework.beans.FatalBeanException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
@@ -34,8 +36,12 @@ public class DataHandler {
     private final XMLSaver<Event> eventXMLSaver;
     private final XMLSaver<io.swagger.model.Map> mapXMLSaver;
 
+    private final ImageSaver imageSaver;
 
-    private DataHandler(){
+
+    @Autowired
+    private DataHandler(ImageSaver imageSaver){
+        this.imageSaver = imageSaver;
         eventXMLSaver = new XMLSaver<>("events");
         mapXMLSaver = new XMLSaver<>("maps");
         try {
@@ -45,10 +51,6 @@ public class DataHandler {
         }
     }
 
-    @Bean
-    public static DataHandler createDataHandler() {
-        return new DataHandler();
-    }
 
     public void init() throws JAXBException {
         JAXBContext mapContext = JAXBContext.newInstance(io.swagger.model.Map.class);
@@ -127,6 +129,10 @@ public class DataHandler {
         events.remove(serial);
         eventXMLSaver.removeFile(serial);
 
+    }
+
+    public Resource getImage(String serial){
+        return imageSaver.loadAsFile(serial);
     }
 
     public Collection<io.swagger.model.Map> getAllMaps() {
