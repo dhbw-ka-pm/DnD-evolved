@@ -36,12 +36,12 @@ public class DataHandler {
     private final XMLSaver<Event> eventXMLSaver;
     private final XMLSaver<io.swagger.model.Map> mapXMLSaver;
 
-    private final ImageSaver imageSaver;
+
 
 
     @Autowired
     private DataHandler(ImageSaver imageSaver){
-        this.imageSaver = imageSaver;
+
         eventXMLSaver = new XMLSaver<>("events");
         mapXMLSaver = new XMLSaver<>("maps");
         try {
@@ -131,9 +131,6 @@ public class DataHandler {
 
     }
 
-    public Resource getImage(String serial){
-        return imageSaver.loadAsFile(serial);
-    }
 
     public Collection<io.swagger.model.Map> getAllMaps() {
         return maps.values();

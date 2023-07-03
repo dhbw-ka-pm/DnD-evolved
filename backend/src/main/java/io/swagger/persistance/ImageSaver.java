@@ -51,6 +51,9 @@ public class ImageSaver {
     }
 
 
+    public String getFilepath(String s){
+       return DATA_DIR + "/" + s + JPG_ENDING;
+    }
     public Resource loadAsFile(String serial){
             Resource resource = new PathResource(DATA_DIR + "/" + serial + JPG_ENDING);
                 return resource;

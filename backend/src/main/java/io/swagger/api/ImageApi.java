@@ -12,10 +12,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Optional;
@@ -38,12 +36,24 @@ public interface ImageApi {
         @Operation(description = "get an image by serial")
         @ApiResponses(value = {
                 @ApiResponse(responseCode = "200", description = "OK"),
-                @ApiResponse(responseCode = "409", description = "Not OK")
+                @ApiResponse(responseCode = "404", description = "image not found")
         })
         @RequestMapping(value = "/images/{serial}",
-        method = RequestMethod.GET,
-        produces = MediaType.IMAGE_JPEG_VALUE)
+            method = RequestMethod.GET,
+            produces = MediaType.IMAGE_JPEG_VALUE)
         default ResponseEntity<Resource> getImageByPath(@PathVariable(value = "serial")String serial){
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+            return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
         }
+
+        @Operation(description = "post an image")
+        @ApiResponses(value = {
+                @ApiResponse(responseCode = "201", description = "created")
+        })
+        @RequestMapping(value = "/images/{mapSerial}",
+                method = RequestMethod.POST,
+                consumes = {MediaType.IMAGE_JPEG_VALUE, MediaType.IMAGE_PNG_VALUE})
+        default ResponseEntity<String> postImageToMap(@RequestBody Resource file, @PathVariable(value = "mapSerial") String serial){
+            return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+        }
+
 }
