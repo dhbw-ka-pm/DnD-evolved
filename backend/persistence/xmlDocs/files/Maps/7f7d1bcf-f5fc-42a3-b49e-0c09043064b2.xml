@@ -8,31 +8,10 @@
     <SizeY>0</SizeY>
     <Event>
         <entry>
-            <key>1de6f7b4-4dcd-4cfc-803d-9a805736d7b2</key>
-            <value>
-                <x>10</x>
-                <y>10</y>
-            </value>
-        </entry>
-        <entry>
             <key>dcd374e2-a1b7-40c1-946f-c02b843a70bf</key>
             <value>
                 <x>10</x>
                 <y>10</y>
-            </value>
-        </entry>
-        <entry>
-            <key>2211e3e7-eaf0-44c5-8c96-88d031194675</key>
-            <value>
-                <x>10</x>
-                <y>10</y>
-            </value>
-        </entry>
-        <entry>
-            <key>ac544c9d-cde2-4d52-9f76-c2d654a48c75</key>
-            <value>
-                <x>3</x>
-                <y>7</y>
             </value>
         </entry>
     </Event>
