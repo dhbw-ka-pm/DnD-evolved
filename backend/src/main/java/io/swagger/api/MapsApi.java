@@ -6,9 +6,9 @@
 package io.swagger.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.swagger.model.Event;
 import io.swagger.model.Location;
 import io.swagger.model.Map;
+import io.swagger.model.MapListWrapper;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
@@ -20,6 +20,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,7 +31,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
-import java.util.List;
 import java.util.Optional;
 
 @Validated
@@ -61,7 +61,7 @@ public interface MapsApi {
             method = RequestMethod.POST)
     default ResponseEntity<String> mapsPost(@Parameter(in = ParameterIn.DEFAULT, description = "", required = true, schema = @Schema()) @Valid @RequestBody Map body) {
         // Populate the response with a success status code
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
     }
 
 
@@ -87,7 +87,7 @@ public interface MapsApi {
         sampleMap.addEventsItem("eventSerial", new Location(10, 10));
 
         // Return the sample map in the response
-        return new ResponseEntity<>(sampleMap, HttpStatus.OK);
+        return new ResponseEntity<>(sampleMap, HttpStatus.NOT_IMPLEMENTED);
     }
 
     @Operation(summary = "delete a Map", description = "", tags = {})
@@ -106,10 +106,10 @@ public interface MapsApi {
         @ApiResponse(responseCode = "200", description = "OK", content = @Content(mediaType = "application/xml", array = @ArraySchema(schema = @Schema(implementation = Map.class))))
     })
     @RequestMapping(value = "/maps/",
-                            produces = {"application/xml"},
+                            produces = {MediaType.APPLICATION_XML_VALUE},
     method = RequestMethod.GET)
 
-    default ResponseEntity<List<Map>> getAllMaps(){
+    default ResponseEntity<MapListWrapper> getAllMaps(){
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
     }
 
@@ -119,7 +119,8 @@ public interface MapsApi {
             @ApiResponse(responseCode = "404", description = "Event not found")
     })
     @RequestMapping(value = "/maps/{mapSerial},{eventSerial},{location_x},{location_y}",
-            method = RequestMethod.PATCH)
+            method = RequestMethod.PATCH,
+    consumes = MediaType.APPLICATION_XML_VALUE)
     default ResponseEntity<Void> eventLocationChange(@Parameter(in = ParameterIn.PATH, description = "", required = true, schema = @Schema()) @PathVariable("eventSerial") String eventSerial,
                                                      @Parameter(in = ParameterIn.PATH, description = "", required = true, schema = @Schema()) @PathVariable("mapSerial") String mapSerial,
                                                      @Parameter(in = ParameterIn.PATH, description = "", required = true, schema = @Schema()) @PathVariable("location_x") int locationX,
@@ -141,14 +142,15 @@ public interface MapsApi {
     }
 
 
-    @Operation(summary = "change the value of an Event", description = "", tags = {})
+    @Operation(summary = "change the value of a Map", description = "", tags = {})
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200"),
             @ApiResponse(responseCode = "404")
     })
     @RequestMapping(value = "/maps/{serial}",
-            method = RequestMethod.PATCH)
-    default ResponseEntity<Void> patchEvents(@PathVariable(value = "serial") String serial, @RequestBody Map body){
+            method = RequestMethod.PATCH,
+    consumes = MediaType.APPLICATION_XML_VALUE)
+    default ResponseEntity<Void> patchMap(@PathVariable(value = "serial") String serial, @RequestBody Map body){
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
     }
 

@@ -18,6 +18,7 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static org.springframework.beans.BeanUtils.getPropertyDescriptor;
@@ -132,8 +133,8 @@ public class DataHandler {
     }
 
 
-    public Collection<io.swagger.model.Map> getAllMaps() {
-        return maps.values();
+    public List<io.swagger.model.Map> getAllMaps() {
+        return List.copyOf(maps.values());
     }
 
 
