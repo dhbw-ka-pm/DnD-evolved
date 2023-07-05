@@ -68,11 +68,8 @@ public class EventsApiController implements EventsApi {
     public ResponseEntity<String> eventsMapSerialPost(@Parameter(in = ParameterIn.PATH, description = "", required = true, schema = @Schema()) @PathVariable("mapSerial") String mapSerial, @Parameter(in = ParameterIn.DEFAULT, description = "", required = true, schema = @Schema()) @Valid @RequestBody Event body){
         try {
             Map map = dataHandler.getMap(mapSerial);
-            if(body.getSerial() == null) {
-                String serial = UUID.randomUUID().toString();
-                body.setSerial(serial);
-
-            }
+            String serial = UUID.randomUUID().toString();
+            body.setSerial(serial);
             map.addEventsItem(body.getSerial(), new Location(10, 10));
             dataHandler.putMap(map);
             dataHandler.putEvent(body);
@@ -94,13 +91,11 @@ public class EventsApiController implements EventsApi {
             Event event = dataHandler.getEvent(serial);
             DataHandler.copyNonNullProperties(body, event);
 
-            dataHandler.putEvent(body);
+            //dataHandler.putEvent(body);
             //TODO Events have to hold their location information. Currently they are not linked
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (DataHandler.SerialNotFoundException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        } catch (JAXBException e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 

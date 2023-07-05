@@ -17,6 +17,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -92,7 +93,7 @@ public interface EventsApi {
             @ApiResponse(responseCode = "404", description = "Event not found")
     })
     @RequestMapping(value = "/events/{serial}",
-            consumes = {"application/xml"},
+            consumes = {MediaType.APPLICATION_XML_VALUE},
             method = RequestMethod.PATCH)
     default ResponseEntity<Void> overwriteEvent(@Parameter(in = ParameterIn.PATH, description = "", required = true, schema = @Schema()) @PathVariable("serial") String serial,
                                                 @Parameter(in = ParameterIn.DEFAULT, description = "", required = true, schema = @Schema()) @Valid @RequestBody Event body
