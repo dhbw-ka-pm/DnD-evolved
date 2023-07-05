@@ -125,6 +125,7 @@ public class MapsApiController implements MapsApi {
     public ResponseEntity<Void> mapEventDelete(String mapSerial, String eventSerial) {
         try {
             dataHandler.removeEvent(eventSerial);
+            dataHandler.getMap(mapSerial).getEvents().remove(eventSerial);
             dataHandler.updateMap(mapSerial);
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (DataHandler.SerialNotFoundException e) {
