@@ -1,9 +1,9 @@
 package io.swagger.model.patchDTOs
 
 import com.fasterxml.jackson.annotation.JsonProperty
-import io.swagger.model.Event
-import javax.validation.Valid
+import javax.xml.bind.annotation.XmlRootElement
 
+@XmlRootElement(name = "Map")
 data class PatchMap(
         @field:JsonProperty("name")
         var name: String? = null,
