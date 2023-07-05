@@ -74,21 +74,7 @@ public interface MapsApi {
             produces = {"application/xml"},
             method = RequestMethod.GET)
     default ResponseEntity<Map> mapsSerialGet(@Parameter(in = ParameterIn.PATH, description = "", required = true, schema = @Schema()) @PathVariable("serial") String serial) {
-        // Create a sample Map object with example values
-        Map sampleMap = new Map();
-        sampleMap.setSerial("sampleSerial");
-        sampleMap.setName("Sample Map");
-        sampleMap.setDescription("This is a sample map");
-        sampleMap.setImagePath("sampleImagePath");
-        sampleMap.setSizeX(10);
-        sampleMap.setSizeY(8);
-
-        // Create a sample Event and add it to the ma
-
-        sampleMap.addEventsItem("eventSerial", new Location(10, 10));
-
-        // Return the sample map in the response
-        return new ResponseEntity<>(sampleMap, HttpStatus.NOT_IMPLEMENTED);
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
     }
 
     @Operation(summary = "delete a Map", description = "", tags = {})

@@ -61,7 +61,7 @@ public class DataHandler {
         if (null != listOfMaps) {
             for (File file : listOfMaps) {
                 if (file.isFile()) {
-                    io.swagger.model.Map m = (io.swagger.model.Map) mapUnmarshaller.unmarshal(file);
+                   io.swagger.model.Map m = (io.swagger.model.Map) mapUnmarshaller.unmarshal(file);
                     maps.put(m.getSerial(), m);
                 }
             }
