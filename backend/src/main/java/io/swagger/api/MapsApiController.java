@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.model.Location;
 import io.swagger.model.Map;
 import io.swagger.model.MapListWrapper;
+import io.swagger.model.patchDTOs.PatchMap;
 import io.swagger.persistance.DataHandler;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
@@ -136,7 +137,7 @@ public class MapsApiController implements MapsApi {
     }
 
     @Override
-    public ResponseEntity<Void> patchMap(String serial, Map body) {
+    public ResponseEntity<Void> patchMap(String serial, PatchMap body) {
         try {
             Map existingMap = dataHandler.getMap(serial);
             DataHandler.copyNonNullProperties(body, existingMap);

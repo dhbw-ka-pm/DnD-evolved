@@ -9,6 +9,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.model.Location;
 import io.swagger.model.Map;
 import io.swagger.model.MapListWrapper;
+import io.swagger.model.patchDTOs.PatchMap;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
@@ -150,7 +151,7 @@ public interface MapsApi {
     @RequestMapping(value = "/maps/{serial}",
             method = RequestMethod.PATCH,
     consumes = MediaType.APPLICATION_XML_VALUE)
-    default ResponseEntity<Void> patchMap(@PathVariable(value = "serial") String serial, @RequestBody Map body){
+    default ResponseEntity<Void> patchMap(@PathVariable(value = "serial") String serial, @RequestBody PatchMap body){
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
     }
 
