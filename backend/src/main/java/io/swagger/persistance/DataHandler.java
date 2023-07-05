@@ -125,6 +125,10 @@ public class DataHandler {
         mapXMLSaver.saveFile(maps.get(serial));
     }
 
+    public void updateEvent(String serial) throws JAXBException{
+        eventXMLSaver.saveFile(events.get(serial));
+    }
+
     public void removeEvent(String serial) throws SerialNotFoundException {
         checkContains(events, serial);
         events.remove(serial);

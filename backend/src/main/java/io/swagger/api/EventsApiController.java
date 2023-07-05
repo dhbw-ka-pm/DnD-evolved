@@ -85,17 +85,18 @@ public class EventsApiController implements EventsApi {
     }
 
     @Override
-    public ResponseEntity<Void> overwriteEvent(@Parameter(in = ParameterIn.PATH, description = "", required = true, schema = @Schema()) @PathVariable("eventSerial") String serial,
+    public ResponseEntity<Void> overwriteEvent(@Parameter(in = ParameterIn.PATH, description = "", required = true, schema = @Schema()) @PathVariable("serial") String serial,
                                                @Parameter(in = ParameterIn.DEFAULT, description = "", required = true, schema = @Schema()) @Valid @RequestBody Event body) {
         try {
             Event event = dataHandler.getEvent(serial);
             DataHandler.copyNonNullProperties(body, event);
-
-            //dataHandler.putEvent(body);
+            dataHandler.updateEvent(serial);
             //TODO Events have to hold their location information. Currently they are not linked
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (DataHandler.SerialNotFoundException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } catch (JAXBException e) {
+            throw new RuntimeException(e);
         }
     }
 
