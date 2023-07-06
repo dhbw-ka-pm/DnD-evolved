@@ -71,7 +71,7 @@ public class EventsApiController implements EventsApi {
             Map map = dataHandler.getMap(mapSerial);
             String serial = UUID.randomUUID().toString();
             body.setSerial(serial);
-            map.addEventsItem(body.getSerial(), new Location(10, 10));
+            map.addEventsItem(body.getSerial(), new Location(map.getSizeX() / 2, map.getSizeY() / 2));
             dataHandler.putMap(map);
             dataHandler.putEvent(body);
         }
