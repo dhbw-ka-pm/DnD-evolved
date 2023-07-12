@@ -17,6 +17,14 @@ public class Location   {
   @JsonProperty("y")
   private Integer Y = null;
 
+  public Location(){}
+
+  public Location(int x, int y){
+    setX(x);
+    setY(y);
+  }
+
+
   public Integer getX() {
     return X;
   }

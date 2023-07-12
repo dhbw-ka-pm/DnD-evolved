@@ -2,7 +2,9 @@ package io.swagger.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.model.Event;
+import io.swagger.model.Location;
 import io.swagger.model.Map;
+import io.swagger.model.patchDTOs.PatchEvent;
 import io.swagger.persistance.DataHandler;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
@@ -21,7 +23,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.JAXBException;
-import java.io.IOException;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -66,16 +67,11 @@ public class EventsApiController implements EventsApi {
     }
 
     public ResponseEntity<String> eventsMapSerialPost(@Parameter(in = ParameterIn.PATH, description = "", required = true, schema = @Schema()) @PathVariable("mapSerial") String mapSerial, @Parameter(in = ParameterIn.DEFAULT, description = "", required = true, schema = @Schema()) @Valid @RequestBody Event body){
-        String accept = request.getHeader("Accept");
-
-
         try {
             Map map = dataHandler.getMap(mapSerial);
-            if(body.getSerial() == null) {
-                String serial = UUID.randomUUID().toString();
-                body.setSerial(serial);
-                map.addEvent(serial);
-            }
+            String serial = UUID.randomUUID().toString();
+            body.setSerial(serial);
+            map.addEventsItem(body.getSerial(), new Location(map.getSizeX() / 2, map.getSizeY() / 2));
             dataHandler.putMap(map);
             dataHandler.putEvent(body);
         }
@@ -87,6 +83,22 @@ public class EventsApiController implements EventsApi {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(body.getSerial(), HttpStatus.CREATED);
+    }
+
+    @Override
+    public ResponseEntity<Void> overwriteEvent(@Parameter(in = ParameterIn.PATH, description = "", required = true, schema = @Schema()) @PathVariable("serial") String serial,
+                                               @Parameter(in = ParameterIn.DEFAULT, description = "", required = true, schema = @Schema()) @Valid @RequestBody PatchEvent body) {
+        try {
+            Event event = dataHandler.getEvent(serial);
+            DataHandler.copyNonNullProperties(body, event);
+            dataHandler.updateEvent(serial);
+            //TODO Events have to hold their location information. Currently they are not linked
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (DataHandler.SerialNotFoundException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } catch (JAXBException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }
