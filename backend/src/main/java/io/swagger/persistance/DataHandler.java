@@ -16,10 +16,7 @@ import java.beans.PropertyDescriptor;
 import java.io.File;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static org.springframework.beans.BeanUtils.getPropertyDescriptor;
 import static org.springframework.beans.BeanUtils.getPropertyDescriptors;
@@ -41,8 +38,7 @@ public class DataHandler {
 
 
     @Autowired
-    private DataHandler(ImageSaver imageSaver){
-
+    private DataHandler(){
         eventXMLSaver = new XMLSaver<>("events");
         mapXMLSaver = new XMLSaver<>("maps");
         try {
