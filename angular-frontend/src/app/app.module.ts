@@ -18,6 +18,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { MapImageViewComponent } from './map-image-view/map-image-view.component';
 import { InteractiveMapComponent } from './interactive-map/interactive-map.component';
 import { HttpClientModule } from '@angular/common/http';
+import { EditDialogComponent } from './edit-dialog/edit-dialog.component';
+import {MatDialogModule} from "@angular/material/dialog";
+import { FormsModule } from '@angular/forms';
+import { EventEntryComponent } from './event-entry/event-entry.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +31,9 @@ import { HttpClientModule } from '@angular/common/http';
     EventEditingComponent,
     DashboardComponent,
     MapImageViewComponent,
-    InteractiveMapComponent
+    InteractiveMapComponent,
+    EditDialogComponent,
+    EventEntryComponent
   ],
   imports: [
     BrowserModule,
@@ -46,6 +52,8 @@ import { HttpClientModule } from '@angular/common/http';
     MatIconModule,
     MatButtonModule,
     HttpClientModule,
+    MatDialogModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

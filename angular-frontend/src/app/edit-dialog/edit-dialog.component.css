@@ -1,0 +1,10 @@
+.interactionButtons {
+  display: flex;
+  justify-content: center;
+  margin: 0 5px;
+}
+
+.mat-form-field {
+  width: 100%;
+}
+
