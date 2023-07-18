@@ -11,8 +11,8 @@ export class EventsService {
   constructor(private http: HttpClient
              ) { }
 
-  getEvents(): any {
-    this.http.get('http://localhost:8080/DnDEvolved/v1/maps/1078cf56-8ec0-4af7-88c6-0775c9f8307c', { responseType: 'text' }).subscribe((xmlData: string) => {
+  getEvents(serial: string): any {
+    this.http.get('http://localhost:8080/DnDEvolved/v1/maps/' + serial, { responseType: 'text' }).subscribe((xmlData: string) => {
         const p: xml2js.Parser = new xml2js.Parser();
         p.parseString(xmlData, (err, result) => {
           if (err) {
