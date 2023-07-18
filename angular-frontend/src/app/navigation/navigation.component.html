@@ -1,0 +1,32 @@
+<mat-sidenav-container class="sidenav-container">
+    <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+        [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
+        <mat-toolbar>Menu</mat-toolbar>
+        <mat-divider></mat-divider>
+        <button mat-raised-button color="primary">Add Map</button>
+        <mat-nav-list>
+            <mat-divider></mat-divider>
+            <div>
+                <mat-card *ngFor="let map of DnDMaps">
+                    <mat-card-header></mat-card-header>
+                    <a mat-list-item href="story-management"> Edit Events</a>
+                </mat-card>
+                </div>
+            <mat-divider></mat-divider>
+        </mat-nav-list>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+
+        <mat-toolbar color="primary">
+            <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
+                <!-- *ngIf="isHandset$ | async" -->
+                <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+            </button>
+            <!-- <span>DnD-Evolved</span> -->
+            <img src="../../assets/icons/logo-1-0.svg" alt="Logo" height="40" />
+        </mat-toolbar>
+        <!-- Add Content Here -->
+        <router-outlet></router-outlet>
+    </mat-sidenav-content>
+</mat-sidenav-container>
