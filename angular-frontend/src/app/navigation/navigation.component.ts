@@ -4,7 +4,6 @@ import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { DnDMap } from '../interfaces/DnDMap';
 import { MapService } from '../service/maps.service';
-import {EditEventDialogComponent} from "../edit-event-dialog/edit-event-dialog.component";
 import {MatDialog} from "@angular/material/dialog";
 import {EditMapDialogComponent} from "../edit-map-dialog/edit-map-dialog.component";
 
