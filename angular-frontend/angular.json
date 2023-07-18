@@ -26,8 +26,8 @@
               "src/manifest.webmanifest"
             ],
             "styles": [
-              "@angular/material/prebuilt-themes/indigo-pink.css",
-              "src/styles.css"
+              "src/styles.css",
+              "src/dnd-evolved-colorScheme.css"
             ],
             "scripts": [],
             "serviceWorker": true,
