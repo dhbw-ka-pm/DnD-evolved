@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 
 import { DnDMap } from './interfaces/DnDMap';
@@ -14,7 +14,12 @@ export class MapService {
 
   // Create a method to fetch maps from the API
   getMaps(): Observable<DnDMap[]> {
-    return this.http.get<DnDMap[]>(this.apiUrl)
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Accept': 'application/xml'
+      })
+    }
+    return this.http.get<DnDMap[]>(this.apiUrl, httpOptions)
     //   .pipe(
     //   map((response: any[]) => {
     //     return response.map(mapData => this.mapApiResponseToMapObject(mapData));

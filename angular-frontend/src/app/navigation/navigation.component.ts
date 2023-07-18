@@ -20,6 +20,7 @@ export class NavigationComponent implements OnInit {
   }
   ngOnInit(): void {
     this.getDnDMaps()
+    console.log(this.DnDMaps)
   }
 
 
