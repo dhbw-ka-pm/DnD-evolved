@@ -1,4 +1,4 @@
-interface DnDMap {
+export interface DnDMap {
     description?: string;
     events?: DnDLocation[];
     imagePath?: string;

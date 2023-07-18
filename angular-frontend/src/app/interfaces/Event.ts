@@ -1,4 +1,4 @@
-interface DnDEvent {
+export interface DnDEvent {
     description?: string;
     leadsToMapSerial?: string;
     name?: string;
