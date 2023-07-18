@@ -9,7 +9,8 @@ export class EventsService {
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor(private http: HttpClient
-             ) { }
+  ) {
+  }
 
   getEvents(serial: string): any {
     this.http.get('http://localhost:8080/DnDEvolved/v1/maps/' + serial, { responseType: 'text' }).subscribe((xmlData: string) => {
