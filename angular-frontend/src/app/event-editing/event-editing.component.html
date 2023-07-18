@@ -1,28 +1,15 @@
 <mat-drawer-container class="sidenav-container">
-  <mat-drawer #eventdrawer class="sidenav" position="end" mode="side" opened>
+  <mat-drawer #eventdrawer class="sidenav" position="end" mode="side" (opened)="getEvents()">
     <mat-toolbar color="accent">
       <span>Events</span>
     </mat-toolbar>
     <mat-accordion>
-      <mat-expansion-panel>
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            Deadman's Cave
-          </mat-panel-title>
-        </mat-expansion-panel-header>
-        <mat-panel-description>
-          Location: 12, 45
-        </mat-panel-description>
-        <mat-panel-description>
-          Description: You will die here
-        </mat-panel-description>
-        <mat-action-row class="full-width">
-          <button mat-raised-button color="warn" class="expand-button" (click)="openDialog()">Edit</button>
-          <button mat-raised-button color="accent" class="expand-button">Delete</button>
-        </mat-action-row>
-      </mat-expansion-panel>
+      <ng-container *ngFor="let str of events">
+            <app-event-entry [data]="str"></app-event-entry>
+      </ng-container>
+      <app-event-entry></app-event-entry>
       <div class="center-button">
-        <button mat-raised-button color="primary">Add</button>
+        <button mat-raised-button color="primary" (click)="openAddDialog()">Add</button>
       </div>
     </mat-accordion>
   </mat-drawer>

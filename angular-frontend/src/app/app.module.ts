@@ -21,6 +21,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { EditDialogComponent } from './edit-dialog/edit-dialog.component';
 import {MatDialogModule} from "@angular/material/dialog";
 import { FormsModule } from '@angular/forms';
+import { EventEntryComponent } from './event-entry/event-entry.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { FormsModule } from '@angular/forms';
     DashboardComponent,
     MapImageViewComponent,
     InteractiveMapComponent,
-    EditDialogComponent
+    EditDialogComponent,
+    EventEntryComponent
   ],
   imports: [
     BrowserModule,
