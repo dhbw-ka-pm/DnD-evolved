@@ -3,15 +3,17 @@
         [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
         <mat-toolbar>Menu</mat-toolbar>
         <mat-divider></mat-divider>
-        <button mat-raised-button color="primary">Add Map</button>
         <mat-nav-list>
-            <mat-divider></mat-divider>
             <div>
                 <mat-card *ngFor="let map of DnDMaps">
                     <mat-card-header></mat-card-header>
-                    <a mat-list-item href="story-management"> Edit Events</a>
+                    <a mat-list-item href="story-management">{{map.name}}</a>
                 </mat-card>
-                </div>
+            </div>
+            <mat-divider></mat-divider>
+            <div class="center-container">
+                <button mat-raised-button color="primary" class="add-map-button">Add Map</button>
+            </div>
             <mat-divider></mat-divider>
         </mat-nav-list>
     </mat-sidenav>

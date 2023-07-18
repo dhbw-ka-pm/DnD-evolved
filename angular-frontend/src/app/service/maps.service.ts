@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import * as xml2js from 'xml2js';
 
 
-import { DnDMap } from './interfaces/DnDMap';
+import { DnDMap } from '../interfaces/DnDMap';
 import { Observable } from 'rxjs';
 
 @Injectable({
