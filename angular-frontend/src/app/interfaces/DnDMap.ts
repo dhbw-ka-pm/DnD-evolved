@@ -3,7 +3,7 @@ import { EventPair } from "./EventPair";
 export interface DnDMap {
     serial?: string;
     description?: string;
-    events?: EventPair;
+    events?: EventPair[];
     imagePath?: string;
     name?: string;
     sizeX?: number;
