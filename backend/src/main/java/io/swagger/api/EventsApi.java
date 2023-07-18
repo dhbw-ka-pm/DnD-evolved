@@ -93,11 +93,11 @@ public interface EventsApi {
             @ApiResponse(responseCode = "200", description = "OK"),
             @ApiResponse(responseCode = "404", description = "Event not found")
     })
-    @RequestMapping(value = "/events/{serial}",
-            consumes = {MediaType.APPLICATION_XML_VALUE},
+    @RequestMapping(value = "/events/edit/{serial}",
+            consumes = {"application/xml"},
             method = RequestMethod.PATCH)
     default ResponseEntity<Void> overwriteEvent(@Parameter(in = ParameterIn.PATH, description = "", required = true, schema = @Schema()) @PathVariable("serial") String serial,
-                                                @Parameter(in = ParameterIn.DEFAULT, description = "", required = true, schema = @Schema()) @Valid @RequestBody PatchEvent body
+                                                @Parameter(in = ParameterIn.DEFAULT, description = "", required = true, schema = @Schema()) @Valid @RequestBody Event body
     ) {
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
     }

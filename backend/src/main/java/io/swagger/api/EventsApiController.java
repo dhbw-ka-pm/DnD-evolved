@@ -89,7 +89,7 @@ public class EventsApiController implements EventsApi {
 
     @Override
     public ResponseEntity<Void> overwriteEvent(@Parameter(in = ParameterIn.PATH, description = "", required = true, schema = @Schema()) @PathVariable("serial") String serial,
-                                               @Parameter(in = ParameterIn.DEFAULT, description = "", required = true, schema = @Schema()) @Valid @RequestBody PatchEvent body) {
+                                               @Parameter(in = ParameterIn.DEFAULT, description = "", required = true, schema = @Schema()) @Valid @RequestBody Event body) {
         try {
             Event event = dataHandler.getEvent(serial);
             DataHandler.copyNonNullProperties(body, event);
