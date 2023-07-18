@@ -1,11 +1,11 @@
-import { DnDLocation } from "./DnDLocation";
+import { EventPair } from "./EventPair";
 
 export interface DnDMap {
+    serial?: string;
     description?: string;
-    events?: DnDLocation[];
+    events?: EventPair;
     imagePath?: string;
     name?: string;
-    serial?: string;
     sizeX?: number;
     sizeY?: number;
 }
