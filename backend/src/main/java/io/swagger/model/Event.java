@@ -17,7 +17,6 @@ import java.util.Objects;
         "serial",
         "name",
         "description",
-        "location",
         "leadsToMapSerial"
 })
 @XmlRootElement(name = "Event")
@@ -35,10 +34,6 @@ public class Event implements XMLModel {
   @JsonProperty("description")
   private String description;
 
-  @XmlElement(name = "location")
-  @JsonProperty("location")
-  @Valid
-  private Location location;
 
   @XmlElement(name = "leadsToMapSerial")
   @JsonProperty("leadsToMapSerial")
@@ -97,19 +92,6 @@ public class Event implements XMLModel {
     this.description = description;
   }
 
-  public Event location(Location location) {
-    this.location = location;
-    return this;
-  }
-
-  @Valid
-  public Location getLocation() {
-    return location;
-  }
-
-  public void setLocation(Location location) {
-    this.location = location;
-  }
 
   public Event leadsToMapSerial(String leadsToMapSerial) {
     this.leadsToMapSerial = leadsToMapSerial;
@@ -144,24 +126,21 @@ public class Event implements XMLModel {
     return Objects.equals(this.serial, event.serial) &&
             Objects.equals(this.name, event.name) &&
             Objects.equals(this.description, event.description) &&
-            Objects.equals(this.location, event.location) &&
             Objects.equals(this.leadsToMapSerial, event.leadsToMapSerial);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(serial, name, description, location, leadsToMapSerial);
+    return Objects.hash(serial, name, description, leadsToMapSerial);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class Event {\n");
-
     sb.append("    serial: ").append(toIndentedString(serial)).append("\n");
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("    description: ").append(toIndentedString(description)).append("\n");
-    sb.append("    location: ").append(toIndentedString(location)).append("\n");
     sb.append("    leadsToMapSerial: ").append(toIndentedString(leadsToMapSerial)).append("\n");
     sb.append("}");
     return sb.toString();

@@ -1,7 +1,10 @@
 package io.swagger.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.swagger.model.Location;
 import io.swagger.model.Map;
+import io.swagger.model.MapListWrapper;
+import io.swagger.model.patchDTOs.PatchMap;
 import io.swagger.persistance.DataHandler;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
@@ -17,14 +20,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import javax.xml.bind.JAXBException;
-import java.io.IOException;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
 @RestController
 public class MapsApiController implements MapsApi {
-
 
 
     private static final Logger log = LoggerFactory.getLogger(MapsApiController.class);
@@ -34,6 +37,7 @@ public class MapsApiController implements MapsApi {
     private final HttpServletRequest request;
 
     private final DataHandler dataHandler;
+
     @Autowired
     public MapsApiController(ObjectMapper objectMapper, HttpServletRequest request, DataHandler dataHandler) {
         this.objectMapper = objectMapper;
@@ -51,10 +55,9 @@ public class MapsApiController implements MapsApi {
         return Optional.ofNullable(request);
     }
 
+    @Override
     public ResponseEntity<String> mapsPost(@Parameter(in = ParameterIn.DEFAULT, description = "", required = true, schema = @Schema()) @Valid @RequestBody Map body) {
-        String accept = request.getHeader("Accept");
-        String serial = body.getSerial() == null?UUID.randomUUID().toString(): body.getSerial();
-        body.setSerial(serial);
+        body.setSerial(UUID.randomUUID().toString());
         try {
             dataHandler.putMap(body);
 
@@ -62,9 +65,10 @@ public class MapsApiController implements MapsApi {
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.CONFLICT);
         }
-        return new ResponseEntity<>(serial, HttpStatus.CREATED);
+        return new ResponseEntity<>(body.getSerial(), HttpStatus.CREATED);
     }
 
+    @Override
     public ResponseEntity<Map> mapsSerialGet(@Parameter(in = ParameterIn.PATH, description = "", required = true, schema = @Schema()) @PathVariable("serial") String serial) {
         String accept = request.getHeader("Accept");
         if (accept != null && accept.contains("application/xml")) {
@@ -79,4 +83,71 @@ public class MapsApiController implements MapsApi {
 
     }
 
+    @Override
+    public ResponseEntity<Void> mapDelete(@NotNull @Parameter(in = ParameterIn.QUERY, description = "", required = true, schema = @Schema()) @Valid @PathVariable(value = "serial", required = true) String serial) {
+        try {
+            dataHandler.removeMap(serial);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (DataHandler.SerialNotFoundException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @Override
+    public ResponseEntity<MapListWrapper> getAllMaps(){
+        try {
+            List<Map> maps = dataHandler.getAllMaps();
+            MapListWrapper mapListWrapper = new MapListWrapper();
+            mapListWrapper.setMaps(maps);
+            return new ResponseEntity<>(mapListWrapper, HttpStatus.OK);
+        } catch (Exception e) {
+            log.error("Error occurred while retrieving all maps", e);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+    @Override
+    public ResponseEntity<Void> eventLocationChange(String eventSerial, String mapSerial, int locationX, int locationY) {
+
+        try {
+            Map map = dataHandler.getMap(mapSerial);
+            Location loc = map.getEvents().get(eventSerial);
+            loc.setX(locationX);
+            loc.setY(locationY);
+            dataHandler.updateMap(mapSerial);
+        } catch (DataHandler.SerialNotFoundException ex) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } catch (JAXBException e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @Override
+    public ResponseEntity<Void> mapEventDelete(String mapSerial, String eventSerial) {
+        try {
+            dataHandler.removeEvent(eventSerial);
+            dataHandler.getMap(mapSerial).getEvents().remove(eventSerial);
+            dataHandler.updateMap(mapSerial);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (DataHandler.SerialNotFoundException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } catch (JAXBException e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @Override
+    public ResponseEntity<Void> patchMap(String serial, PatchMap body) {
+        try {
+            Map existingMap = dataHandler.getMap(serial);
+            DataHandler.copyNonNullProperties(body, existingMap);
+            dataHandler.updateMap(serial);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (DataHandler.SerialNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (JAXBException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
 }
