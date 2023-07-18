@@ -7,6 +7,7 @@ import javax.xml.bind.JAXBException;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import io.swagger.model.Wrapper.EventSerialListWrapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,7 @@ import java.util.UUID;
 
 import io.swagger.model.Location;
 import io.swagger.model.Map;
-import io.swagger.model.MapListWrapper;
+import io.swagger.model.Wrapper.MapListWrapper;
 import io.swagger.model.patchDTOs.PatchMap;
 import io.swagger.persistance.DataHandler;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -153,6 +154,17 @@ public class MapsApiController implements MapsApi {
         } catch (JAXBException e) {
             throw new RuntimeException(e);
         }
+    }
 
+    @Override
+    public ResponseEntity<EventSerialListWrapper> getEvents(String serial) {
+        try {
+            Map map = dataHandler.getMap(serial);
+            EventSerialListWrapper esw = new EventSerialListWrapper();
+            esw.setEvents(map.getEvents().keySet());
+            return new ResponseEntity<>(esw, HttpStatus.OK);
+        } catch (DataHandler.SerialNotFoundException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 }

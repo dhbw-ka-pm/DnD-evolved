@@ -1,10 +1,12 @@
-package io.swagger.model;
+package io.swagger.model.Wrapper;
+
+import io.swagger.model.Map;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.List;
 
-@XmlRootElement
+@XmlRootElement(name = "maps")
 public class MapListWrapper {
     private List<Map> maps;
 

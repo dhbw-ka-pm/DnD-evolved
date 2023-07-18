@@ -6,9 +6,9 @@
 package io.swagger.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.swagger.model.Location;
 import io.swagger.model.Map;
-import io.swagger.model.MapListWrapper;
+import io.swagger.model.Wrapper.EventSerialListWrapper;
+import io.swagger.model.Wrapper.MapListWrapper;
 import io.swagger.model.patchDTOs.PatchMap;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -32,6 +32,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 import java.util.Optional;
 
 @Validated
@@ -138,6 +139,18 @@ public interface MapsApi {
             method = RequestMethod.PATCH,
     consumes = MediaType.APPLICATION_XML_VALUE)
     default ResponseEntity<Void> patchMap(@PathVariable(value = "serial") String serial, @RequestBody PatchMap body){
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+    }
+
+    @Operation(summary = "get a list of all Eventserials on a map", description = "", tags = {})
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200"),
+            @ApiResponse(responseCode = "404")
+    })
+    @RequestMapping(value = "/maps/events/{serial}",
+    method = RequestMethod.GET,
+    produces = MediaType.APPLICATION_XML_VALUE)
+    default ResponseEntity<EventSerialListWrapper> getEvents(@PathVariable(value = "serial") String serial){
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
     }
 
