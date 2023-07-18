@@ -97,7 +97,7 @@ public interface EventsApi {
             consumes = {"application/xml"},
             method = RequestMethod.PATCH)
     default ResponseEntity<Void> overwriteEvent(@Parameter(in = ParameterIn.PATH, description = "", required = true, schema = @Schema()) @PathVariable("serial") String serial,
-                                                @Parameter(in = ParameterIn.DEFAULT, description = "", required = true, schema = @Schema()) @Valid @RequestBody Event body
+                                                @Parameter(in = ParameterIn.DEFAULT, description = "", required = true, schema = @Schema()) @Valid @RequestBody PatchEvent body
     ) {
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
     }
