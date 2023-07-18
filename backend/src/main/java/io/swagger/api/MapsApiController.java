@@ -76,17 +76,12 @@ public class MapsApiController implements MapsApi {
 
     @Override
     public ResponseEntity<Map> mapsSerialGet(@Parameter(in = ParameterIn.PATH, description = "", required = true, schema = @Schema()) @PathVariable("serial") String serial) {
-        String accept = request.getHeader("Accept");
-        if (accept != null && accept.contains("application/xml")) {
             try {
                 return new ResponseEntity<>(dataHandler.getMap(serial), HttpStatus.OK);
             } catch (DataHandler.SerialNotFoundException e) {
                 log.error(e.getMessage(), e);
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             }
-        }
-        return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-
     }
 
     @Override
