@@ -1,31 +1,91 @@
-<div class="grid-container">
-    <mat-grid-list cols="2">
+<mat-drawer-container class="sidenav-container">
+  <mat-drawer #eventdrawer class="sidenav" position="end" mode="side" opened>
+    <mat-toolbar color="accent">
+      <span>Events</span>
+    </mat-toolbar>
+    <mat-divider></mat-divider>
+
+    <mat-form-field color="accent">
+      <input matInput placeholder="Search">
+    </mat-form-field>
+
+    <mat-divider></mat-divider>
+    <mat-accordion>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          Dreadlands
+        </mat-expansion-panel-header>
+      </mat-expansion-panel>
+
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          Abandoned Hut
+        </mat-expansion-panel-header>
+      </mat-expansion-panel>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          Hidden Shrine
+        </mat-expansion-panel-header>
+      </mat-expansion-panel>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          Forbidden Forest
+        </mat-expansion-panel-header>
+      </mat-expansion-panel>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          Deadman's Cave
+        </mat-expansion-panel-header>
+      </mat-expansion-panel>
+      <mat-divider></mat-divider>
+      <button mat-raised-button color="primary">Add</button>
+      <button mat-raised-button color="primary">Edit</button>
+      <button mat-raised-button color="primary">Delete</button>
+
+    </mat-accordion>
+  </mat-drawer>
+  <mat-drawer-content>
+
+    <mat-toolbar color="accent">
+      <span>Dreadlands</span>
+      <span style="flex: 1 1 auto;"></span>
+      <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="eventdrawer.toggle()">
+        <!-- *ngIf="isHandset$ | async" -->
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+    </mat-toolbar>
+    <div class="grid-container">
+      <mat-grid-list cols="2">
         <mat-grid-tile>
-            <mat-card class="event-card-input">
-                <mat-form-field class="event-form-field">
-                    <mat-label>Title</mat-label>
-                    <input matInput>
-                </mat-form-field>
-                <mat-form-field class="event-form-field">
-                    <mat-label>Map-Datei</mat-label>
-                    <mat-select>
-                        <mat-option value="one">First Map</mat-option>
-                        <mat-option value="two">Second Map</mat-option>
-                    </mat-select>
-                </mat-form-field>
-                <mat-form-field class="event-form-field">
-                    <mat-label>Description</mat-label>
-                    <textarea matInput></textarea>
-                </mat-form-field>
-            </mat-card>
+          <mat-card class="event-card-input">
+            <mat-form-field class="event-form-field">
+              <mat-label>Title</mat-label>
+              <input matInput>
+            </mat-form-field>
+            <mat-form-field class="event-form-field">
+              <mat-label>Map-Datei</mat-label>
+              <mat-select>
+                <mat-option value="one">First Map</mat-option>
+                <mat-option value="two">Second Map</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field class="event-form-field">
+              <mat-label>Description</mat-label>
+              <textarea matInput></textarea>
+            </mat-form-field>
+            <button mat-raised-button color="primary">Save</button>
+          </mat-card>
         </mat-grid-tile>
         <mat-grid-tile>
-            <mat-card class="event-card">
-                <mat-card-header>Map</mat-card-header>
-                <mat-card-content>
-                    <img mat-card-image src="../../assets/map2.jpeg" alt="" />
-                </mat-card-content>
-            </mat-card>
+          <mat-card class="event-card">
+            <mat-card-header>Map</mat-card-header>
+            <mat-card-content>
+              <img mat-card-image src="../../assets/map2.jpeg" alt=""/>
+            </mat-card-content>
+          </mat-card>
         </mat-grid-tile>
-    </mat-grid-list>
-</div>
+
+      </mat-grid-list>
+    </div>
+  </mat-drawer-content>
+</mat-drawer-container>
