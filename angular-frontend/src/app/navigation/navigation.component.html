@@ -6,16 +6,12 @@
         <button mat-raised-button color="primary">Add Map</button>
         <mat-nav-list>
             <mat-divider></mat-divider>
-            <mat-card>
-                <a mat-list-item href="story-management"> Edit Events</a>
-            </mat-card>
-            <mat-divider></mat-divider>
-            <mat-card>
-            </mat-card>
-            <mat-divider></mat-divider>
-            <mat-card>
-                <a mat-list-item href="map">Interactive Map</a>
-            </mat-card>
+            <div>
+                <mat-card *ngFor="let map of DnDMaps">
+                    <mat-card-header></mat-card-header>
+                    <a mat-list-item href="story-management"> Edit Events</a>
+                </mat-card>
+                </div>
             <mat-divider></mat-divider>
         </mat-nav-list>
     </mat-sidenav>

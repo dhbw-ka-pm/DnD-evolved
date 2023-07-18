@@ -1,3 +1,5 @@
+import { DnDLocation } from "./DnDLocation";
+
 export interface DnDMap {
     description?: string;
     events?: DnDLocation[];
