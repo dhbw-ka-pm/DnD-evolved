@@ -18,10 +18,11 @@ import { MatButtonModule } from '@angular/material/button';
 import { MapImageViewComponent } from './map-image-view/map-image-view.component';
 import { InteractiveMapComponent } from './interactive-map/interactive-map.component';
 import { HttpClientModule } from '@angular/common/http';
-import { EditDialogComponent } from './edit-dialog/edit-dialog.component';
+import { EditEventDialogComponent } from './edit-event-dialog/edit-event-dialog.component';
 import {MatDialogModule} from "@angular/material/dialog";
 import { FormsModule } from '@angular/forms';
 import { EventEntryComponent } from './event-entry/event-entry.component';
+import { EditMapDialogComponent } from './edit-map-dialog/edit-map-dialog.component';
 
 @NgModule({
   declarations: [
@@ -32,8 +33,9 @@ import { EventEntryComponent } from './event-entry/event-entry.component';
     DashboardComponent,
     MapImageViewComponent,
     InteractiveMapComponent,
-    EditDialogComponent,
-    EventEntryComponent
+    EditEventDialogComponent,
+    EventEntryComponent,
+    EditMapDialogComponent
   ],
   imports: [
     BrowserModule,

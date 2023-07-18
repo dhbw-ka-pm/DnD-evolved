@@ -1,6 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {MatDialog} from "@angular/material/dialog";
-import {EditDialogComponent} from "../edit-dialog/edit-dialog.component";
+import {EditEventDialogComponent} from "../edit-event-dialog/edit-event-dialog.component";
 
 @Component({
   selector: 'app-event-entry',
@@ -13,7 +13,7 @@ export class EventEntryComponent {
   constructor(public dialog: MatDialog) {}
 
   openEditDialog(): void {
-    const dialogRef = this.dialog.open(EditDialogComponent, {
+    const dialogRef = this.dialog.open(EditEventDialogComponent, {
       width: '260px',
       data: {name: 'Deadman\'s Cave', location: '12, 45', description: 'You will die here', serial: 'e8207402-147e-4bfe-baa3-97575caa1e50'}
     });

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { EditDialogComponent } from '../edit-dialog/edit-dialog.component';
+import { EditEventDialogComponent } from '../edit-event-dialog/edit-event-dialog.component';
 import { EventsService } from '../service/events.service';
 
 
@@ -21,8 +21,8 @@ export class EventEditingComponent implements OnInit {
   events: string[] = [];
 
   openAddDialog() {
-    const dialogRef = this.dialog.open(EditDialogComponent, {
-      width: '260px',
+    const dialogRef = this.dialog.open(EditEventDialogComponent, {
+      width: '270px',
       data: { name: '', location: '', description: '', serial: '' }
     });
 

@@ -4,6 +4,9 @@ import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { DnDMap } from '../interfaces/DnDMap';
 import { MapService } from '../service/maps.service';
+import {EditEventDialogComponent} from "../edit-event-dialog/edit-event-dialog.component";
+import {MatDialog} from "@angular/material/dialog";
+import {EditMapDialogComponent} from "../edit-map-dialog/edit-map-dialog.component";
 
 @Component({
   selector: 'app-navigation',
@@ -16,7 +19,7 @@ export class NavigationComponent implements OnInit {
 
   DnDMaps: DnDMap[] = [];
 
-  constructor(private mapService: MapService) {
+  constructor(private mapService: MapService, public dialog: MatDialog) {
   }
   ngOnInit(): void {
     // this.getDnDMaps()
@@ -24,6 +27,17 @@ export class NavigationComponent implements OnInit {
     console.log(this.DnDMaps)
   }
 
+  openEditDialog(): void {
+    const dialogRef = this.dialog.open(EditMapDialogComponent, {
+      width: '260px',
+      data: {name: 'Deadman\'s Cave', location: '12, 45', description: 'You will die here', serial: 'e8207402-147e-4bfe-baa3-97575caa1e50'}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      // This is where the data gets returned (result) after clicking save button
+    });
+  }
 
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)

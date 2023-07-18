@@ -11,13 +11,13 @@ export interface DialogData {
 
 @Component({
   selector: 'app-edit-dialog',
-  templateUrl: './edit-dialog.component.html',
-  styleUrls: ['./edit-dialog.component.css']
+  templateUrl: './edit-event-dialog.component.html',
+  styleUrls: ['./edit-event-dialog.component.css']
 })
-export class EditDialogComponent {
+export class EditEventDialogComponent {
 
   constructor(
-    public dialogRef: MatDialogRef<EditDialogComponent>,
+    public dialogRef: MatDialogRef<EditEventDialogComponent>,
     private http: HttpClient,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
 
