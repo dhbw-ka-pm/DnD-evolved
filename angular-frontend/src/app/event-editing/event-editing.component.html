@@ -3,45 +3,27 @@
     <mat-toolbar color="accent">
       <span>Events</span>
     </mat-toolbar>
-    <mat-divider></mat-divider>
-
-    <mat-form-field color="accent">
-      <input matInput placeholder="Search">
-    </mat-form-field>
-
-    <mat-divider></mat-divider>
     <mat-accordion>
       <mat-expansion-panel>
         <mat-expansion-panel-header>
-          Dreadlands
+          <mat-panel-title>
+            Deadman's Cave
+          </mat-panel-title>
         </mat-expansion-panel-header>
+        <mat-panel-description>
+          Location: 12, 45
+        </mat-panel-description>
+        <mat-panel-description>
+          Description: You will die here
+        </mat-panel-description>
+        <mat-action-row class="full-width">
+          <button mat-raised-button color="accent" class="expand-button" (click)="openDialog()">Edit</button>
+          <button mat-raised-button color="warn" class="expand-button">Delete</button>
+        </mat-action-row>
       </mat-expansion-panel>
-
-      <mat-expansion-panel>
-        <mat-expansion-panel-header>
-          Abandoned Hut
-        </mat-expansion-panel-header>
-      </mat-expansion-panel>
-      <mat-expansion-panel>
-        <mat-expansion-panel-header>
-          Hidden Shrine
-        </mat-expansion-panel-header>
-      </mat-expansion-panel>
-      <mat-expansion-panel>
-        <mat-expansion-panel-header>
-          Forbidden Forest
-        </mat-expansion-panel-header>
-      </mat-expansion-panel>
-      <mat-expansion-panel>
-        <mat-expansion-panel-header>
-          Deadman's Cave
-        </mat-expansion-panel-header>
-      </mat-expansion-panel>
-      <mat-divider></mat-divider>
-      <button mat-raised-button color="primary">Add</button>
-      <button mat-raised-button color="primary">Edit</button>
-      <button mat-raised-button color="primary">Delete</button>
-
+      <div class="center-button">
+        <button mat-raised-button color="primary">Add</button>
+      </div>
     </mat-accordion>
   </mat-drawer>
   <mat-drawer-content>

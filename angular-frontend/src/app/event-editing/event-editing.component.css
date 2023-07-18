@@ -25,3 +25,38 @@
   width: 100%; /* Here you can use wherever you want to specify the width and also the height of the <img>*/
   height: 90%;
 }
+
+.center-button {
+  display: flex;
+  justify-content: center;
+  margin-top: 16px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.mat-expansion-panel-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.mat-action-row {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+.expand-button {
+  width: auto;
+  margin: 4px 10px;
+  padding: 10px;
+
+}
+
+.sidenav, .expand-button {
+  box-sizing: border-box;
+}
+
+
