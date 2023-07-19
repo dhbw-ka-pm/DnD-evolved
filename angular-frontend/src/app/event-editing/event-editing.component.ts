@@ -2,8 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { EditEventDialogComponent } from '../edit-event-dialog/edit-event-dialog.component';
 import { EventsService } from '../service/events.service';
-import {DnDEvent} from "../interfaces/DnDEvent";
+import { DnDEvent } from "../interfaces/DnDEvent";
 import { ActivatedRoute } from '@angular/router';
+import { MapService } from '../service/maps.service';
+import { DnDMap } from '../interfaces/DnDMap';
 // import { Location } from '@angular/common';
 
 
@@ -18,8 +20,9 @@ export class EventEditingComponent implements OnInit {
     public dialog: MatDialog,
     private eventService: EventsService,
     private route: ActivatedRoute,
+    private mapService: MapService,
     // private location: Location,
-              ) {}
+  ) {}
   ngOnInit(): void {
     this.eventService.getEvents('10ad2eb7-3dc4-4db3-bc0b-86bb3a1059d6').then((events: any) => {
       this.eventSerials = events;
@@ -36,15 +39,17 @@ export class EventEditingComponent implements OnInit {
     }).catch((error: any) => {
       console.error(error);
     });
-    this.mapSerial=this.route.snapshot.queryParamMap.get('id');
+    this.mapSerial = this.route.snapshot.queryParamMap.get('id');
     console.log("Serial:");
     console.log(this.mapSerial);
+    this.mapName = this.route.snapshot.queryParamMap.get('name');
 
   }
 
   eventSerials: string[] = [];
   events: DnDEvent[] = [];
-  mapSerial:any='';
+  mapSerial: any = '';
+  mapName:any='';
 
 
   openAddDialog() {
@@ -60,16 +65,16 @@ export class EventEditingComponent implements OnInit {
   }
 
   openEditDialog(serial: string | undefined): void {
-    let Event: DnDEvent = {name: '', description: '', serial: ''};
-    for(let i = 0; i < this.events.length; i++){
-      if(this.events[i].serial === serial){
+    let Event: DnDEvent = { name: '', description: '', serial: '' };
+    for (let i = 0; i < this.events.length; i++) {
+      if (this.events[i].serial === serial) {
         Event = this.events[i];
       }
     }
 
     const dialogRef = this.dialog.open(EditEventDialogComponent, {
       width: '260px',
-      data: {name: Event.name, location: Event.description, description: Event.description, serial: Event.serial}
+      data: { name: Event.name, location: Event.description, description: Event.description, serial: Event.serial }
     });
 
     dialogRef.afterClosed().subscribe(result => {

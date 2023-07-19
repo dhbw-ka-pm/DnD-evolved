@@ -7,11 +7,13 @@
             <div>
                 <mat-card *ngFor="let map of DnDMaps">
                     <mat-card-header></mat-card-header>
-                    <a mat-list-item [routerLink]="['/event-editing']" [queryParams]="{id:map.Serial}">{{map.Name}}</a>
-                  <mat-action-row class="full-width">
-                    <button mat-raised-button color="warn" class="expand-button" (click)= "openEditDialog()">Edit</button>
-                    <button mat-raised-button color="accent" class="expand-button">Delete</button>
-                  </mat-action-row>
+                    <a mat-list-item [routerLink]="['/event-editing']"
+                        [queryParams]="{id:map.Serial, name:map.Name}">{{map.Name}}</a>
+                    <mat-action-row class="full-width">
+                        <button mat-raised-button color="warn" class="expand-button"
+                            (click)="openEditDialog()">Edit</button>
+                        <button mat-raised-button color="accent" class="expand-button">Delete</button>
+                    </mat-action-row>
                 </mat-card>
             </div>
             <mat-divider></mat-divider>

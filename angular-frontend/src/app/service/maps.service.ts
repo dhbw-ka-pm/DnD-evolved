@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { parseString } from 'xml2js';
 
 import { map } from 'rxjs';
+import { DnDMap } from '../interfaces/DnDMap';
 
 @Injectable({
   providedIn: 'root'
@@ -41,7 +42,7 @@ export class MapService {
     });
   }
 
-  getMapBySerial(serial: string): Promise<any> {
+  getMapBySerial(serial: string): Promise<DnDMap> {
     return new Promise((resolve, reject) => {
       this.http.get(this.apiUrl + serial, { responseType: 'text' })
         .pipe(
@@ -51,15 +52,15 @@ export class MapService {
                 if (err) {
                   rejectParse(err);
                 } else {
-                  resolevParse(result.map);
+                  resolevParse(result.Map);
                 }
               });
             });
           })
         )
         .subscribe(
-          (map: any) => {
-            resolve(map);
+          (maps: any) => {
+            resolve(maps);
           },
           (error: any) => {
             reject(error);
