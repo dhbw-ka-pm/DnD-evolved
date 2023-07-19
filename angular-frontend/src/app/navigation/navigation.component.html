@@ -12,9 +12,12 @@
                                 [queryParams]="{id:map.Serial, name:map.Name}">{{map.Name}}</a>
                         </mat-panel-title>
                     </mat-expansion-panel-header>
+                    <mat-panel-description>
+                        {{map.Description}}
+                    </mat-panel-description>
                     <mat-action-row class="full-width">
                         <button mat-raised-button color="warn" class="expand-button"
-                            (click)="openEditDialog()">Edit</button>
+                            (click)="openEditDialog(map)">Edit</button>
                         <button mat-raised-button color="accent" class="expand-button">Delete</button>
                     </mat-action-row>
                 </mat-expansion-panel>

@@ -1,24 +1,27 @@
-import {Component, Inject} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {HttpClient, HttpHeaders} from "@angular/common/http";
+import { Component, EventEmitter, Inject, Output } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { DnDMap } from '../interfaces/DnDMap';
 
-export interface DialogData {
-  serial: string;
-  name: string;
-  location: string;
-  description: string;
-}
 @Component({
   selector: 'app-edit-map-dialog',
   templateUrl: './edit-map-dialog.component.html',
   styleUrls: ['./edit-map-dialog.component.css']
 })
 export class EditMapDialogComponent {
+  mapApi = 'http://localhost:8080/DnDEvolved/v1/maps/'
+  @Output() saveChanges: EventEmitter<DnDMap> = new EventEmitter<DnDMap>();
+
+  onSave() {
+    this.saveChanges.emit(this.data);
+    this.saveData();
+  }
+
 
   constructor(
     public dialogRef: MatDialogRef<EditMapDialogComponent>,
     private http: HttpClient,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
+    @Inject(MAT_DIALOG_DATA) public data: DnDMap) {}
 
   onNoClick(): void {
     this.dialogRef.close();
@@ -28,22 +31,27 @@ export class EditMapDialogComponent {
     const contentType = new HttpHeaders().set('Content-Type', 'application/xml');
 
     const body = `
-    <Event>
-    <description>${this.data.description}</description>
-    <leadsToMapSerial></leadsToMapSerial>
-    <name>${this.data.name}</name>
-    <serial>${this.data.serial}</serial>
-    </Event>`;
+ <Map>
+    <Serial>${this.data.Serial}</Serial>
+    <Name>${this.data.Name}</Name>
+    <Description>${this.data.Description}</Description>
+    <ImagePath>${this.data.ImagePath}</ImagePath>
+    <SizeX>${this.data.SizeX}</SizeX>
+    <SizeY>${this.data.SizeY}</SizeY>
+  </Map>
 
 
-    if(this.data.serial === '') {
-      this.http.post('http://localhost:8080/DnDEvolved/v1/events/1078cf56-8ec0-4af7-88c6-0775c9f8307c', body, { headers: contentType })
+    `;
+
+
+    if (this.data.Serial === '') {
+      this.http.post(this.mapApi + this.data.Serial, body, { headers: contentType })
         .subscribe(
           response => console.log(response), // Handle success here
           error => console.log(error) // Handle error here
         );
     } else {
-      this.http.patch('http://localhost:8080/DnDEvolved/v1/events/edit/e8207402-147e-4bfe-baa3-97575caa1e50', body, { headers: contentType })
+      this.http.patch(this.mapApi + this.data.Serial, body, { headers: contentType })
         .subscribe(
           response => console.log(response), // Handle success here
           error => console.log(error) // Handle error here

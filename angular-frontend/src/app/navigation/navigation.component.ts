@@ -23,7 +23,7 @@ export class NavigationComponent implements OnInit {
     // this.DnDMaps=this.mockData
     this.mapService.getMaps().then(
       (maps: DnDMap[]) => {
-        for (let i=0;i<maps.length;i++) {
+        for (let i = 0; i < maps.length; i++) {
           this.DnDMaps.push(maps[i]);
         }
         console.log(this.DnDMaps);
@@ -33,12 +33,15 @@ export class NavigationComponent implements OnInit {
     console.log(this.DnDMaps)
   }
 
-  openEditDialog(): void {
+  openEditDialog(map: DnDMap): void {
     const dialogRef = this.dialog.open(EditMapDialogComponent, {
       width: '260px',
-      data: { name: 'Deadman\'s Cave', location: '12, 45', description: 'You will die here', serial: 'e8207402-147e-4bfe-baa3-97575caa1e50' }
+      data: { ...map }
     });
 
+    dialogRef.componentInstance.saveChanges.subscribe(updatedData => {
+      console.log("Data to be saved: " + JSON.stringify(updatedData));
+    })
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
       // This is where the data gets returned (result) after clicking save button
