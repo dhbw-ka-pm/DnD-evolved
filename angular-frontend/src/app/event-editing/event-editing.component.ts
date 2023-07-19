@@ -13,9 +13,11 @@ import { EventsService } from '../service/events.service';
 export class EventEditingComponent implements OnInit {
   constructor(public dialog: MatDialog, private eventService: EventsService) {}
   ngOnInit(): void {
-    this.events = this.eventService.getEvents("10ad2eb7-3dc4-4db3-bc0b-86bb3a1059d6");
-    console.log("the next print statement is important ");
-    console.log(this.events);
+    this.eventService.getEvents('10ad2eb7-3dc4-4db3-bc0b-86bb3a1059d6').then((events: any) => {
+      this.events = events;
+    }).catch((error: any) => {
+      console.error(error);
+    });
   }
 
   events: string[] = [];
