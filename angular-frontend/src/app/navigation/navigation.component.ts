@@ -4,8 +4,8 @@ import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { DnDMap } from '../interfaces/DnDMap';
 import { MapService } from '../service/maps.service';
-import {MatDialog} from "@angular/material/dialog";
-import {EditMapDialogComponent} from "../edit-map-dialog/edit-map-dialog.component";
+import { MatDialog } from "@angular/material/dialog";
+import { EditMapDialogComponent } from "../edit-map-dialog/edit-map-dialog.component";
 
 @Component({
   selector: 'app-navigation',
@@ -21,15 +21,23 @@ export class NavigationComponent implements OnInit {
   constructor(private mapService: MapService, public dialog: MatDialog) {
   }
   ngOnInit(): void {
-    // this.getDnDMaps()
-    this.DnDMaps=this.mockData
+    // this.DnDMaps=this.mockData
+    this.mapService.getMaps().then(
+      (maps: DnDMap[]) => {
+        for (let i=0;i<maps.length;i++) {
+          this.DnDMaps.push(maps[i]);
+        }
+        console.log(this.DnDMaps);
+      }
+    )
+
     console.log(this.DnDMaps)
   }
 
   openEditDialog(): void {
     const dialogRef = this.dialog.open(EditMapDialogComponent, {
       width: '260px',
-      data: {name: 'Deadman\'s Cave', location: '12, 45', description: 'You will die here', serial: 'e8207402-147e-4bfe-baa3-97575caa1e50'}
+      data: { name: 'Deadman\'s Cave', location: '12, 45', description: 'You will die here', serial: 'e8207402-147e-4bfe-baa3-97575caa1e50' }
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -45,55 +53,55 @@ export class NavigationComponent implements OnInit {
       shareReplay()
     );
 
-  getDnDMaps(): void {
-    this.mapService.getMaps()
-      .subscribe(maps => this.DnDMaps = maps);
-  }
+
+
+
+
   mockData: DnDMap[] = [
     {
-      description: "A mysterious castle in the woods",
-      events: [],
-      imagePath: "castle.jpg",
-      name: "Castle of Shadows",
-      serial: "map_001",
-      sizeX: 1000,
-      sizeY: 800,
+      Description: "A mysterious castle in the woods",
+      Events: [],
+      ImagePath: "castle.jpg",
+      Name: "Castle of Shadows",
+      Serial: "map_001",
+      SizeX: 1000,
+      SizeY: 800,
     },
     {
-      description: "An ancient temple hidden in the mountains",
-      events: [],
-      imagePath: "temple.jpg",
-      name: "Temple of the Ancients",
-      serial: "map_002",
-      sizeX: 1200,
-      sizeY: 900,
+      Description: "An ancient temple hidden in the mountains",
+      Events: [],
+      ImagePath: "temple.jpg",
+      Name: "Temple of the Ancients",
+      Serial: "map_002",
+      SizeX: 1200,
+      SizeY: 900,
     },
     {
-      description: "A bustling city with winding streets",
-      events: [],
-      imagePath: "city.jpg",
-      name: "City of Thieves",
-      serial: "map_003",
-      sizeX: 1800,
-      sizeY: 1200,
+      Description: "A bustling city with winding streets",
+      Events: [],
+      ImagePath: "city.jpg",
+      Name: "City of Thieves",
+      Serial: "map_003",
+      SizeX: 1800,
+      SizeY: 1200,
     },
     {
-      description: "A treacherous swamp filled with dangerous creatures",
-      events: [],
-      imagePath: "swamp.jpg",
-      name: "Swamp of Sorrow",
-      serial: "map_004",
-      sizeX: 800,
-      sizeY: 1200,
+      Description: "A treacherous swamp filled with dangerous creatures",
+      Events: [],
+      ImagePath: "swamp.jpg",
+      Name: "Swamp of Sorrow",
+      Serial: "map_004",
+      SizeX: 800,
+      SizeY: 1200,
     },
     {
-      description: "A vast ocean with uncharted islands",
-      events: [],
-      imagePath: "ocean.jpg",
-      name: "Sea of Mystery",
-      serial: "map_005",
-      sizeX: 2000,
-      sizeY: 2000,
+      Description: "A vast ocean with uncharted islands",
+      Events: [],
+      ImagePath: "ocean.jpg",
+      Name: "Sea of Mystery",
+      Serial: "map_005",
+      SizeX: 2000,
+      SizeY: 2000,
     },
   ];
 

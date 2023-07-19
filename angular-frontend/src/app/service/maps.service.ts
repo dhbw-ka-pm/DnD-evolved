@@ -1,10 +1,9 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import * as xml2js from 'xml2js';
 
+import { parseString } from 'xml2js';
 
-import { DnDMap } from '../interfaces/DnDMap';
-import { Observable } from 'rxjs';
+import { map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -14,29 +13,31 @@ export class MapService {
   constructor(private http: HttpClient) {}
 
   // Create a method to fetch maps from the API
-  getMaps(): Observable<DnDMap[]> {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Accept': 'application/xml'
-      })
-    }
-    return this.http.get<DnDMap[]>(this.apiUrl, httpOptions)
-    //   .pipe(
-    //   map((response: any[]) => {
-    //     return response.map(mapData => this.mapApiResponseToMapObject(mapData));
-    //   })
-    // );
-  }
-  // mapApiResponseToMapObject(mapData: any): DnDMap {
-  //   return {
-  //     description: mapData.description,
-  //     events: mapData.events as DnDLocation[],
-  //     imagePath: mapData.imagePath,
-  //     name: mapData.strig,
-  //     serial: mapData.serial,
-  //     sizeX: mapData.sizeX,
-  //     sizeY: mapData.sizeY
-  //   }
-  // }
 
+  getMaps(): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.http.get(this.apiUrl, { responseType: 'text' })
+        .pipe(
+          map((xmlData: string) => {
+            return new Promise<any>((resolveParse, rejectParse) => {
+              parseString(xmlData, (err, result) => {
+                if (err) {
+                  rejectParse(err);
+                } else {
+                  resolveParse(result.maps.map);
+                }
+              });
+            });
+          })
+        )
+        .subscribe(
+          (maps: any) => {
+            resolve(maps);
+          },
+          (error: any) => {
+            reject(error);
+          }
+        );
+    });
+  }
 }
