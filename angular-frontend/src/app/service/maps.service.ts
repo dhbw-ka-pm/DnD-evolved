@@ -40,4 +40,31 @@ export class MapService {
         );
     });
   }
+
+  getMapBySerial(serial: string): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.http.get(this.apiUrl + serial, { responseType: 'text' })
+        .pipe(
+          map((xmlData: string) => {
+            return new Promise<any>((resolevParse, rejectParse) => {
+              parseString(xmlData, (err, result) => {
+                if (err) {
+                  rejectParse(err);
+                } else {
+                  resolevParse(result.map);
+                }
+              });
+            });
+          })
+        )
+        .subscribe(
+          (map: any) => {
+            resolve(map);
+          },
+          (error: any) => {
+            reject(error);
+          }
+        );
+    });
+  }
 }

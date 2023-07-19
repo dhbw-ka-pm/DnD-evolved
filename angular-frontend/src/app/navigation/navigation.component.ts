@@ -13,7 +13,6 @@ import { EditMapDialogComponent } from "../edit-map-dialog/edit-map-dialog.compo
   styleUrls: ['./navigation.component.css'],
 })
 export class NavigationComponent implements OnInit {
-  // mapService: MapService =inject(MapService)
   private breakpointObserver = inject(BreakpointObserver);
 
   DnDMaps: DnDMap[] = [];
