@@ -21,7 +21,7 @@
       <g>
         <xsl:for-each select="/Map/Event/entry/value">
 
-          <image href="/assets/icons/mappointer-v1.svg" width="25" height="25">
+          <image href="/assets/icons/mappointer-v1.svg" width="60" height="60">
             <xsl:attribute name="x">
               <xsl:value-of select="x"></xsl:value-of>
             </xsl:attribute>
