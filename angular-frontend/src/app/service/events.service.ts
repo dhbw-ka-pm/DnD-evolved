@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { parseString } from 'xml2js';
-import {DnDEvent} from "../interfaces/Event";
+import {DnDEvent} from "../interfaces/DnDEvent";
 
 @Injectable({
   providedIn: 'root'

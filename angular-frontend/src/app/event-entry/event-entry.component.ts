@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {MatDialog} from "@angular/material/dialog";
 import {EditEventDialogComponent} from "../edit-event-dialog/edit-event-dialog.component";
-import {DnDEvent} from "../interfaces/Event";
+import {DnDEvent} from "../interfaces/DnDEvent";
 import {EventsService} from "../service/events.service";
 
 @Component({
