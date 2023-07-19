@@ -162,4 +162,18 @@ public class MapsApiController implements MapsApi {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+
+    @Override
+    public ResponseEntity<Location> getEventLocation(String mapSerial, String eventSerial) {
+        try {
+            Map map = dataHandler.getMap(mapSerial);
+            Location l = map.getEvents().get(eventSerial);
+            if(l == null){
+                throw new DataHandler.SerialNotFoundException("the serial of the Event is not on this map");
+            }
+            return new ResponseEntity<>(l, HttpStatus.OK);
+        } catch (DataHandler.SerialNotFoundException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
 }

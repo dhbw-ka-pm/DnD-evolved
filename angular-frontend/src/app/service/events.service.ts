@@ -16,7 +16,7 @@ export class EventsService {
 
   ;
 
-  getEvents(serial: string): Promise<any> {
+   getEvents(serial: string): Promise<any> {
     return new Promise((resolve, reject) => {
       this.http.get('http://localhost:8080/DnDEvolved/v1/maps/events/' + serial, { responseType: 'text' })
         .pipe(
@@ -96,4 +96,6 @@ export class EventsService {
         );
     });
   }
+
+
 }

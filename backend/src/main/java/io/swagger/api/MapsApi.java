@@ -6,6 +6,7 @@
 package io.swagger.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.swagger.model.Location;
 import io.swagger.model.Map;
 import io.swagger.model.Wrapper.EventSerialListWrapper;
 import io.swagger.model.Wrapper.MapListWrapper;
@@ -106,7 +107,7 @@ public interface MapsApi {
             @ApiResponse(responseCode = "200", description = "OK"),
             @ApiResponse(responseCode = "404", description = "Event not found")
     })
-    @RequestMapping(value = "/maps/{mapSerial},{eventSerial},{location_x},{location_y}",
+    @RequestMapping(value = "/maps/{mapSerial}/events/{eventSerial}/{location_x},{location_y}",
             method = RequestMethod.PATCH,
     consumes = MediaType.APPLICATION_XML_VALUE)
     default ResponseEntity<Void> eventLocationChange(@Parameter(in = ParameterIn.PATH, description = "", required = true, schema = @Schema()) @PathVariable("eventSerial") String eventSerial,
@@ -151,6 +152,18 @@ public interface MapsApi {
     method = RequestMethod.GET,
     produces = MediaType.APPLICATION_XML_VALUE)
     default ResponseEntity<EventSerialListWrapper> getEvents(@PathVariable(value = "serial") String serial){
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+    }
+
+    @Operation(summary = "get the location for an Event in a map")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200"),
+            @ApiResponse(responseCode = "404")
+    })
+    @RequestMapping(value = "/maps/{mapSerial}/events/{eventSerial}",
+    method = RequestMethod.GET,
+    produces = MediaType.APPLICATION_XML_VALUE)
+    default ResponseEntity<Location> getEventLocation(@PathVariable(value = "mapSerial") String mapSerial, @PathVariable(value = "eventSerial") String eventSerial){
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
     }
 
