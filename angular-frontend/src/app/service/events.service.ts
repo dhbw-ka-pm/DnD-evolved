@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { parseString } from 'xml2js';
 import {DnDEvent} from "../interfaces/DnDEvent";
+import {DnDLocation} from "../interfaces/DnDLocation";
 
 @Injectable({
   providedIn: 'root'
@@ -95,6 +96,34 @@ export class EventsService {
           }
         );
     });
+  }
+
+  getEventLocation(mapSerial: string ,eventSerial:string): Promise<DnDLocation>{
+     return new Promise((resolve, reject) => {
+       this.http.get("http://localhost:8080/DnDEvolved/v1/maps/" + mapSerial + "/events/" + eventSerial, {responseType: 'text'})
+         .pipe(
+         map((xmlData: string) => {
+           return new Promise((resolveParse, rejectParse) => {
+             parseString(xmlData, (err, result) => {
+               if(err){
+                 rejectParse(err)
+               }
+               else {
+                 resolveParse(result.Location)
+               }
+             })
+             })
+           })
+         )
+         .subscribe(
+           (location: any) => {
+             resolve(location);
+           },
+           (error: any) => {
+             reject(error);
+           }
+         );
+     })
   }
 
 

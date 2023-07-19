@@ -6,6 +6,7 @@ import { DnDEvent } from "../interfaces/DnDEvent";
 import { ActivatedRoute } from '@angular/router';
 import { MapService } from '../service/maps.service';
 import { DnDMap } from '../interfaces/DnDMap';
+import {DnDLocation} from "../interfaces/DnDLocation";
 // import { Location } from '@angular/common';
 
 
@@ -27,10 +28,12 @@ export class EventEditingComponent implements OnInit {
     this.eventService.getEvents('10ad2eb7-3dc4-4db3-bc0b-86bb3a1059d6').then((events: any) => {
       this.eventSerials = events;
       for (let i = 0; i < this.eventSerials.length; i++) {
-        console.log("for loop")
         this.eventService.getEventData(this.eventSerials[i]).then((event: DnDEvent) => {
+          this.eventService.getEventLocation("10ad2eb7-3dc4-4db3-bc0b-86bb3a1059d6" , this.eventSerials[i]).then((location: DnDLocation) => {
+            event.location = location
+            console.log(event.location)
+          })
           this.events.push(event);
-          console.log(event);
         }).catch((error: any) => {
           console.error(error);
         });
