@@ -53,7 +53,11 @@ export class EditMapDialogComponent {
     } else {
       this.http.patch(this.mapApi + this.data.Serial, body, { headers: contentType })
         .subscribe(
-          response => console.log(response), // Handle success here
+          response => {
+            console.log(response);
+            console.log("body: " + body)
+          }, // Handle success here
+
           error => console.log(error) // Handle error here
         );
     }

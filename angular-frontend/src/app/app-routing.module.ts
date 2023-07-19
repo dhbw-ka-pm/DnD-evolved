@@ -8,11 +8,11 @@ const routes: Routes = [
   { path: 'event-editing', component: EventEditingComponent },
   { path: 'story-management', component: StoryManagementComponent },
   { path: 'map', component: InteractiveMapComponent },
-  { path: 'event-editing/:Serial', component: EventEditingComponent },
+  { path: 'event-editing/:Serial', component: EventEditingComponent, runGuardsAndResolvers: 'always' },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { onSameUrlNavigation: 'reload' })],
   exports: [RouterModule]
 })
 export class AppRoutingModule {}

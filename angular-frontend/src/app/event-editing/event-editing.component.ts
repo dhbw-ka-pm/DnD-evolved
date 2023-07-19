@@ -49,7 +49,7 @@ export class EventEditingComponent implements OnInit {
   eventSerials: string[] = [];
   events: DnDEvent[] = [];
   mapSerial: any = '';
-  mapName:any='';
+  mapName: any = '';
 
 
   openAddDialog() {

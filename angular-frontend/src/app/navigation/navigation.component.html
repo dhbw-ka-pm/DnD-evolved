@@ -8,7 +8,7 @@
                 <mat-expansion-panel *ngFor="let map of DnDMaps">
                     <mat-expansion-panel-header>
                         <mat-panel-title>
-                            <a mat-list-item [routerLink]="['/event-editing']"
+                            <a mat-list-item routerLink='/event-editing' (click)="reloadPage()"
                                 [queryParams]="{id:map.Serial, name:map.Name}">{{map.Name}}</a>
                         </mat-panel-title>
                     </mat-expansion-panel-header>
@@ -21,12 +21,12 @@
                         <button mat-raised-button color="accent" class="expand-button">Delete</button>
                     </mat-action-row>
                 </mat-expansion-panel>
+                <mat-divider></mat-divider>
             </div>
-            <mat-divider></mat-divider>
+            <p></p>
             <div class="center-container">
                 <button mat-raised-button color="primary" class="add-map-button">Add Map</button>
             </div>
-            <mat-divider></mat-divider>
         </mat-nav-list>
     </mat-sidenav>
 

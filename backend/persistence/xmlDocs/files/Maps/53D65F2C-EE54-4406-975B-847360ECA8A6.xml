@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Map>
+    <Serial>53D65F2C-EE54-4406-975B-847360ECA8A6</Serial>
+    <Name>Second Map</Name>
+    <Description>A nice Map for an DnD campaign</Description>
+    <ImagePath>http://localhost:8080/DnDEvolved/v1/images/a5aec609-2de3-4931-9fd0-6fa246a69645</ImagePath>
+    <SizeX>640</SizeX>
+    <SizeY>832</SizeY>
+    <Event>
+        <entry>
+            <key>035242CF-39D0-4346-867B-CD9C4C592F1B</key>
+            <value>
+                <x>400</x>
+                <y>210</y>
+            </value>
+        </entry>
+        <entry>
+            <key>31E75382-6AE1-4B33-A14B-F9BF96F3D714</key>
+            <value>
+                <x>150</x>
+                <y>500</y>
+            </value>
+        </entry>
+        <entry>
+            <key>8f257d06-4751-4b20-8c60-7ebe7105d0d2</key>
+            <value>
+                <x>320</x>
+                <y>416</y>
+            </value>
+        </entry>
+        <entry>
+            <key>6169a3bc-df1e-4a72-b74c-6a8d131ad27d</key>
+            <value>
+                <x>100</x>
+                <y>200</y>
+            </value>
+        </entry>
+    </Event>
+</Map>
