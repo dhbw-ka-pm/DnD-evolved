@@ -43,6 +43,33 @@ export class EventsService {
     });
   }
 
+  getEventLocations(serial: string): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.http.get('http://localhost:8080/DnDEvolved/v1/maps/' + serial, { responseType: 'text' })
+        .pipe(
+          map((xmlData: string) => {
+            return new Promise<any>((resolveParse, rejectParse) => {
+              parseString(xmlData, (err, result) => {
+                if (err) {
+                  rejectParse(err);
+                } else {
+                  resolveParse(result.Map.Event);
+                }
+              });
+            });
+          })
+        )
+        .subscribe(
+          (events: any) => {
+            resolve(events);
+          },
+          (error: any) => {
+            reject(error);
+          }
+        );
+    });
+  }
+
   getEventData(serial: string): Promise<DnDEvent> {
     return new Promise((resolve, reject) => {
       this.http.get('http://localhost:8080/DnDEvolved/v1/events/' + serial, { responseType: 'text' })
