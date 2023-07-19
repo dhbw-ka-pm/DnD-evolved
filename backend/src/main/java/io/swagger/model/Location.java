@@ -3,13 +3,14 @@ package io.swagger.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.validation.annotation.Validated;
 
+import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Objects;
 
 /**
  * Location
  */
 @Validated
-
+@XmlRootElement(name = "Location")
 public class Location   {
   @JsonProperty("x")
   private Integer X = null;
