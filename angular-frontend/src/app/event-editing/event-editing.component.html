@@ -18,12 +18,11 @@
             {{Event.description}}
           </mat-panel-description>
           <mat-action-row class="full-width">
-            <button mat-raised-button color="warn" class="expand-button" (click)="openEditDialog()">Edit</button>
+            <button mat-raised-button color="warn" class="expand-button" (click)="openEditDialog(Event.serial)">Edit</button>
             <button mat-raised-button color="accent" class="expand-button">Delete</button>
           </mat-action-row>
         </mat-expansion-panel>
       </ng-container>
-      <app-event-entry></app-event-entry>
       <div class="center-button">
         <button mat-raised-button color="primary" (click)="openAddDialog()">Add</button>
       </div>

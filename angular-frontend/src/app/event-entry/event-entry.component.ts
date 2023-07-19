@@ -17,7 +17,7 @@ export class EventEntryComponent implements OnInit{
   openEditDialog(): void {
     const dialogRef = this.dialog.open(EditEventDialogComponent, {
       width: '260px',
-      data: {name: 'this', location: '12, 45', description: 'You will die here', serial: 'e8207402-147e-4bfe-baa3-97575caa1e50'}
+      data: {name: this.DnDEvent.name, location: this.DnDEvent.description, description: this.DnDEvent.description, serial: this.DnDEvent.serial}
     });
 
     dialogRef.afterClosed().subscribe(result => {

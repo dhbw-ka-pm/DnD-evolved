@@ -48,10 +48,17 @@ export class EventEditingComponent implements OnInit {
     });
   }
 
-  openEditDialog(): void {
+  openEditDialog(serial: string | undefined): void {
+    let Event: DnDEvent = {name: '', description: '', serial: ''};
+    for(let i = 0; i < this.events.length; i++){
+      if(this.events[i].serial === serial){
+        Event = this.events[i];
+      }
+    }
+
     const dialogRef = this.dialog.open(EditEventDialogComponent, {
       width: '260px',
-      data: {name: 'this', location: '12, 45', description: 'You will die here', serial: 'e8207402-147e-4bfe-baa3-97575caa1e50'}
+      data: {name: Event.name, location: Event.description, description: Event.description, serial: Event.serial}
     });
 
     dialogRef.afterClosed().subscribe(result => {
