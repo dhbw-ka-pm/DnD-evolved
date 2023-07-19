@@ -3,6 +3,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { EditEventDialogComponent } from '../edit-event-dialog/edit-event-dialog.component';
 import { EventsService } from '../service/events.service';
 import {DnDEvent} from "../interfaces/Event";
+import { ActivatedRoute } from '@angular/router';
+// import { Location } from '@angular/common';
 
 
 @Component({
@@ -12,7 +14,12 @@ import {DnDEvent} from "../interfaces/Event";
 })
 
 export class EventEditingComponent implements OnInit {
-  constructor(public dialog: MatDialog, private eventService: EventsService) {}
+  constructor(
+    public dialog: MatDialog,
+    private eventService: EventsService,
+    private route: ActivatedRoute,
+    // private location: Location,
+              ) {}
   ngOnInit(): void {
     this.eventService.getEvents('10ad2eb7-3dc4-4db3-bc0b-86bb3a1059d6').then((events: any) => {
       this.eventSerials = events;
@@ -29,11 +36,15 @@ export class EventEditingComponent implements OnInit {
     }).catch((error: any) => {
       console.error(error);
     });
+    this.mapSerial=this.route.snapshot.queryParamMap.get('id');
+    console.log("Serial:");
+    console.log(this.mapSerial);
 
   }
 
   eventSerials: string[] = [];
   events: DnDEvent[] = [];
+  mapSerial:any='';
 
 
   openAddDialog() {

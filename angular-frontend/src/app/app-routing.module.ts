@@ -8,6 +8,7 @@ const routes: Routes = [
   { path: 'event-editing', component: EventEditingComponent },
   { path: 'story-management', component: StoryManagementComponent },
   { path: 'map', component: InteractiveMapComponent },
+  { path: 'event-editing/:Serial', component: EventEditingComponent },
 ];
 
 @NgModule({
