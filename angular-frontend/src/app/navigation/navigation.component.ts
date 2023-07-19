@@ -13,14 +13,14 @@ import { EditMapDialogComponent } from "../edit-map-dialog/edit-map-dialog.compo
   styleUrls: ['./navigation.component.css'],
 })
 export class NavigationComponent implements OnInit {
-  reloadPage() {
-    console.log(" empty stuff");
-  }
   private breakpointObserver = inject(BreakpointObserver);
 
   DnDMaps: DnDMap[] = [];
 
-  constructor(private mapService: MapService, public dialog: MatDialog) {
+  constructor(
+    private mapService: MapService,
+    public dialog: MatDialog,
+  ) {
   }
   ngOnInit(): void {
     // this.DnDMaps=this.mockData

@@ -18,7 +18,6 @@ export class InteractiveMapComponent implements OnInit {
 
   ngOnInit(): void {
     const apiUrl = 'http://localhost:8080/DnDEvolved/v1/maps/'
-    const xmlPath = '../../assets/xml/locations.xml'
     const xslPath = '../../assets/xslt/interactive-map/interactiveMap.xslt'
 
     console.log("child serial: " + this.parentMapSerial);
