@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet href="catalog.xsl" type="text/xsl"?>
 <events>
   <imgPath>/assets/maps/fantasy-map.jpeg</imgPath>
   <event>
