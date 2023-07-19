@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 @Component({
@@ -10,6 +10,7 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 export class InteractiveMapComponent implements OnInit {
   constructor(private sanitizer: DomSanitizer) {
   }
+  @Input() parentMapSerial="";
 
   transformedHtml: SafeHtml = 'This should not show';
 
@@ -20,6 +21,7 @@ export class InteractiveMapComponent implements OnInit {
     const xslPath = '../../assets/xslt/interactive-map/interactiveMap.xslt'
 
     const xhttp = new XMLHttpRequest();
+    console.log("child serial: " + this.parentMapSerial);
 
     // xhttp.onreadystatechange = () => {
     // }
@@ -36,6 +38,7 @@ export class InteractiveMapComponent implements OnInit {
     this.transformedHtml = this.sanitizer.bypassSecurityTrustHtml(new XMLSerializer().serializeToString(result.documentElement));
     // this.transformedHtml=result) ;
     console.log(this.transformedHtml);
+
   }
 
 
