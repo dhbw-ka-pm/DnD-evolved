@@ -55,20 +55,17 @@ public class EventsApiController implements EventsApi {
         return Optional.ofNullable(request);
     }
 
-    public ResponseEntity<Event> eventsGet(@NotNull @Parameter(in = ParameterIn.QUERY, description = "", required = true, schema = @Schema()) @Valid @RequestParam(value = "serial", required = true) String serial) {
-        String accept = request.getHeader("Accept");
-            if (accept != null && accept.contains("application/xml")) {
-                try {
-                    return new ResponseEntity<>(dataHandler.getEvent(serial), HttpStatus.OK);
-                } catch (DataHandler.SerialNotFoundException e) {
-                    log.error(e.getMessage(), e);
-                    return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-                }
-            }
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+    public ResponseEntity<Event> eventsGet(@PathVariable(value = "serial") String serial) {
+        try {
+            return new ResponseEntity<>(dataHandler.getEvent(serial), HttpStatus.OK);
+        } catch (DataHandler.SerialNotFoundException e) {
+            log.error(e.getMessage(), e);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
-    public ResponseEntity<String> eventsMapSerialPost(@Parameter(in = ParameterIn.PATH, description = "", required = true, schema = @Schema()) @PathVariable("mapSerial") String mapSerial, @Parameter(in = ParameterIn.DEFAULT, description = "", required = true, schema = @Schema()) @Valid @RequestBody Event body){
+
+    public ResponseEntity<String> eventsMapSerialPost(@Parameter(in = ParameterIn.PATH, description = "", required = true, schema = @Schema()) @PathVariable("mapSerial") String mapSerial, @Parameter(in = ParameterIn.DEFAULT, description = "", required = true, schema = @Schema()) @Valid @RequestBody Event body) {
         try {
             Map map = dataHandler.getMap(mapSerial);
             String serial = UUID.randomUUID().toString();
@@ -76,8 +73,7 @@ public class EventsApiController implements EventsApi {
             map.addEventsItem(body.getSerial(), new Location(map.getSizeX() / 2, map.getSizeY() / 2));
             dataHandler.putMap(map);
             dataHandler.putEvent(body);
-        }
-        catch (JAXBException e) {
+        } catch (JAXBException e) {
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.CONFLICT);
         } catch (DataHandler.SerialNotFoundException e) {

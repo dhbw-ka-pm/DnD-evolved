@@ -1,22 +1,18 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {MatDialog} from "@angular/material/dialog";
 import {EditEventDialogComponent} from "../edit-event-dialog/edit-event-dialog.component";
+import {DnDEvent} from "../interfaces/Event";
+import {EventsService} from "../service/events.service";
 
-export interface EventData {
-  serial: string;
-  name: string;
-  location: string;
-  description: string;
-}
 @Component({
   selector: 'app-event-entry',
   templateUrl: './event-entry.component.html',
   styleUrls: ['./event-entry.component.css']
 })
-export class EventEntryComponent {
+export class EventEntryComponent implements OnInit{
 
-  @Input() data!: string;
-  constructor(public dialog: MatDialog) {}
+  @Input() DnDEvent!: DnDEvent;
+  constructor(public dialog: MatDialog, private eventService: EventsService) {}
 
   openEditDialog(): void {
     const dialogRef = this.dialog.open(EditEventDialogComponent, {
@@ -28,6 +24,9 @@ export class EventEntryComponent {
       console.log('The dialog was closed');
       // This is where the data gets returned (result) after clicking save button
     });
+  }
+
+  ngOnInit(): void {
   }
 
 }

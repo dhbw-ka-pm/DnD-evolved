@@ -54,7 +54,7 @@ public interface EventsApi {
     @RequestMapping(value = "/events/{serial}",
             produces = {"application/xml"},
             method = RequestMethod.GET)
-    default ResponseEntity<Event> eventsGet(@NotNull @Parameter(in = ParameterIn.QUERY, description = "", required = true, schema = @Schema()) @Valid @RequestParam(value = "serial", required = true) String serial) {
+    default ResponseEntity<Event> eventsGet(@PathVariable(value = "serial") String serial) {
         if (getObjectMapper().isPresent() && getAcceptHeader().isPresent()) {
             if (getAcceptHeader().get().contains("application/xml")) {
                 try {
