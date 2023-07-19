@@ -32,15 +32,11 @@ export class EditMapDialogComponent {
 
     const body = `
  <Map>
-    <Serial>${this.data.Serial}</Serial>
-    <Name>${this.data.Name}</Name>
-    <Description>${this.data.Description}</Description>
-    <ImagePath>${this.data.ImagePath}</ImagePath>
-    <SizeX>${this.data.SizeX}</SizeX>
-    <SizeY>${this.data.SizeY}</SizeY>
+    <name>${this.data.Name}</name>
+    <description>${this.data.Description}</description>
+    <sizeX>${this.data.SizeX}</sizeX>
+    <sizeY>${this.data.SizeY}</sizeY>
   </Map>
-
-
     `;
 
 

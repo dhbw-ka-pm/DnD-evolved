@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Map>
     <Serial>10ad2eb7-3dc4-4db3-bc0b-86bb3a1059d6</Serial>
-    <Name>sampleMap</Name>
+    <Name>sample</Name>
     <Description>basic description of this map</Description>
     <ImagePath>http://localhost:8080/DnDEvolved/v1/images/a5aec609-2de3-4931-9fd0-6fa246a69649</ImagePath>
     <SizeX>640</SizeX>
