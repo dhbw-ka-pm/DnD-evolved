@@ -12,13 +12,23 @@
             </mat-panel-title>
           </mat-expansion-panel-header>
           <mat-panel-description>
-            {{Event.description}}
+            <mat-label>X:</mat-label>
+            <br>
+            {{Event.location?.x}}
           </mat-panel-description>
           <mat-panel-description>
+            <mat-label>Y:</mat-label>
+            <br>
+            {{Event.location?.y}}
+          </mat-panel-description>
+          <mat-panel-description>
+            <mat-label>Description:</mat-label>
+            <br>
             {{Event.description}}
           </mat-panel-description>
           <mat-action-row class="full-width">
-            <button mat-raised-button color="warn" class="expand-button" (click)="openEditDialog(Event.serial)">Edit</button>
+            <button (click)="openEditDialog(Event.serial)" class="expand-button" color="warn" mat-raised-button>Edit
+            </button>
             <button mat-raised-button color="accent" class="expand-button">Delete</button>
           </mat-action-row>
         </mat-expansion-panel>
@@ -29,7 +39,6 @@
     </mat-accordion>
   </mat-drawer>
   <mat-drawer-content>
-
     <mat-toolbar color="accent">
       <span>{{mapName}}</span>
       <span style="flex: 1 1 auto;"></span>

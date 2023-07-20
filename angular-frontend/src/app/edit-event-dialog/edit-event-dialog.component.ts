@@ -1,11 +1,13 @@
 import {Component, Inject} from '@angular/core';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 
 export interface DialogData {
+  mapSerial: string;
   serial: string;
   name: string;
-  location: string;
+  locationX: string;
+  locationY: string;
   description: string;
 }
 
@@ -38,20 +40,23 @@ export class EditEventDialogComponent {
 
 
     if(this.data.serial === '') {
-      this.http.post('http://localhost:8080/DnDEvolved/v1/events/1078cf56-8ec0-4af7-88c6-0775c9f8307c', body, { headers: contentType })
+      this.http.post('http://localhost:8080/DnDEvolved/v1/events/' + this.data.mapSerial, body, {headers: contentType})
         .subscribe(
           response => console.log(response), // Handle success here
           error => console.log(error) // Handle error here
         );
     } else {
-      this.http.patch('http://localhost:8080/DnDEvolved/v1/events/edit/e8207402-147e-4bfe-baa3-97575caa1e50', body, { headers: contentType })
+      this.http.patch('http://localhost:8080/DnDEvolved/v1/events/edit/' + this.data.serial, body, {headers: contentType})
+        .subscribe(
+          response => console.log(response), // Handle success here
+          error => console.log(error) // Handle error here
+        );
+      this.http.patch('http://127.0.0.1:8080/DnDEvolved/v1/maps/' + this.data.mapSerial + '/events/' + this.data.serial + '/' + this.data.locationX + ',' + this.data.locationY, body, {headers: contentType})
         .subscribe(
           response => console.log(response), // Handle success here
           error => console.log(error) // Handle error here
         );
     }
-
-
     this.dialogRef.close();
   }
 }

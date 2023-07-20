@@ -1,12 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { EditEventDialogComponent } from '../edit-event-dialog/edit-event-dialog.component';
-import { EventsService } from '../service/events.service';
-import { DnDEvent } from "../interfaces/DnDEvent";
-import { ActivatedRoute } from '@angular/router';
-import { MapService } from '../service/maps.service';
-import { DnDMap } from '../interfaces/DnDMap';
+import {Component, OnInit} from '@angular/core';
+import {MatDialog} from '@angular/material/dialog';
+import {EditEventDialogComponent} from '../edit-event-dialog/edit-event-dialog.component';
+import {EventsService} from '../service/events.service';
+import {DnDEvent} from "../interfaces/DnDEvent";
+import {ActivatedRoute} from '@angular/router';
+import {MapService} from '../service/maps.service';
 import {DnDLocation} from "../interfaces/DnDLocation";
+
 // import { Location } from '@angular/common';
 
 
@@ -23,13 +23,24 @@ export class EventEditingComponent implements OnInit {
     private route: ActivatedRoute,
     private mapService: MapService,
     // private location: Location,
-  ) {}
+  ) {
+  }
+
   ngOnInit(): void {
-    this.eventService.getEvents('10ad2eb7-3dc4-4db3-bc0b-86bb3a1059d6').then((events: any) => {
+    this.mapSerial = this.route.snapshot.queryParamMap.get('id');
+    console.log("Serial:");
+    console.log(this.mapSerial);
+    this.mapName = this.route.snapshot.queryParamMap.get('name');
+    this.updateEvents();
+  }
+
+  updateEvents() {
+    this.eventService.getEvents(this.mapSerial).then((events: any) => {
       this.eventSerials = events;
+      this.events = [];
       for (let i = 0; i < this.eventSerials.length; i++) {
         this.eventService.getEventData(this.eventSerials[i]).then((event: DnDEvent) => {
-          this.eventService.getEventLocation("10ad2eb7-3dc4-4db3-bc0b-86bb3a1059d6" , this.eventSerials[i]).then((location: DnDLocation) => {
+          this.eventService.getEventLocation(this.mapSerial, this.eventSerials[i]).then((location: DnDLocation) => {
             event.location = location
             console.log(event.location)
           })
@@ -42,11 +53,6 @@ export class EventEditingComponent implements OnInit {
     }).catch((error: any) => {
       console.error(error);
     });
-    this.mapSerial = this.route.snapshot.queryParamMap.get('id');
-    console.log("Serial:");
-    console.log(this.mapSerial);
-    this.mapName = this.route.snapshot.queryParamMap.get('name');
-
   }
 
   eventSerials: string[] = [];
@@ -58,17 +64,18 @@ export class EventEditingComponent implements OnInit {
   openAddDialog() {
     const dialogRef = this.dialog.open(EditEventDialogComponent, {
       width: '270px',
-      data: { name: '', location: '', description: '', serial: '' }
+      data: {name: '', locationX: '', locationY: '', description: '', serial: '', mapSerial: this.mapSerial}
     });
 
     dialogRef.afterClosed().subscribe(result => {
+      this.updateEvents();
       console.log('The dialog was closed');
       // This is where the data gets returned (result) after clicking save button
     });
   }
 
   openEditDialog(serial: string | undefined): void {
-    let Event: DnDEvent = { name: '', description: '', serial: '' };
+    let Event: DnDEvent = {name: '', description: '', serial: ''};
     for (let i = 0; i < this.events.length; i++) {
       if (this.events[i].serial === serial) {
         Event = this.events[i];
@@ -77,10 +84,18 @@ export class EventEditingComponent implements OnInit {
 
     const dialogRef = this.dialog.open(EditEventDialogComponent, {
       width: '260px',
-      data: { name: Event.name, location: Event.description, description: Event.description, serial: Event.serial }
+      data: {
+        name: Event.name,
+        locationX: Event.location?.x,
+        locationY: Event.location?.y,
+        description: Event.description,
+        serial: Event.serial,
+        mapSerial: this.mapSerial
+      }
     });
 
     dialogRef.afterClosed().subscribe(result => {
+      this.updateEvents();
       console.log('The dialog was closed');
       // This is where the data gets returned (result) after clicking save button
     });
