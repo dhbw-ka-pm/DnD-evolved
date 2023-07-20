@@ -1,2 +1,4 @@
-<div id="transformedHtml" [innerHtml]="transformedHtml" (click)="getImageCoordinates($event)">
+<div id="transformedHtml" [innerHTML]="transformedHtml" (click)="getImageCoordinates($event)"
+    (keydown)="handleKeyboardEvent($event)" tabindex="0">
+    <!-- Content inside the div, including the transformedHtml -->
 </div>
