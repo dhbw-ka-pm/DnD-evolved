@@ -3,7 +3,7 @@ import {MatDialog} from '@angular/material/dialog';
 import {EditEventDialogComponent} from '../edit-event-dialog/edit-event-dialog.component';
 import {EventsService} from '../service/events.service';
 import {DnDEvent} from "../interfaces/DnDEvent";
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {MapService} from '../service/maps.service';
 import {DnDLocation} from "../interfaces/DnDLocation";
 
@@ -22,6 +22,7 @@ export class EventEditingComponent implements OnInit {
     private eventService: EventsService,
     private route: ActivatedRoute,
     private mapService: MapService,
+    private router: Router,
     // private location: Location,
   ) {
   }
@@ -69,6 +70,11 @@ export class EventEditingComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       this.updateEvents();
+      const currentUrl = this.router.url; // Get the current URL
+      this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+        // Navigating to the same URL with skipLocationChange set to true triggers component reload
+        this.router.navigateByUrl(currentUrl);
+      });
       console.log('The dialog was closed');
       // This is where the data gets returned (result) after clicking save button
     });
@@ -96,6 +102,11 @@ export class EventEditingComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       this.updateEvents();
+      const currentUrl = this.router.url; // Get the current URL
+      this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+        // Navigating to the same URL with skipLocationChange set to true triggers component reload
+        this.router.navigateByUrl(currentUrl);
+      });
       console.log('The dialog was closed');
       // This is where the data gets returned (result) after clicking save button
     });

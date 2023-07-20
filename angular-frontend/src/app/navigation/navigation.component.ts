@@ -1,11 +1,12 @@
-import { Component, OnInit, inject } from '@angular/core';
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { Observable } from 'rxjs';
-import { map, shareReplay } from 'rxjs/operators';
-import { DnDMap } from '../interfaces/DnDMap';
-import { MapService } from '../service/maps.service';
-import { MatDialog } from "@angular/material/dialog";
-import { EditMapDialogComponent } from "../edit-map-dialog/edit-map-dialog.component";
+import {Component, inject, OnInit} from '@angular/core';
+import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
+import {Observable} from 'rxjs';
+import {map, shareReplay} from 'rxjs/operators';
+import {DnDMap} from '../interfaces/DnDMap';
+import {MapService} from '../service/maps.service';
+import {MatDialog} from "@angular/material/dialog";
+import {EditMapDialogComponent} from "../edit-map-dialog/edit-map-dialog.component";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-navigation',
@@ -20,6 +21,7 @@ export class NavigationComponent implements OnInit {
   constructor(
     private mapService: MapService,
     public dialog: MatDialog,
+    private router: Router,
   ) {
   }
   ngOnInit(): void {
@@ -59,7 +61,13 @@ export class NavigationComponent implements OnInit {
     );
 
 
-
+  reload() {
+    const currentUrl = this.router.url;
+    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+      // Navigating to the same URL with skipLocationChange set to true triggers component reload
+      this.router.navigateByUrl(currentUrl);
+    });
+  }
 
 
   mockData: DnDMap[] = [

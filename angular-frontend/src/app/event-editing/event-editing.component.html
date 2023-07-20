@@ -1,5 +1,5 @@
 <mat-drawer-container class="sidenav-container">
-  <mat-drawer #eventdrawer class="sidenav" position="end" mode="side" >
+  <mat-drawer #eventdrawer class="sidenav" mode="side" opened position="end">
     <mat-toolbar color="accent">
       <span>Events</span>
     </mat-toolbar>
@@ -12,19 +12,13 @@
             </mat-panel-title>
           </mat-expansion-panel-header>
           <mat-panel-description>
-            <mat-label>X:</mat-label>
-            <br>
-            {{Event.location?.x}}
+            <p>X: {{Event.location?.x}}</p>
           </mat-panel-description>
           <mat-panel-description>
-            <mat-label>Y:</mat-label>
-            <br>
-            {{Event.location?.y}}
+            <p>Y: {{Event.location?.y}}</p>
           </mat-panel-description>
           <mat-panel-description>
-            <mat-label>Description:</mat-label>
-            <br>
-            {{Event.description}}
+            <p>Description: {{Event.description}}</p>
           </mat-panel-description>
           <mat-action-row class="full-width">
             <button (click)="openEditDialog(Event.serial)" class="expand-button" color="warn" mat-raised-button>Edit

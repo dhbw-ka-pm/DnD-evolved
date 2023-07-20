@@ -40,9 +40,21 @@ export class EditEventDialogComponent {
 
 
     if(this.data.serial === '') {
-      this.http.post('http://localhost:8080/DnDEvolved/v1/events/' + this.data.mapSerial, body, {headers: contentType})
+      let newSerial: string = '';
+      this.http.post('http://localhost:8080/DnDEvolved/v1/events/' + this.data.mapSerial, body, {
+        headers: contentType,
+        responseType: "text"
+      })
         .subscribe(
-          response => console.log(response), // Handle success here
+          response => {
+            console.log(response);
+            newSerial = response;
+            this.http.patch('http://127.0.0.1:8080/DnDEvolved/v1/maps/' + this.data.mapSerial + '/events/' + newSerial + '/' + this.data.locationX + ',' + this.data.locationY, body, {headers: contentType})
+              .subscribe(
+                response => console.log(response), // Handle success here
+                error => console.log(error) // Handle error here
+              );
+          }, // Handle success here
           error => console.log(error) // Handle error here
         );
     } else {
