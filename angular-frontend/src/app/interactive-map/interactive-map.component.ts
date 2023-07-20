@@ -8,6 +8,9 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
   styleUrls: ['./interactive-map.component.css']
 })
 export class InteractiveMapComponent implements OnInit, AfterViewInit {
+  handleKeyboardEvent(event: KeyboardEvent) {
+    console.log();
+  }
 
   getImageCoordinates(event: MouseEvent) {
     const transformedHtmlElement = document.getElementById('transformedHtml')?.querySelector('svg');
