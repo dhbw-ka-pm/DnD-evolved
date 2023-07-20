@@ -1,0 +1,8 @@
+<h2 mat-dialog-title>Upload Image</h2>
+<mat-dialog-content>
+  <input (change)="handleFileInput($event)" type="file">
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button (click)="cancel()" mat-button>Cancel</button>
+  <button (click)="upload()" color="primary" mat-button>Upload</button>
+</mat-dialog-actions>

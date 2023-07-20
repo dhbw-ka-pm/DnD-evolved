@@ -38,10 +38,18 @@ export class NavigationComponent implements OnInit {
     console.log(this.DnDMaps)
   }
 
-  openEditDialog(map: DnDMap): void {
+  openEditDialog(add: boolean, map?: DnDMap): void {
+    if (add) {
+      map = {
+        Description: '',
+        ImagePath: '',
+        Name: '',
+        Serial: '',
+      }
+    }
     const dialogRef = this.dialog.open(EditMapDialogComponent, {
       width: '260px',
-      data: { ...map }
+      data: {...map}
     });
 
     dialogRef.componentInstance.saveChanges.subscribe(updatedData => {

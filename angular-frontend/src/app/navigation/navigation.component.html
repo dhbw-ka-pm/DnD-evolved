@@ -17,7 +17,8 @@
                     </mat-panel-description>
                     <mat-action-row class="full-width">
                         <button mat-raised-button color="warn" class="expand-button"
-                            (click)="openEditDialog(map)">Edit</button>
+                                (click)="openEditDialog(false, map)">Edit
+                        </button>
                         <button mat-raised-button color="accent" class="expand-button">Delete</button>
                     </mat-action-row>
                 </mat-expansion-panel>
@@ -25,7 +26,8 @@
             </div>
             <p></p>
             <div class="center-container">
-                <button mat-raised-button color="primary" class="add-map-button">Add Map</button>
+              <button (click)=openEditDialog(true) class="add-map-button" color="primary" mat-raised-button>Add Map
+              </button>
             </div>
         </mat-nav-list>
     </mat-sidenav>

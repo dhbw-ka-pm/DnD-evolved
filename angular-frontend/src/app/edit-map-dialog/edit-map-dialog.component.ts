@@ -1,7 +1,8 @@
-import { Component, EventEmitter, Inject, Output } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
-import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { DnDMap } from '../interfaces/DnDMap';
+import {Component, EventEmitter, Inject, Output} from '@angular/core';
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {DnDMap} from '../interfaces/DnDMap';
+import {ImageUploadDialogComponent} from "../image-upload-dialog/image-upload-dialog.component";
 
 @Component({
   selector: 'app-edit-map-dialog',
@@ -12,16 +13,35 @@ export class EditMapDialogComponent {
   mapApi = 'http://localhost:8080/DnDEvolved/v1/maps/'
   @Output() saveChanges: EventEmitter<DnDMap> = new EventEmitter<DnDMap>();
 
-  onSave() {
-    this.saveChanges.emit(this.data);
-    this.saveData();
-  }
-
-
   constructor(
     public dialogRef: MatDialogRef<EditMapDialogComponent>,
     private http: HttpClient,
-    @Inject(MAT_DIALOG_DATA) public data: DnDMap) {}
+    private dialog: MatDialog,
+    @Inject(MAT_DIALOG_DATA) public data: DnDMap) {
+  }
+
+  onSave() {
+    this.saveChanges.emit(this.data);
+    this.saveData();
+    this.openUploadDialog()
+  }
+
+  openUploadDialog(): void {
+    const dialogRef = this.dialog.open(ImageUploadDialogComponent, {
+      width: '400px',
+      data: {}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        // Image upload was successful
+        // Perform any additional actions
+      } else {
+        // Image upload was canceled or failed
+        // Perform any error handling or cleanup
+      }
+    });
+  }
 
   onNoClick(): void {
     this.dialogRef.close();
@@ -41,7 +61,7 @@ export class EditMapDialogComponent {
 
 
     if (this.data.Serial === '') {
-      this.http.post(this.mapApi + this.data.Serial, body, { headers: contentType })
+      this.http.post('http://localhost:8080/DnDEvolved/v1/maps', body, {headers: contentType})
         .subscribe(
           response => console.log(response), // Handle success here
           error => console.log(error) // Handle error here
