@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Component, Input, OnInit } from '@angular/core';
+import { AfterViewInit, Component, Input, OnInit } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 @Component({
@@ -7,8 +7,30 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
   templateUrl: './interactive-map.component.html',
   styleUrls: ['./interactive-map.component.css']
 })
-export class InteractiveMapComponent implements OnInit {
+export class InteractiveMapComponent implements OnInit, AfterViewInit {
+
+  getImageCoordinates(event: MouseEvent) {
+    const transformedHtmlElement = document.getElementById('transformedHtml')?.querySelector('svg');
+    if (transformedHtmlElement === null) {
+      console.log('Transformed HTML is not available yet.');
+      return;
+    } else {
+      const boundingRect = transformedHtmlElement?.getBoundingClientRect();
+
+      // Calculate the x and y coordinates relative to the transformedHtml div.
+      if (boundingRect) {
+        const x = event.clientX - boundingRect.left - 30;
+        const y = event.clientY - boundingRect.top - 53;
+        console.log('X Coordinate:', x);
+        console.log('Y Coordinate:', y);
+      }
+
+    }
+  }
   constructor(private sanitizer: DomSanitizer) {
+  }
+  ngAfterViewInit(): void {
+    console.log();
   }
   @Input() parentMapSerial = "";
 
