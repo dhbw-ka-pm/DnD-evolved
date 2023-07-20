@@ -4,30 +4,33 @@
         <mat-toolbar>Menu</mat-toolbar>
         <mat-divider></mat-divider>
         <mat-nav-list>
+
             <div>
-                <mat-expansion-panel *ngFor="let map of DnDMaps">
-                    <mat-expansion-panel-header>
-                        <mat-panel-title (click)="reload()">
-                          <a [queryParams]="{id:map.Serial, name:map.Name}" mat-list-item
-                             routerLink='/event-editing'>{{map.Name}}</a>
-                        </mat-panel-title>
-                    </mat-expansion-panel-header>
-                    <mat-panel-description>
-                        {{map.Description}}
-                    </mat-panel-description>
-                    <mat-action-row class="full-width">
-                        <button mat-raised-button color="warn" class="expand-button"
+                <mat-accordion>
+                    <mat-expansion-panel *ngFor="let map of DnDMaps">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title (click)="reload()">
+                                <a [queryParams]="{id:map.Serial, name:map.Name}" mat-list-item
+                                    routerLink='/event-editing'>{{map.Name}}</a>
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <mat-panel-description>
+                            {{map.Description}}
+                        </mat-panel-description>
+                        <mat-action-row class="full-width">
+                            <button mat-raised-button color="warn" class="expand-button"
                                 (click)="openEditDialog(false, map)">Edit
-                        </button>
-                        <button mat-raised-button color="accent" class="expand-button">Delete</button>
-                    </mat-action-row>
-                </mat-expansion-panel>
+                            </button>
+                            <button mat-raised-button color="accent" class="expand-button">Delete</button>
+                        </mat-action-row>
+                    </mat-expansion-panel>
+                </mat-accordion>
                 <mat-divider></mat-divider>
             </div>
             <p></p>
             <div class="center-container">
-              <button (click)=openEditDialog(true) class="add-map-button" color="primary" mat-raised-button>Add Map
-              </button>
+                <button (click)=openEditDialog(true) class="add-map-button" color="primary" mat-raised-button>Add Map
+                </button>
             </div>
         </mat-nav-list>
     </mat-sidenav>
