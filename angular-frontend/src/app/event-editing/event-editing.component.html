@@ -22,7 +22,7 @@
                     </mat-panel-description>
                     <mat-action-row class="full-width">
                         <button mat-raised-button class="expand-button" color="basic"
-                            (click)="alert(Event.serial)">Change Location</button>
+                            (click)="alert(Event.serial,$event)">Change Location</button>
                         <button (click)="openEditDialog(Event.serial)" class="expand-button" color="warn"
                             mat-raised-button>Edit
                         </button>
@@ -31,7 +31,7 @@
                 </mat-expansion-panel>
             </ng-container>
             <div class="center-button">
-                <button mat-raised-button color="primary" (click)="openAddDialog()">Add</button>
+                <button mat-raised-button color="primary" (click)="addEvent($event)">Add</button>
             </div>
         </mat-accordion>
     </mat-drawer>

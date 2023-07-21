@@ -7,6 +7,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MapService } from '../service/maps.service';
 import { DnDLocation } from "../interfaces/DnDLocation";
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ShareCoordinatesService } from '../service/share-coordinates.service';
 
 // import { Location } from '@angular/common';
 
@@ -25,17 +26,43 @@ export class EventEditingComponent implements OnInit {
     private mapService: MapService,
     private router: Router,
     private _snackBar: MatSnackBar,
+    private shareCoordinates: ShareCoordinatesService,
     // private location: Location,
   ) {}
 
-  alert(serial: string | undefined) {
-    this._snackBar.open('Please Click on a location on the map','', {
+  alert(serial: string | undefined, event: MouseEvent) {
+    this._snackBar.open('Please Click on a location on the map', '', {
       horizontalPosition: 'right',
       verticalPosition: 'top',
       duration: 3000
 
     });
-    this.openEditDialog(serial);
+    event.stopPropagation();
+    this.waitForClick().then(() => {
+      this.openChangeLocationDialog(serial);
+    });
+  }
+
+  addEvent(event: MouseEvent) {
+    this._snackBar.open('Please Click on a location on the map', '', {
+      horizontalPosition: 'right',
+      verticalPosition: 'top',
+      duration: 3000
+
+    });
+    event.stopPropagation();
+    this.waitForClick().then(() => {
+      this.openAddDialog();
+    });
+  }
+  waitForClick(): Promise<void> {
+    return new Promise((resolve) => {
+      const clickHandler = () => {
+        document.removeEventListener('click', clickHandler);
+        resolve();
+      };
+      document.addEventListener('click', clickHandler);
+    });
   }
   ngOnInit(): void {
     this.mapSerial = this.route.snapshot.queryParamMap.get('id');
@@ -75,16 +102,24 @@ export class EventEditingComponent implements OnInit {
   openAddDialog() {
     const dialogRef = this.dialog.open(EditEventDialogComponent, {
       width: '270px',
-      data: { name: '', locationX: '', locationY: '', description: '', serial: '', mapSerial: this.mapSerial }
+      data: {
+        name: '',
+        locationX: this.shareCoordinates.getLocation()[0],
+        locationY: this.shareCoordinates.getLocation()[1],
+        description: '',
+        serial: '',
+        mapSerial: this.mapSerial
+      }
     });
 
     dialogRef.afterClosed().subscribe(result => {
       this.updateEvents();
       const currentUrl = this.router.url; // Get the current URL
-      this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
-        // Navigating to the same URL with skipLocationChange set to true triggers component reload
-        this.router.navigateByUrl(currentUrl);
-      });
+      this.router.navigateByUrl('/',
+        { skipLocationChange: true }).then(() => {
+          // Navigating to the same URL with skipLocationChange set to true triggers component reload
+          this.router.navigateByUrl(currentUrl);
+        });
       console.log('The dialog was closed');
       // This is where the data gets returned (result) after clicking save button
     });
@@ -106,7 +141,9 @@ export class EventEditingComponent implements OnInit {
         locationY: Event.location?.y,
         description: Event.description,
         serial: Event.serial,
-        mapSerial: this.mapSerial
+        mapSerial: this.mapSerial,
+        newLocationX: this.shareCoordinates.getLocation()[0],
+        newLocationY: this.shareCoordinates.getLocation()[1]
       }
     });
 
@@ -122,5 +159,36 @@ export class EventEditingComponent implements OnInit {
     });
   }
 
+  openChangeLocationDialog(serial: string | undefined): void {
+    let Event: DnDEvent = { name: '', description: '', serial: '' };
+    for (let i = 0; i < this.events.length; i++) {
+      if (this.events[i].serial === serial) {
+        Event = this.events[i];
+      }
+    }
+
+    const dialogRef = this.dialog.open(EditEventDialogComponent, {
+      width: '260px',
+      data: {
+        name: Event.name,
+        description: Event.description,
+        locationX: this.shareCoordinates.getLocation()[0],
+        locationY: this.shareCoordinates.getLocation()[1],
+        serial: Event.serial,
+        mapSerial: this.mapSerial,
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.updateEvents();
+      const currentUrl = this.router.url; // Get the current URL
+      this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+        // Navigating to the same URL with skipLocationChange set to true triggers component reload
+        this.router.navigateByUrl(currentUrl);
+      });
+      console.log('The dialog was closed');
+      // This is where the data gets returned (result) after clicking save button
+    });
+  }
 
 }

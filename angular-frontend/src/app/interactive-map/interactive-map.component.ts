@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { AfterViewInit, Component, Input, OnInit } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { ShareCoordinatesService } from '../service/share-coordinates.service';
 
 @Component({
   selector: 'app-interactive-map',
@@ -12,11 +13,14 @@ export class InteractiveMapComponent implements OnInit, AfterViewInit {
     console.log();
   }
 
-  getImageCoordinates(event: MouseEvent): number[] {
+  constructor(private sanitizer: DomSanitizer,
+    private shareCoordinates: ShareCoordinatesService) {
+  }
+
+  getImageCoordinates(event: MouseEvent): void {
     const transformedHtmlElement = document.getElementById('transformedHtml')?.querySelector('svg');
     if (transformedHtmlElement === null) {
       console.log('Transformed HTML is not available yet.');
-      return [0, 0]
     } else {
       const boundingRect = transformedHtmlElement?.getBoundingClientRect();
 
@@ -26,12 +30,10 @@ export class InteractiveMapComponent implements OnInit, AfterViewInit {
         const y = event.clientY - boundingRect.top - 53;
         console.log('X Coordinate:', x);
         console.log('Y Coordinate:', y);
-        return [x, y]
+        this.shareCoordinates.setLocation(x, y)
+
       }
-      return [0, 0]
     }
-  }
-  constructor(private sanitizer: DomSanitizer) {
   }
   ngAfterViewInit(): void {
     console.log();
