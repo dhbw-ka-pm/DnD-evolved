@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { EditEventDialogComponent } from '../edit-event-dialog/edit-event-dialog.component';
 import { EventsService } from '../service/events.service';
@@ -27,6 +27,7 @@ export class EventEditingComponent implements OnInit {
     private router: Router,
     private _snackBar: MatSnackBar,
     private shareCoordinates: ShareCoordinatesService,
+    private changeDetectorRef: ChangeDetectorRef
     // private location: Location,
   ) {}
 
@@ -76,22 +77,36 @@ export class EventEditingComponent implements OnInit {
     this.eventService.getEvents(this.mapSerial).then((events: any) => {
       this.eventSerials = events;
       this.events = [];
+      const fetchEventPromises: Promise<any>[] = [];
+
       for (let i = 0; i < this.eventSerials.length; i++) {
-        this.eventService.getEventData(this.eventSerials[i]).then((event: DnDEvent) => {
-          this.eventService.getEventLocation(this.mapSerial, this.eventSerials[i]).then((location: DnDLocation) => {
-            event.location = location
-            console.log(event.location)
-          })
-          this.events.push(event);
-        }).catch((error: any) => {
+        const fetchEventPromise = this.eventService.getEventData(this.eventSerials[i])
+          .then((event: DnDEvent) => {
+            return this.eventService.getEventLocation(this.mapSerial, this.eventSerials[i])
+              .then((location: DnDLocation) => {
+                event.location = location;
+                return event;
+              });
+          });
+
+        fetchEventPromises.push(fetchEventPromise);
+      }
+
+      // Wait for all the event fetch promises to resolve
+      Promise.all(fetchEventPromises)
+        .then((sortedEvents: DnDEvent[]) => {
+          this.events = sortedEvents; // Populate the events array after all the fetch operations
+          this.events.sort((a, b) => a.name[0].localeCompare(b.name[0])); // Sort events by name
+          this.changeDetectorRef.detectChanges();
+        })
+        .catch((error: any) => {
           console.error(error);
         });
-      }
-      console.log(events);
     }).catch((error: any) => {
       console.error(error);
     });
   }
+
 
   eventSerials: string[] = [];
   events: DnDEvent[] = [];
