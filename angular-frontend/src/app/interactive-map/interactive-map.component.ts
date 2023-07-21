@@ -12,11 +12,11 @@ export class InteractiveMapComponent implements OnInit, AfterViewInit {
     console.log();
   }
 
-  getImageCoordinates(event: MouseEvent) {
+  getImageCoordinates(event: MouseEvent): number[] {
     const transformedHtmlElement = document.getElementById('transformedHtml')?.querySelector('svg');
     if (transformedHtmlElement === null) {
       console.log('Transformed HTML is not available yet.');
-      return;
+      return [0, 0]
     } else {
       const boundingRect = transformedHtmlElement?.getBoundingClientRect();
 
@@ -26,8 +26,9 @@ export class InteractiveMapComponent implements OnInit, AfterViewInit {
         const y = event.clientY - boundingRect.top - 53;
         console.log('X Coordinate:', x);
         console.log('Y Coordinate:', y);
+        return [x, y]
       }
-
+      return [0, 0]
     }
   }
   constructor(private sanitizer: DomSanitizer) {

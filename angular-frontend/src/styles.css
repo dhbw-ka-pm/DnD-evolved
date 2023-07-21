@@ -9,3 +9,7 @@ body {
   font-family: Roboto, 'Helvetica Neue', sans-serif;
   cursor: url('assets/cursors/cursor-32.png'), auto;
 }
+
+.custom-cursor-class {
+  cursor: url('assets/cursors/cursor-click-32.png'), pointer;
+}

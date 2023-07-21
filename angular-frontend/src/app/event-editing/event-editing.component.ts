@@ -1,11 +1,12 @@
-import {Component, OnInit} from '@angular/core';
-import {MatDialog} from '@angular/material/dialog';
-import {EditEventDialogComponent} from '../edit-event-dialog/edit-event-dialog.component';
-import {EventsService} from '../service/events.service';
-import {DnDEvent} from "../interfaces/DnDEvent";
-import {ActivatedRoute, Router} from '@angular/router';
-import {MapService} from '../service/maps.service';
-import {DnDLocation} from "../interfaces/DnDLocation";
+import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { EditEventDialogComponent } from '../edit-event-dialog/edit-event-dialog.component';
+import { EventsService } from '../service/events.service';
+import { DnDEvent } from "../interfaces/DnDEvent";
+import { ActivatedRoute, Router } from '@angular/router';
+import { MapService } from '../service/maps.service';
+import { DnDLocation } from "../interfaces/DnDLocation";
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 // import { Location } from '@angular/common';
 
@@ -23,10 +24,19 @@ export class EventEditingComponent implements OnInit {
     private route: ActivatedRoute,
     private mapService: MapService,
     private router: Router,
+    private _snackBar: MatSnackBar,
     // private location: Location,
-  ) {
-  }
+  ) {}
 
+  alert(serial: string | undefined) {
+    this._snackBar.open('Please Click on a location on the map','', {
+      horizontalPosition: 'right',
+      verticalPosition: 'top',
+      duration: 3000
+
+    });
+    this.openEditDialog(serial);
+  }
   ngOnInit(): void {
     this.mapSerial = this.route.snapshot.queryParamMap.get('id');
     console.log("Serial:");
@@ -65,13 +75,13 @@ export class EventEditingComponent implements OnInit {
   openAddDialog() {
     const dialogRef = this.dialog.open(EditEventDialogComponent, {
       width: '270px',
-      data: {name: '', locationX: '', locationY: '', description: '', serial: '', mapSerial: this.mapSerial}
+      data: { name: '', locationX: '', locationY: '', description: '', serial: '', mapSerial: this.mapSerial }
     });
 
     dialogRef.afterClosed().subscribe(result => {
       this.updateEvents();
       const currentUrl = this.router.url; // Get the current URL
-      this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+      this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
         // Navigating to the same URL with skipLocationChange set to true triggers component reload
         this.router.navigateByUrl(currentUrl);
       });
@@ -81,7 +91,7 @@ export class EventEditingComponent implements OnInit {
   }
 
   openEditDialog(serial: string | undefined): void {
-    let Event: DnDEvent = {name: '', description: '', serial: ''};
+    let Event: DnDEvent = { name: '', description: '', serial: '' };
     for (let i = 0; i < this.events.length; i++) {
       if (this.events[i].serial === serial) {
         Event = this.events[i];
@@ -103,7 +113,7 @@ export class EventEditingComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       this.updateEvents();
       const currentUrl = this.router.url; // Get the current URL
-      this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+      this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
         // Navigating to the same URL with skipLocationChange set to true triggers component reload
         this.router.navigateByUrl(currentUrl);
       });
