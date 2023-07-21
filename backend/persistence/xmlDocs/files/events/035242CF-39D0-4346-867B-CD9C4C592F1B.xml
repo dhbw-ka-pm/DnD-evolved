@@ -1,6 +1,7 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Event>
     <serial>035242CF-39D0-4346-867B-CD9C4C592F1B</serial>
     <name>Islands of Doom</name>
     <description>Cursed Islands</description>
+    <leadsToMapSerial></leadsToMapSerial>
 </Event>
