@@ -1,12 +1,12 @@
-import {Component, inject, OnInit} from '@angular/core';
-import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
-import {Observable} from 'rxjs';
-import {map, shareReplay} from 'rxjs/operators';
-import {DnDMap} from '../interfaces/DnDMap';
-import {MapService} from '../service/maps.service';
-import {MatDialog} from "@angular/material/dialog";
-import {EditMapDialogComponent} from "../edit-map-dialog/edit-map-dialog.component";
-import {Router} from "@angular/router";
+import { Component, inject, OnInit } from '@angular/core';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { Observable } from 'rxjs';
+import { map, shareReplay } from 'rxjs/operators';
+import { DnDMap } from '../interfaces/DnDMap';
+import { MapService } from '../service/maps.service';
+import { MatDialog } from "@angular/material/dialog";
+import { EditMapDialogComponent } from "../edit-map-dialog/edit-map-dialog.component";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-navigation',
@@ -25,17 +25,7 @@ export class NavigationComponent implements OnInit {
   ) {
   }
   ngOnInit(): void {
-    // this.DnDMaps=this.mockData
-    this.mapService.getMaps().then(
-      (maps: DnDMap[]) => {
-        for (let i = 0; i < maps.length; i++) {
-          this.DnDMaps.push(maps[i]);
-        }
-        console.log(this.DnDMaps);
-      }
-    )
-
-    console.log(this.DnDMaps)
+    this.updateMaps();
   }
 
   openEditDialog(add: boolean, map?: DnDMap): void {
@@ -49,7 +39,7 @@ export class NavigationComponent implements OnInit {
     }
     const dialogRef = this.dialog.open(EditMapDialogComponent, {
       width: '260px',
-      data: {...map}
+      data: { ...map }
     });
 
     dialogRef.componentInstance.saveChanges.subscribe(updatedData => {
@@ -71,61 +61,27 @@ export class NavigationComponent implements OnInit {
 
   reload() {
     const currentUrl = this.router.url;
-    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
       // Navigating to the same URL with skipLocationChange set to true triggers component reload
       this.router.navigateByUrl(currentUrl);
     });
   }
-
-
-  mockData: DnDMap[] = [
-    {
-      Description: "A mysterious castle in the woods",
-      Events: [],
-      ImagePath: "castle.jpg",
-      Name: "Castle of Shadows",
-      Serial: "map_001",
-      SizeX: 1000,
-      SizeY: 800,
-    },
-    {
-      Description: "An ancient temple hidden in the mountains",
-      Events: [],
-      ImagePath: "temple.jpg",
-      Name: "Temple of the Ancients",
-      Serial: "map_002",
-      SizeX: 1200,
-      SizeY: 900,
-    },
-    {
-      Description: "A bustling city with winding streets",
-      Events: [],
-      ImagePath: "city.jpg",
-      Name: "City of Thieves",
-      Serial: "map_003",
-      SizeX: 1800,
-      SizeY: 1200,
-    },
-    {
-      Description: "A treacherous swamp filled with dangerous creatures",
-      Events: [],
-      ImagePath: "swamp.jpg",
-      Name: "Swamp of Sorrow",
-      Serial: "map_004",
-      SizeX: 800,
-      SizeY: 1200,
-    },
-    {
-      Description: "A vast ocean with uncharted islands",
-      Events: [],
-      ImagePath: "ocean.jpg",
-      Name: "Sea of Mystery",
-      Serial: "map_005",
-      SizeX: 2000,
-      SizeY: 2000,
-    },
-  ];
-
-  // You can use the mockData array in your code to simulate real data.
-
+  updateMaps() {
+    this.mapService.getMaps().then((maps: DnDMap[]) => {
+      this.DnDMaps = [];
+      const fetchMapPromises: Promise<DnDMap>[] = [];
+      for (let i = 0; i < maps.length; i++) {
+        const fetchEventPromise = this.mapService.getMapBySerial(maps[i].Serial).then((map: DnDMap) => {
+          return map;
+        });
+        fetchMapPromises.push(fetchEventPromise);
+      }
+      // wait for all promises to resolve
+      Promise.all(fetchMapPromises).then((sortedMaps: DnDMap[]) => {
+        this.DnDMaps = sortedMaps;
+        this.DnDMaps.sort((a, b) => a.Name[0].localeCompare(b.Name[0]));
+      })
+    })
+    console.log(this.DnDMaps)
+  }
 }

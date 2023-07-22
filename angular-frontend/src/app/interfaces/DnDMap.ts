@@ -1,11 +1,11 @@
 import { EventPair } from "./EventPair";
 
 export interface DnDMap {
-    Serial?: string;
+    Serial: string;
     Description?: string;
     Events?: EventPair[];
     ImagePath?: string;
-    Name?: string;
+    Name: string;
     SizeX?: number;
     SizeY?: number;
 }
