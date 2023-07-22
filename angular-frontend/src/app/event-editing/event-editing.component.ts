@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { EditEventDialogComponent } from '../edit-event-dialog/edit-event-dialog.component';
+import { EditEventDialogComponent } from "../edit-event-dialog/edit-event-dialog.component";
 import { EventsService } from '../service/events.service';
 import { DnDEvent } from '../interfaces/DnDEvent';
 import { ActivatedRoute, Router } from '@angular/router';
