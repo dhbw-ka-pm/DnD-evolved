@@ -42,10 +42,10 @@ export class NavigationComponent implements OnInit {
     });
 
     dialogRef.componentInstance.saveChanges.subscribe(updatedData => {
-      // console.log("Data to be saved: " + JSON.stringify(updatedData));
+      console.log("Data to be saved: " + JSON.stringify(updatedData));
     });
     dialogRef.afterClosed().subscribe(result => {
-      // console.log('The dialog was closed');
+      console.log('The dialog was closed');
       // This is where the data gets returned (result) after clicking save button
       this.updateMaps();
       const currentUrl = this.router.url;
