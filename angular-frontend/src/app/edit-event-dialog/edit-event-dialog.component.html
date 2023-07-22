@@ -1,23 +1,30 @@
 <h1 mat-dialog-title>Edit Event</h1>
-<div mat-dialog-content (keyup.enter)="saveData()">
-    <mat-form-field>
-        <mat-label>Name</mat-label>
-        <input matInput [(ngModel)]=" data.name">
-    </mat-form-field>
-    <mat-form-field>
-        <mat-label>LocationX</mat-label>
-        <input [(ngModel)]="data.locationX" matInput>
-    </mat-form-field>
-    <mat-form-field>
-        <mat-label>LocationY</mat-label>
-        <input [(ngModel)]="data.locationY" matInput>
-    </mat-form-field>
-    <mat-form-field>
-        <mat-label>Description</mat-label>
-        <input matInput [(ngModel)]="data.description">
-    </mat-form-field>
+<div mat-dialog-content (keyup.enter)="saveData()" tabindex="0">
+    <form [formGroup]="eventForm">
+        <mat-form-field>
+            <mat-label>Name</mat-label>
+            <input matInput formControlName="name" />
+            <mat-error *ngIf="eventForm.get('name').hasError('required')">Name is required</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>LocationX</mat-label>
+            <input [(ngModel)]="data.locationX" matInput />
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>LocationY</mat-label>
+            <input [(ngModel)]="data.locationY" matInput />
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Description</mat-label>
+            <input matInput [(ngModel)]="data.description" />
+        </mat-form-field>
+    </form>
 </div>
 <div mat-dialog-actions class="center-container">
-    <button mat-raised-button class="interactionButtons" color="accent" (click)="onNoClick()">Cancel</button>
-    <button mat-raised-button class="interactionButtons" color="primary" (click)="saveData()">Save</button>
+    <button mat-raised-button class="interactionButtons" color="accent" (click)="onNoClick()">
+        Cancel
+    </button>
+    <button mat-raised-button class="interactionButtons" color="primary" (click)="saveData()">
+        Save
+    </button>
 </div>

@@ -20,7 +20,7 @@ import { InteractiveMapComponent } from './interactive-map/interactive-map.compo
 import { HttpClientModule } from '@angular/common/http';
 import { EditEventDialogComponent } from './edit-event-dialog/edit-event-dialog.component';
 import { MatDialogModule } from "@angular/material/dialog";
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EventEntryComponent } from './event-entry/event-entry.component';
 import { EditMapDialogComponent } from './edit-map-dialog/edit-map-dialog.component';
 import { ImageUploadDialogComponent } from './image-upload-dialog/image-upload-dialog.component';
@@ -60,6 +60,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatDialogModule,
     FormsModule,
     MatSnackBarModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
