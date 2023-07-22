@@ -4,9 +4,9 @@ import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { DnDMap } from '../interfaces/DnDMap';
 import { MapService } from '../service/maps.service';
-import { MatDialog } from "@angular/material/dialog";
-import { EditMapDialogComponent } from "../edit-map-dialog/edit-map-dialog.component";
-import { Router } from "@angular/router";
+import { MatDialog } from '@angular/material/dialog';
+import { EditMapDialogComponent } from '../edit-map-dialog/edit-map-dialog.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navigation',
@@ -21,9 +21,8 @@ export class NavigationComponent implements OnInit {
   constructor(
     private mapService: MapService,
     public dialog: MatDialog,
-    private router: Router,
-  ) {
-  }
+    private router: Router
+  ) {}
   ngOnInit(): void {
     this.updateMaps();
   }
@@ -35,29 +34,34 @@ export class NavigationComponent implements OnInit {
         ImagePath: '',
         Name: '',
         Serial: '',
-      }
+      };
     }
     const dialogRef = this.dialog.open(EditMapDialogComponent, {
       width: '260px',
-      data: { ...map }
+      data: { ...map },
     });
 
     dialogRef.componentInstance.saveChanges.subscribe(updatedData => {
-      console.log("Data to be saved: " + JSON.stringify(updatedData));
-    })
+      // console.log("Data to be saved: " + JSON.stringify(updatedData));
+    });
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+      // console.log('The dialog was closed');
       // This is where the data gets returned (result) after clicking save button
+      this.updateMaps();
+      const currentUrl = this.router.url;
+      this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+        // Navigating to the same URL with skipLocationChange set to true triggers component reload
+        this.router.navigateByUrl(currentUrl);
+      });
     });
   }
 
-
-  isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
+  isHandset$: Observable<boolean> = this.breakpointObserver
+    .observe(Breakpoints.Handset)
     .pipe(
       map(result => result.matches),
       shareReplay()
     );
-
 
   reload() {
     const currentUrl = this.router.url;
@@ -71,17 +75,19 @@ export class NavigationComponent implements OnInit {
       this.DnDMaps = [];
       const fetchMapPromises: Promise<DnDMap>[] = [];
       for (let i = 0; i < maps.length; i++) {
-        const fetchEventPromise = this.mapService.getMapBySerial(maps[i].Serial).then((map: DnDMap) => {
-          return map;
-        });
+        const fetchEventPromise = this.mapService
+          .getMapBySerial(maps[i].Serial)
+          .then((map: DnDMap) => {
+            return map;
+          });
         fetchMapPromises.push(fetchEventPromise);
       }
       // wait for all promises to resolve
       Promise.all(fetchMapPromises).then((sortedMaps: DnDMap[]) => {
         this.DnDMaps = sortedMaps;
         this.DnDMaps.sort((a, b) => a.Name[0].localeCompare(b.Name[0]));
-      })
-    })
-    console.log(this.DnDMaps)
+      });
+    });
+    console.log(this.DnDMaps);
   }
 }

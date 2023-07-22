@@ -1,60 +1,78 @@
 <mat-drawer-container class="sidenav-container">
-    <mat-drawer #eventdrawer class="sidenav" mode="side" opened position="end">
-        <mat-toolbar color="accent">
-            <span>Events</span>
-        </mat-toolbar>
-        <mat-accordion>
-            <ng-container *ngFor="let Event of events">
-                <mat-expansion-panel>
-                    <mat-expansion-panel-header>
-                        <mat-panel-title>
-                            {{Event.name}}
-                        </mat-panel-title>
-                    </mat-expansion-panel-header>
-                    <mat-panel-description>
-                        <p>X: {{Event.location?.x}}</p>
-                    </mat-panel-description>
-                    <mat-panel-description>
-                        <p>Y: {{Event.location?.y}}</p>
-                    </mat-panel-description>
-                    <mat-panel-description>
-                        <p>Description: {{Event.description}}</p>
-                    </mat-panel-description>
-                    <mat-action-row class="full-width">
-                        <button mat-raised-button class="expand-button" color="basic"
-                            (click)="alert(Event.serial,$event)">Change Location</button>
-                        <button (click)="openEditDialog(Event.serial)" class="expand-button" color="warn"
-                            mat-raised-button>Edit
-                        </button>
-                        <button mat-raised-button color="accent" class="expand-button">Delete</button>
-                    </mat-action-row>
-                </mat-expansion-panel>
-            </ng-container>
-            <div class="center-button">
-                <button mat-raised-button color="primary" (click)="addEvent($event)">Add</button>
-            </div>
-        </mat-accordion>
-    </mat-drawer>
-    <mat-drawer-content>
-        <mat-toolbar color="accent">
-            <span>{{mapName}}</span>
-            <span ></span>
-            <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="eventdrawer.toggle()">
-                <!-- *ngIf="isHandset$ | async" -->
-                <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+  <mat-drawer #eventdrawer class="sidenav" mode="side" opened position="end">
+    <mat-toolbar color="accent">
+      <span>Events</span>
+    </mat-toolbar>
+    <mat-accordion>
+      <ng-container *ngFor="let Event of events">
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              {{ Event.name }}
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <mat-panel-description>
+            <p>X: {{ Event.location.x }}</p>
+          </mat-panel-description>
+          <mat-panel-description>
+            <p>Y: {{ Event.location.y }}</p>
+          </mat-panel-description>
+          <mat-panel-description>
+            <p>Description: {{ Event.description }}</p>
+          </mat-panel-description>
+          <mat-action-row class="full-width">
+            <button
+              mat-raised-button
+              class="expand-button"
+              color="basic"
+              (click)="alert(Event.serial, $event)">
+              Change Location
             </button>
-        </mat-toolbar>
-        <div class="grid-container">
-            <mat-grid-list cols="1">
-                <mat-grid-tile>
-                    <mat-card class="event-card">
-                        <mat-card-content class="centering-container">
-                            <app-interactive-map class="center-map" [parentMapSerial]="mapSerial"></app-interactive-map>
-                        </mat-card-content>
-                    </mat-card>
-                </mat-grid-tile>
-
-            </mat-grid-list>
-        </div>
-    </mat-drawer-content>
+            <button
+              (click)="openEditDialog(Event.serial)"
+              class="expand-button"
+              color="warn"
+              mat-raised-button>
+              Edit
+            </button>
+            <button mat-raised-button color="accent" class="expand-button">
+              Delete
+            </button>
+          </mat-action-row>
+        </mat-expansion-panel>
+      </ng-container>
+      <div class="center-button">
+        <button mat-raised-button color="primary" (click)="addEvent($event)">
+          Add
+        </button>
+      </div>
+    </mat-accordion>
+  </mat-drawer>
+  <mat-drawer-content>
+    <mat-toolbar color="accent">
+      <span>{{ mapName }}</span>
+      <span></span>
+      <button
+        type="button"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        (click)="eventdrawer.toggle()">
+        <!-- *ngIf="isHandset$ | async" -->
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+    </mat-toolbar>
+    <div class="grid-container">
+      <mat-grid-list cols="1">
+        <mat-grid-tile>
+          <mat-card class="event-card">
+            <mat-card-content class="centering-container">
+              <app-interactive-map
+                class="center-map"
+                [parentMapSerial]="mapSerial"></app-interactive-map>
+            </mat-card-content>
+          </mat-card>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </div>
+  </mat-drawer-content>
 </mat-drawer-container>

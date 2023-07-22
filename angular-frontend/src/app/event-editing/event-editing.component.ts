@@ -141,7 +141,11 @@ export class EventEditingComponent implements OnInit {
   }
 
   openEditDialog(serial: string | undefined): void {
-    let Event: DnDEvent = { name: '', description: '', serial: '' };
+    let Event: DnDEvent = {
+      name: '', description: '', serial: '',
+      leadsToMapSerial: '',
+      location: { x: 0, y: 0 }
+    };
     for (let i = 0; i < this.events.length; i++) {
       if (this.events[i].serial === serial) {
         Event = this.events[i];
@@ -175,7 +179,11 @@ export class EventEditingComponent implements OnInit {
   }
 
   openChangeLocationDialog(serial: string | undefined): void {
-    let Event: DnDEvent = { name: '', description: '', serial: '' };
+    let Event: DnDEvent = {
+      name: '', description: '', serial: '',
+      leadsToMapSerial: '',
+      location: { x: 0, y: 0 }
+    };
     for (let i = 0; i < this.events.length; i++) {
       if (this.events[i].serial === serial) {
         Event = this.events[i];
