@@ -3,20 +3,23 @@
     <form [formGroup]="eventForm">
         <mat-form-field>
             <mat-label>Name</mat-label>
-            <input matInput formControlName="name" />
-            <mat-error *ngIf="eventForm.get('name').hasError('required')">Name is required</mat-error>
+            <input matInput formControlName="name" [(ngModel)]="data.name" />
+            <mat-error *ngIf="eventForm.get('name')?.hasError('required')">Name is required</mat-error>
         </mat-form-field>
         <mat-form-field>
             <mat-label>LocationX</mat-label>
-            <input [(ngModel)]="data.locationX" matInput />
+            <input matInput formControlName="locationX" [(ngModel)]="data.locationX" />
+            <mat-error *ngIf="eventForm.get('locationX')?.hasError('required')">X-location is required</mat-error>
         </mat-form-field>
         <mat-form-field>
             <mat-label>LocationY</mat-label>
-            <input [(ngModel)]="data.locationY" matInput />
+            <input matInput formControlName="locationY" [(ngModel)]="data.locationY" />
+            <mat-error *ngIf="eventForm.get('locationY')?.hasError('required')">Y-location is is required</mat-error>
         </mat-form-field>
         <mat-form-field>
             <mat-label>Description</mat-label>
-            <input matInput [(ngModel)]="data.description" />
+            <input matInput formControlName="description" [(ngModel)]="data.description" />
+            <mat-error *ngIf="eventForm.get('description')?.hasError('required')">Description is required</mat-error>
         </mat-form-field>
     </form>
 </div>

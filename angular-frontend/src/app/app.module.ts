@@ -18,51 +18,54 @@ import { MatButtonModule } from '@angular/material/button';
 import { MapImageViewComponent } from './map-image-view/map-image-view.component';
 import { InteractiveMapComponent } from './interactive-map/interactive-map.component';
 import { HttpClientModule } from '@angular/common/http';
-import { EditEventDialogComponent } from './edit-event-dialog/edit-event-dialog.component';
+import { EditEventDialogComponent } from "./edit-event-dialog/edit-event-dialog.component";
 import { MatDialogModule } from "@angular/material/dialog";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EventEntryComponent } from './event-entry/event-entry.component';
 import { EditMapDialogComponent } from './edit-map-dialog/edit-map-dialog.component';
 import { ImageUploadDialogComponent } from './image-upload-dialog/image-upload-dialog.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatFormFieldModule } from "@angular/material/form-field";
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    NavigationComponent,
-    StoryManagementComponent,
-    EventEditingComponent,
-    DashboardComponent,
-    MapImageViewComponent,
-    InteractiveMapComponent,
-    EditEventDialogComponent,
-    EventEntryComponent,
-    EditMapDialogComponent,
-    ImageUploadDialogComponent,
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    MaterialDesignModule,
-    ServiceWorkerModule.register('ngsw-worker.js', {
-      enabled: !isDevMode(),
-      // Register the ServiceWorker as soon as the application is stable
-      // or after 30 seconds (whichever comes first).
-      registrationStrategy: 'registerWhenStable:30000'
-    }),
-    MatGridListModule,
-    MatCardModule,
-    MatMenuModule,
-    MatIconModule,
-    MatButtonModule,
-    HttpClientModule,
-    MatDialogModule,
-    FormsModule,
-    MatSnackBarModule,
-    ReactiveFormsModule,
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        NavigationComponent,
+        StoryManagementComponent,
+        EventEditingComponent,
+        DashboardComponent,
+        MapImageViewComponent,
+        InteractiveMapComponent,
+        EditEventDialogComponent,
+        EventEntryComponent,
+        EditMapDialogComponent,
+        ImageUploadDialogComponent,
+
+    ],
+    providers: [],
+    bootstrap: [AppComponent],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        MaterialDesignModule,
+        ServiceWorkerModule.register('ngsw-worker.js', {
+            enabled: !isDevMode(),
+            // Register the ServiceWorker as soon as the application is stable
+            // or after 30 seconds (whichever comes first).
+            registrationStrategy: 'registerWhenStable:30000'
+        }),
+        MatGridListModule,
+        MatCardModule,
+        MatMenuModule,
+        MatIconModule,
+        MatButtonModule,
+        HttpClientModule,
+        MatDialogModule,
+        FormsModule,
+        MatSnackBarModule,
+        ReactiveFormsModule,
+        MatFormFieldModule
+    ]
 })
 export class AppModule {}

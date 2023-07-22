@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -19,7 +19,7 @@ export interface DialogData {
   templateUrl: './edit-event-dialog.component.html',
   styleUrls: ['./edit-event-dialog.component.css']
 })
-export class EditEventDialogComponent implements OnInit {
+export class EditEventDialogComponent {
 
   eventForm: FormGroup;
 
@@ -35,19 +35,6 @@ export class EditEventDialogComponent implements OnInit {
       locationY: [data?.locationY || '', Validators.required],
       description: [data?.description || '', Validators.required]
     });
-  }
-  ngOnInit(): void {
-    this.initializeForm();
-  }
-  initializeForm() {
-    if (this.data) {
-      this.eventForm = this.formBuilder.group({
-        name: [this.data?.name || '', Validators.required],
-        locationX: [this.data?.locationX || '', Validators.required],
-        locationY: [this.data?.locationY || '', Validators.required],
-        description: [this.data?.description || '', Validators.required]
-      });
-    }
   }
 
   onNoClick(): void {
