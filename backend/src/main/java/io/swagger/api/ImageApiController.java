@@ -10,6 +10,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.ResourceUtils;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.support.ServletContextResource;
 import org.springframework.web.multipart.MultipartFile;
@@ -26,7 +27,7 @@ import java.io.InputStream;
 import java.util.Optional;
 import java.util.UUID;
 
-
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 public class ImageApiController implements ImageApi{
     private static final Logger log = LoggerFactory.getLogger(MapsApiController.class);

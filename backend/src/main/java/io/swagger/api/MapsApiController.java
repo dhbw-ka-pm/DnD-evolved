@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -65,6 +66,7 @@ public class MapsApiController implements MapsApi {
     public ResponseEntity<String> mapsPost(@Parameter(in = ParameterIn.DEFAULT, description = "", required = true, schema = @Schema()) @Valid @RequestBody Map body) {
         body.setSerial(UUID.randomUUID().toString());
         try {
+            body.setEvents(new HashMap<>());
             dataHandler.putMap(body);
 
         } catch (JAXBException e) {

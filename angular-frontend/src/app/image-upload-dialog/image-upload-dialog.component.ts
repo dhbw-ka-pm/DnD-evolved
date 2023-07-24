@@ -1,6 +1,6 @@
 import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 
 @Component({
   selector: 'app-image-upload-dialog',
@@ -13,7 +13,7 @@ export class ImageUploadDialogComponent {
   constructor(
     public dialogRef: MatDialogRef<ImageUploadDialogComponent>,
     private http: HttpClient,
-    @Inject(MAT_DIALOG_DATA) public data: any
+    @Inject(MAT_DIALOG_DATA) public data: {serial: string}
   ) {
   }
 
@@ -25,7 +25,7 @@ export class ImageUploadDialogComponent {
     if (this.selectedFile) {
       const formData = new FormData();
       formData.append('image', this.selectedFile, this.selectedFile.name);
-      this.http.post('/api/upload', formData).subscribe(
+      this.http.post('http://localhost:8080/DnDEvolved/v1/images/' + this.data.serial, this.selectedFile, {headers: new HttpHeaders().set('Content-Type', 'image/jpeg')}).subscribe(
         (response) => {
           // Handle success response
           console.log('Upload successful', response);

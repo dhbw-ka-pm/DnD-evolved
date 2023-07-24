@@ -138,4 +138,12 @@ export class EventsService {
         );
     });
   }
+
+  deleteEvent(eventSerial: string, mapSerial: string) {
+    this.http.delete('http://127.0.0.1:8080/DnDEvolved/v1/maps/' + mapSerial + '/events/' + eventSerial)
+      .subscribe(
+        response => console.log(response), // Handle success here
+        error => console.log(error) // Handle error here
+      );
+  }
 }

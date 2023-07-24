@@ -35,7 +35,7 @@
               mat-raised-button>
               Edit
             </button>
-            <button mat-raised-button color="accent" class="expand-button">
+            <button mat-raised-button color="accent" (click)="openDeleteDialog(Event.serial)" class="expand-button">
               Delete
             </button>
           </mat-action-row>

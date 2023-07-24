@@ -8,6 +8,7 @@ import { MapService } from '../service/maps.service';
 import { DnDLocation } from '../interfaces/DnDLocation';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ShareCoordinatesService } from '../service/share-coordinates.service';
+import {DeleteDialogComponent} from "../delete-dialog/delete-dialog.component";
 
 // import { Location } from '@angular/common';
 
@@ -19,6 +20,7 @@ import { ShareCoordinatesService } from '../service/share-coordinates.service';
 export class EventEditingComponent implements OnInit {
   constructor(
     public dialog: MatDialog,
+    private deleteDialog: MatDialog,
     private eventService: EventsService,
     private route: ActivatedRoute,
     private mapService: MapService,
@@ -214,6 +216,23 @@ export class EventEditingComponent implements OnInit {
       });
       console.log('The dialog was closed');
       // This is where the data gets returned (result) after clicking save button
+    });
+  }
+
+  openDeleteDialog(serial: string): void {
+    const dialogRef = this.dialog.open(DeleteDialogComponent, {
+      width: '250px',
+      data: {serial: serial}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      // You can implement deletion logic here
+      if(result) {
+        this.eventService.deleteEvent(serial, this.mapSerial)
+        this.updateEvents()
+        console.log('Confirmed deletion');
+      }
     });
   }
 }

@@ -26,6 +26,7 @@ import { EditMapDialogComponent } from './edit-map-dialog/edit-map-dialog.compon
 import { ImageUploadDialogComponent } from './image-upload-dialog/image-upload-dialog.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatFormFieldModule } from "@angular/material/form-field";
+import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
 
 @NgModule({
     declarations: [
@@ -40,6 +41,7 @@ import { MatFormFieldModule } from "@angular/material/form-field";
         EventEntryComponent,
         EditMapDialogComponent,
         ImageUploadDialogComponent,
+        DeleteDialogComponent,
 
     ],
     providers: [],

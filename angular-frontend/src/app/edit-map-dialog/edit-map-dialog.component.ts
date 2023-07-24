@@ -23,13 +23,12 @@ export class EditMapDialogComponent {
   onSave() {
     this.saveChanges.emit(this.data);
     this.saveData();
-    this.openUploadDialog()
   }
 
   openUploadDialog(): void {
     const dialogRef = this.dialog.open(ImageUploadDialogComponent, {
       width: '400px',
-      data: {}
+      data: {serial: this.data.Serial}
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -61,9 +60,13 @@ export class EditMapDialogComponent {
 
 
     if (this.data.Serial === '') {
-      this.http.post('http://localhost:8080/DnDEvolved/v1/maps', body, {headers: contentType})
+      this.http.post('http://localhost:8080/DnDEvolved/v1/maps', body, {headers: contentType, responseType: "text"})
         .subscribe(
-          response => console.log(response), // Handle success here
+          response => {
+            this.data.Serial = response;
+            this.openUploadDialog()
+            console.log(response)
+            }, // Handle success here
           error => console.log(error) // Handle error here
         );
     } else {

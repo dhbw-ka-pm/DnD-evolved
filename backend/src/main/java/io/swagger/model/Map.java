@@ -51,7 +51,7 @@ public class Map implements XMLModel {
   @XmlElementWrapper(name = "Event")
   @JsonProperty("events")
   @Valid
-  private HashMap<String, Location> events = null;
+  private HashMap<String, Location> events = new HashMap<>();
 
   // Getters and setters omitted for brevity
 
