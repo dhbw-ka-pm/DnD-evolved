@@ -17,7 +17,8 @@ import java.util.Objects;
         "serial",
         "name",
         "description",
-        "leadsToMapSerial"
+        "leadsToMapSerial",
+        "leadsToChildMapSerial"
 })
 @XmlRootElement(name = "Event")
 public class Event implements XMLModel {
@@ -38,6 +39,11 @@ public class Event implements XMLModel {
   @XmlElement(name = "leadsToMapSerial")
   @JsonProperty("leadsToMapSerial")
   private String leadsToMapSerial;
+
+
+  @XmlElement(name = "leadsToChildMapSerial")
+  @JsonProperty("leadsToChildMapSerial")
+  private String leadsToChildMapSerial;
 
   /**
    * Get serial
@@ -77,6 +83,14 @@ public class Event implements XMLModel {
     return this;
   }
 
+  public String getLeadsToChildMapSerial() {
+    return leadsToChildMapSerial;
+  }
+
+  public void setLeadsToChildMapSerial(String leadsToChildMapSerial) {
+    this.leadsToChildMapSerial = leadsToChildMapSerial;
+  }
+
   /**
    * Get description
    *
@@ -111,49 +125,5 @@ public class Event implements XMLModel {
 
   public void setLeadsToMapSerial(String leadsToMapSerial) {
     this.leadsToMapSerial = leadsToMapSerial;
-  }
-
-
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) {
-      return true;
-    }
-    if (o == null || getClass() != o.getClass()) {
-      return false;
-    }
-    Event event = (Event) o;
-    return Objects.equals(this.serial, event.serial) &&
-            Objects.equals(this.name, event.name) &&
-            Objects.equals(this.description, event.description) &&
-            Objects.equals(this.leadsToMapSerial, event.leadsToMapSerial);
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(serial, name, description, leadsToMapSerial);
-  }
-
-  @Override
-  public String toString() {
-    StringBuilder sb = new StringBuilder();
-    sb.append("class Event {\n");
-    sb.append("    serial: ").append(toIndentedString(serial)).append("\n");
-    sb.append("    name: ").append(toIndentedString(name)).append("\n");
-    sb.append("    description: ").append(toIndentedString(description)).append("\n");
-    sb.append("    leadsToMapSerial: ").append(toIndentedString(leadsToMapSerial)).append("\n");
-    sb.append("}");
-    return sb.toString();
-  }
-
-  /**
-   * Convert the given object to string with each line indented by 4 spaces
-   * (except the first line).
-   */
-  private String toIndentedString(Object o) {
-    if (o == null) {
-      return "null";
-    }
-    return o.toString().replace("\n", "\n    ");
   }
 }

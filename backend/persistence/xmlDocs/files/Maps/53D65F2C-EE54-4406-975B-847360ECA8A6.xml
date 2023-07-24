@@ -1,24 +1,94 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Map>
     <Serial>53D65F2C-EE54-4406-975B-847360ECA8A6</Serial>
-    <Name>Second Map</Name>
+    <Name>Oceania</Name>
     <Description>A nice Map for an DnD campaign</Description>
     <ImagePath>http://localhost:8080/DnDEvolved/v1/images/a5aec609-2de3-4931-9fd0-6fa246a69645</ImagePath>
     <SizeX>640</SizeX>
     <SizeY>832</SizeY>
     <Event>
         <entry>
-            <key>035242CF-39D0-4346-867B-CD9C4C592F1B</key>
+            <key>3855bfe7-e0e9-4379-af48-a5bbc6d5bc53</key>
             <value>
-                <x>469</x>
-                <y>152</y>
+                <x>648</x>
+                <y>240</y>
             </value>
         </entry>
         <entry>
-            <key>31E75382-6AE1-4B33-A14B-F9BF96F3D714</key>
+            <key>67a28940-cd6a-4792-baaf-f3e8d5cea9ec</key>
             <value>
-                <x>150</x>
-                <y>500</y>
+                <x>320</x>
+                <y>416</y>
+            </value>
+        </entry>
+        <entry>
+            <key>fc887a54-2c5c-4cc3-8ba5-c8019cb09306</key>
+            <value>
+                <x>320</x>
+                <y>416</y>
+            </value>
+        </entry>
+        <entry>
+            <key>8b4b09b6-a39f-4ea0-8965-6c8a6c6d01a5</key>
+            <value>
+                <x>320</x>
+                <y>416</y>
+            </value>
+        </entry>
+        <entry>
+            <key>95cce336-1706-4a89-86b3-cc07dbeebf03</key>
+            <value>
+                <x>320</x>
+                <y>416</y>
+            </value>
+        </entry>
+        <entry>
+            <key>17e5efb5-3288-4c2b-a92b-abf212a0a666</key>
+            <value>
+                <x>531</x>
+                <y>301</y>
+            </value>
+        </entry>
+        <entry>
+            <key>61462cb1-e356-4899-bb74-099a608f67ab</key>
+            <value>
+                <x>320</x>
+                <y>416</y>
+            </value>
+        </entry>
+        <entry>
+            <key>5f7d6655-d421-457d-a302-eaab69a23dc4</key>
+            <value>
+                <x>662</x>
+                <y>344</y>
+            </value>
+        </entry>
+        <entry>
+            <key>c467fc1f-fbe1-4951-8533-8f03a6083dcb</key>
+            <value>
+                <x>320</x>
+                <y>416</y>
+            </value>
+        </entry>
+        <entry>
+            <key>727fd71c-2baa-4f64-a37c-b1b4f2cf03a3</key>
+            <value>
+                <x>320</x>
+                <y>416</y>
+            </value>
+        </entry>
+        <entry>
+            <key>bc0b2b97-2178-4703-815d-a5026296b928</key>
+            <value>
+                <x>320</x>
+                <y>416</y>
+            </value>
+        </entry>
+        <entry>
+            <key>bf0abf32-0f4d-43e7-a10d-c605fb9a72f6</key>
+            <value>
+                <x>491</x>
+                <y>220</y>
             </value>
         </entry>
         <entry>
@@ -36,10 +106,73 @@
             </value>
         </entry>
         <entry>
+            <key>0005e8c4-33cc-4047-b0e4-577669258394</key>
+            <value>
+                <x>320</x>
+                <y>416</y>
+            </value>
+        </entry>
+        <entry>
+            <key>67ebe246-7359-4f2b-818e-9b5cfc7bdc63</key>
+            <value>
+                <x>320</x>
+                <y>416</y>
+            </value>
+        </entry>
+        <entry>
+            <key>bfa6ef25-03de-43e0-8b6f-06491ffc8776</key>
+            <value>
+                <x>320</x>
+                <y>416</y>
+            </value>
+        </entry>
+        <entry>
+            <key>035242CF-39D0-4346-867B-CD9C4C592F1B</key>
+            <value>
+                <x>469</x>
+                <y>152</y>
+            </value>
+        </entry>
+        <entry>
+            <key>31E75382-6AE1-4B33-A14B-F9BF96F3D714</key>
+            <value>
+                <x>150</x>
+                <y>500</y>
+            </value>
+        </entry>
+        <entry>
+            <key>111ef453-2884-4748-b5bc-26efd357b352</key>
+            <value>
+                <x>320</x>
+                <y>416</y>
+            </value>
+        </entry>
+        <entry>
+            <key>7432f8c1-8f5f-4057-b831-7d4a00c6d265</key>
+            <value>
+                <x>320</x>
+                <y>416</y>
+            </value>
+        </entry>
+        <entry>
+            <key>6995382c-8539-40da-bff9-9833e2dd67c6</key>
+            <value>
+                <x>320</x>
+                <y>416</y>
+            </value>
+        </entry>
+        <entry>
             <key>6169a3bc-df1e-4a72-b74c-6a8d131ad27d</key>
             <value>
                 <x>100</x>
                 <y>200</y>
+            </value>
+        </entry>
+        <entry>
+            <key>990123e6-0f27-4a9e-aa9f-a93a51d47a43</key>
+            <value>
+                <x>320</x>
+                <y>416</y>
             </value>
         </entry>
     </Event>

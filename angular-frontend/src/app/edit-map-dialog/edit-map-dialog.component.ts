@@ -52,10 +52,10 @@ export class EditMapDialogComponent {
 
     const body = `
  <Map>
-    <name>${this.data.Name}</name>
-    <description>${this.data.Description}</description>
-    <sizeX>${this.data.SizeX}</sizeX>
-    <sizeY>${this.data.SizeY}</sizeY>
+    <Name>${this.data.Name}</Name>
+    <Description>${this.data.Description}</Description>
+    <SizeX>${this.data.SizeX}</SizeX>
+    <SizeY>${this.data.SizeY}</SizeY>
   </Map>
     `;
 
