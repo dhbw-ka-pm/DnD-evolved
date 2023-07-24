@@ -230,6 +230,7 @@ export class EventEditingComponent implements OnInit {
       // You can implement deletion logic here
       if(result) {
         this.eventService.deleteEvent(serial, this.mapSerial)
+        this.updateEvents()
         const currentUrl = this.router.url; // Get the current URL
         this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
           // Navigating to the same URL with skipLocationChange set to true triggers component reload

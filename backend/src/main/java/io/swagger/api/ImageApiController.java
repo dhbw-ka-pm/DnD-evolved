@@ -9,21 +9,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.context.support.ServletContextResource;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.xml.bind.JAXBException;
 import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -72,6 +66,8 @@ public class ImageApiController implements ImageApi{
             File destination = new File(imageSaver.getFilepath(serial));
             ImageIO.write(src, "jpg", destination);
             dataHandler.getMap(mapSerial).setImagePath("http://localhost:8080/DnDEvolved/v1/images/" + serial);
+            dataHandler.getMap(mapSerial).setSizeX(src.getWidth());
+            dataHandler.getMap(mapSerial).setSizeY(src.getHeight());
             dataHandler.updateMap(mapSerial);
             return new ResponseEntity<>(serial, HttpStatus.OK);
 

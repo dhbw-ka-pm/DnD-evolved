@@ -3,6 +3,7 @@ import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {DnDMap} from '../interfaces/DnDMap';
 import {ImageUploadDialogComponent} from "../image-upload-dialog/image-upload-dialog.component";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-edit-map-dialog',
@@ -17,12 +18,18 @@ export class EditMapDialogComponent {
     public dialogRef: MatDialogRef<EditMapDialogComponent>,
     private http: HttpClient,
     private dialog: MatDialog,
+    private router: Router,
     @Inject(MAT_DIALOG_DATA) public data: DnDMap) {
   }
 
   onSave() {
     this.saveChanges.emit(this.data);
     this.saveData();
+    const currentUrl = this.router.url; // Get the current URL
+    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+      // Navigating to the same URL with skipLocationChange set to true triggers component reload
+      this.router.navigateByUrl(currentUrl);
+    });
   }
 
   openUploadDialog(): void {
