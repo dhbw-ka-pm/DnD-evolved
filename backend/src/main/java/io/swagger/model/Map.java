@@ -6,9 +6,7 @@ import org.springframework.validation.annotation.Validated;
 
 import javax.validation.Valid;
 import javax.xml.bind.annotation.*;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Objects;
 
 @Validated
@@ -42,11 +40,11 @@ public class Map implements XMLModel {
 
   @XmlElement(name = "SizeX")
   @JsonProperty("sizeX")
-  private Integer sizeX = null;
+  private Integer sizeX = 400;
 
   @XmlElement(name = "SizeY")
   @JsonProperty("sizeY")
-  private Integer sizeY = null;
+  private Integer sizeY = 400;
 
   @XmlElementWrapper(name = "Event")
   @JsonProperty("events")
