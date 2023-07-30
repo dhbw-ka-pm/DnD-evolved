@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Map>
+    <Serial>d7e1f349-f750-4ca0-9f60-1c6b75f7a7b5</Serial>
+    <Name>NewMap</Name>
+    <Description>another map</Description>
+    <ImagePath>http://localhost:8080/DnDEvolved/v1/images/ff423c04-567b-4ac2-baec-e267d3cf7e67</ImagePath>
+    <SizeX>1024</SizeX>
+    <SizeY>1024</SizeY>
+    <Event>
+        <entry>
+            <key>d4feb2b5-094e-4bf3-b964-289089efdf17</key>
+            <value>
+                <x>512</x>
+                <y>512</y>
+            </value>
+        </entry>
+        <entry>
+            <key>822da169-2e0f-4481-8506-557c57631cee</key>
+            <value>
+                <x>231</x>
+                <y>351</y>
+            </value>
+        </entry>
+        <entry>
+            <key>a1741299-db11-4c49-9a51-83498f5d79c5</key>
+            <value>
+                <x>298</x>
+                <y>74</y>
+            </value>
+        </entry>
+    </Event>
+</Map>

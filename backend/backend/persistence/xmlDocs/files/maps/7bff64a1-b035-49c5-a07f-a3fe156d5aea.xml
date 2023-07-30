@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Map>
+    <Serial>7bff64a1-b035-49c5-a07f-a3fe156d5aea</Serial>
+    <Name>Test</Name>
+    <Description>Test</Description>
+    <SizeX>400</SizeX>
+    <SizeY>400</SizeY>
+    <Event>
+        <entry>
+            <key>44f8463b-b7d6-42bb-82fd-db61543af768</key>
+            <value>
+                <x>200</x>
+                <y>200</y>
+            </value>
+        </entry>
+    </Event>
+</Map>
