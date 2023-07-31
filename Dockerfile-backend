@@ -5,15 +5,15 @@ FROM adoptopenjdk:11-jdk-hotspot
 WORKDIR /app
 
 # Compile the Java code
-COPY Backend/src ./src
-COPY Backend/build.gradle .
-COPY Backend/gradlew .
-COPY Backend/gradle ./gradle
+COPY backend/src ./src
+COPY backend/build.gradle .
+COPY backend/gradlew .
+COPY backend/gradle ./gradle
 RUN ./gradlew build
 
 
 # Copy the Spring Boot application JAR file to the container
-COPY Backend/build/libs/*.jar application-0.0.1-SNAPSHOT.jar
+COPY backend/build/libs/*.jar application-0.0.1-SNAPSHOT.jar
 
 # Expose the port on which Spring Boot application runs
 EXPOSE 8080
