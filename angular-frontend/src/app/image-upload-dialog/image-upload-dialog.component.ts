@@ -25,7 +25,7 @@ export class ImageUploadDialogComponent {
     if (this.selectedFile) {
       const formData = new FormData();
       formData.append('image', this.selectedFile, this.selectedFile.name);
-      this.http.post('http://localhost:8080/DnDEvolved/v1/images/' + this.data.serial, this.selectedFile, { headers: new HttpHeaders().set('Content-Type', 'image/jpeg') }).subscribe(
+      this.http.post('http://193.196.37.17:8080/DnDEvolved/v1/images/' + this.data.serial, this.selectedFile, { headers: new HttpHeaders().set('Content-Type', 'image/jpeg') }).subscribe(
         (response) => {
           // Handle success response
           console.log('Upload successful', response);
