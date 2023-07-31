@@ -68,4 +68,19 @@ export class MapService {
         );
     });
   }
+
+  //delete map by serial endpoint
+  deleteMap(serial: string): Promise<DnDMap> {
+    return new Promise((resolve, reject) => {
+      this.http.delete(this.apiUrl + serial, { responseType: 'text' })
+        .subscribe(
+          (maps: any) => {
+            resolve(maps);
+          },
+          (error: any) => {
+            reject(error);
+          }
+        );
+    });
+  }
 }

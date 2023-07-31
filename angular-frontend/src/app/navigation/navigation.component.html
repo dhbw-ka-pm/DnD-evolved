@@ -21,7 +21,7 @@
                             <button mat-raised-button color="warn" class="expand-button"
                                 (click)="openEditDialog(false, map)">Edit
                             </button>
-                            <button mat-raised-button color="accent" class="expand-button">Delete</button>
+                            <button mat-raised-button color="accent" class="expand-button" (click)="deleteMap(map.Serial)">Delete</button>
                         </mat-action-row>
                     </mat-expansion-panel>
                 </mat-accordion>

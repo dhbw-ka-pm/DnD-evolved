@@ -1,12 +1,13 @@
-import { Component, inject, OnInit } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { Component, OnInit, inject } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
+import { EditMapDialogComponent } from '../edit-map-dialog/edit-map-dialog.component';
 import { DnDMap } from '../interfaces/DnDMap';
 import { MapService } from '../service/maps.service';
-import { MatDialog } from '@angular/material/dialog';
-import { EditMapDialogComponent } from '../edit-map-dialog/edit-map-dialog.component';
-import { Router } from '@angular/router';
+import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
 
 @Component({
   selector: 'app-navigation',
@@ -14,6 +15,28 @@ import { Router } from '@angular/router';
   styleUrls: ['./navigation.component.css'],
 })
 export class NavigationComponent implements OnInit {
+  deleteMap(serial: string) {
+    const dialogRef = this.dialog.open(DeleteDialogComponent, {
+      width: '250px',
+      data: { serial: serial }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      // You can implement deletion logic here
+      if (result) {
+        this.mapService.deleteMap(serial)
+        this.updateMaps();
+        const currentUrl = this.router.url; // Get the current URL
+        this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+          // Navigating to the same URL with skipLocationChange set to true triggers component reload
+          this.router.navigateByUrl(currentUrl);
+        });
+        console.log('Confirmed deletion');
+      }
+    });
+
+  }
   private breakpointObserver = inject(BreakpointObserver);
 
   DnDMaps: DnDMap[] = [];
