@@ -74,7 +74,7 @@ public class ImageApiController implements ImageApi {
       File destination = new File(imageSaver.getFilepath(serial));
       ImageIO.write(src, "jpg", destination);
       dataHandler.getMap(mapSerial).setImagePath(
-          "http://localhost:8080/DnDEvolved/v1/images/" + serial);
+          "http://193.196.37.17:8080/DnDEvolved/v1/images/" + serial);
       dataHandler.getMap(mapSerial).setSizeX(src.getWidth());
       dataHandler.getMap(mapSerial).setSizeY(src.getHeight());
       dataHandler.updateMap(mapSerial);
