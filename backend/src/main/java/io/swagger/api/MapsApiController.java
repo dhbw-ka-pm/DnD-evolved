@@ -86,7 +86,7 @@ public class MapsApiController implements MapsApi {
     }
 
     @Override
-    public ResponseEntity<Void> mapDelete(@NotNull @Parameter(in = ParameterIn.QUERY, description = "", required = true, schema = @Schema()) @Valid @PathVariable(value = "serial", required = true) String serial) {
+    public ResponseEntity<Void> mapDelete(@NotNull @Parameter(in = ParameterIn.PATH, description = "", required = true, schema = @Schema()) @PathVariable(value = "serial") String serial) {
         try {
             dataHandler.removeMap(serial);
             return new ResponseEntity<>(HttpStatus.OK);

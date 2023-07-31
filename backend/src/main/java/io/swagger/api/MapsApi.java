@@ -86,7 +86,7 @@ public interface MapsApi {
     })
     @RequestMapping(value = "/maps/{serial}",
             method = RequestMethod.DELETE)
-    default ResponseEntity<Void> mapDelete(@NotNull @Parameter(in = ParameterIn.QUERY, description = "", required = true, schema = @Schema()) @Valid @PathVariable(value = "serial") String serial) {
+    default ResponseEntity<Void> mapDelete(@NotNull @Parameter(in = ParameterIn.PATH, description = "", required = true, schema = @Schema()) @PathVariable(value = "serial") String serial) {
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
     }
 

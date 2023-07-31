@@ -104,6 +104,10 @@ public class DataHandler {
 
     public void removeMap(String serial) throws SerialNotFoundException {
         checkContains(maps, serial);
+        for(String s: maps.get(serial).getEvents().keySet()){
+            events.remove(s);
+            eventXMLSaver.removeFile(s);
+        }
         maps.remove(serial);
         mapXMLSaver.removeFile(serial);
     }
