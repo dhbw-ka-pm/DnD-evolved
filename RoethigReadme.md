@@ -55,8 +55,8 @@ Dazu haben wir eine Komponente geschrieben, welche das XSLT als String-literal e
 
 Unsere XML Datenstrukturen finden sie unter folgende Verzeichnissen:
 
-- [Map.xsd](Backend/persistence/xmlDocs/schemas/Map.xsd)
-- [Event.xsd](Backend/persistence/xmlDocs/schemas/Event.xsd)
+- [Map.xsd](backend/persistence/xmlDocs/schemas/Map.xsd)
+- [Event.xsd](backend/persistence/xmlDocs/schemas/Event.xsd)
 
 <a id="orge4e0eb2"></a>
 
