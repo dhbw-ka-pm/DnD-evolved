@@ -60,6 +60,14 @@ Unsere XML Datenstrukturen finden sie unter folgende Verzeichnissen:
 
 <a id="orge4e0eb2"></a>
 
-# Benotung
+# Repositories
+Wir haben momentan zwei wichtig Repositories. Das erste enthält unsere Source Dateien. Hier findet unsere Entwicklung statt:
+https://github.com/dhbw-ka-pm/DnD-evolved/
+Im zweiten haben wir den aktuellen Stand unserer Artefakte für den Server, da wir mit git in der Lage sind einfach Updates auf unsere Server zu spielen:
+https://github.com/dolerich-hirnfiedler/server
 
+
+# Benotung
 Tanina hat sich Webengineering bereits anrechnen lassen.
+
+
