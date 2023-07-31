@@ -47,7 +47,7 @@ Wir haben uns dazu entschieden im Backend mit Spring Boot zu Arbeiten und im Fro
 Wir haben uns dafür entschieden ihre Anforderungen bezüglich XSLT zu erfüllen, indem wir XSLT zum rendern der Karte mit Events verwenden.
 Dazu haben wir eine Komponente geschrieben, welche das XSLT als String-literal enthält und mit Javascript in HTML transformiert. Die Komponente finden sie wie folgt:
 
-<./angular-frontend/src/app/interactive-map/interactive-map.component.ts>
+[XSLT-Komponente](./angular-frontend/src/app/interactive-map/interactive-map.component.ts)
 
 <a id="org71a1b26"></a>
 
