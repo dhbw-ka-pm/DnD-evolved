@@ -98,7 +98,7 @@ export class InteractiveMapComponent implements OnInit, AfterViewInit {
     const domParser = new DOMParser();
     const xsltDoc = domParser.parseFromString(this.xsltContent, 'text/xml');
     console.log('xsltDoc: ' + xsltDoc);
-    const apiUrl = 'http://localhost:8080/DnDEvolved/v1/maps/'
+    const apiUrl = 'http://193.196.37.17:8080/DnDEvolved/v1/maps/'
 
     console.log("child serial: " + this.parentMapSerial);
     console.log("path: " + apiUrl + this.parentMapSerial);

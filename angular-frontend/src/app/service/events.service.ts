@@ -15,7 +15,7 @@ export class EventsService {
   getEvents(serial: string): Promise<any> {
     return new Promise((resolve, reject) => {
       this.http
-        .get('http://localhost:8080/DnDEvolved/v1/maps/events/' + serial, {
+        .get('http://193.196.37.17:8080/DnDEvolved/v1/maps/events/' + serial, {
           responseType: 'text',
         })
         .pipe(
@@ -45,7 +45,7 @@ export class EventsService {
   getEventLocations(serial: string): Promise<any> {
     return new Promise((resolve, reject) => {
       this.http
-        .get('http://localhost:8080/DnDEvolved/v1/maps/' + serial, {
+        .get('http://193.196.37.17:8080/DnDEvolved/v1/maps/' + serial, {
           responseType: 'text',
         })
         .pipe(
@@ -75,7 +75,7 @@ export class EventsService {
   getEventData(serial: string): Promise<DnDEvent> {
     return new Promise((resolve, reject) => {
       this.http
-        .get('http://localhost:8080/DnDEvolved/v1/events/' + serial, {
+        .get('http://193.196.37.17:8080/DnDEvolved/v1/events/' + serial, {
           responseType: 'text',
         })
         .pipe(
@@ -109,7 +109,7 @@ export class EventsService {
     return new Promise((resolve, reject) => {
       this.http
         .get(
-          'http://localhost:8080/DnDEvolved/v1/maps/' +
+          'http://193.196.37.17:8080/DnDEvolved/v1/maps/' +
             mapSerial +
             '/events/' +
             eventSerial,
@@ -140,7 +140,7 @@ export class EventsService {
   }
 
   deleteEvent(eventSerial: string, mapSerial: string) {
-    this.http.delete('http://127.0.0.1:8080/DnDEvolved/v1/maps/' + mapSerial + '/events/' + eventSerial)
+    this.http.delete('http://193.196.37.17:8080/DnDEvolved/v1/maps/' + mapSerial + '/events/' + eventSerial)
       .subscribe(
         response => console.log(response), // Handle success here
         error => console.log(error) // Handle error here

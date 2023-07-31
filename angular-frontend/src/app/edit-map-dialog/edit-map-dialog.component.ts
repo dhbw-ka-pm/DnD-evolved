@@ -11,7 +11,7 @@ import {Router} from "@angular/router";
   styleUrls: ['./edit-map-dialog.component.css']
 })
 export class EditMapDialogComponent {
-  mapApi = 'http://localhost:8080/DnDEvolved/v1/maps/'
+  mapApi = 'http://193.196.37.17:8080/DnDEvolved/v1/maps/'
   @Output() saveChanges: EventEmitter<DnDMap> = new EventEmitter<DnDMap>();
 
   constructor(
@@ -67,7 +67,7 @@ export class EditMapDialogComponent {
 
 
     if (this.data.Serial === '') {
-      this.http.post('http://localhost:8080/DnDEvolved/v1/maps', body, {headers: contentType, responseType: "text"})
+      this.http.post('http://193.196.37.17:8080/DnDEvolved/v1/maps', body, {headers: contentType, responseType: "text"})
         .subscribe(
           response => {
             this.data.Serial = response;

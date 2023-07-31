@@ -10,7 +10,7 @@ import { DnDMap } from '../interfaces/DnDMap';
   providedIn: 'root'
 })
 export class MapService {
-  private apiUrl = 'http://localhost:8080/DnDEvolved/v1/maps/'
+  private apiUrl = 'http://193.196.37.17:8080/DnDEvolved/v1/maps/'
   constructor(private http: HttpClient) {}
 
   // Create a method to fetch maps from the API
