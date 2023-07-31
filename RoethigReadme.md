@@ -27,9 +27,9 @@
 **Aufgrund der geringen Serverleistung der bwcloud, kann es passieren dass nach dem Löschen oder Hinzufügen von Karten die Website neu geladen werden muss um die Änderungen anzuzeigen**
 
 Mit der Website sollen User die Möglichkeit haben Maps für ein DnD-Spiel anzulegen.
-Dies können sie auf der rechten Seite der Website. Nachdem sie eine Map angelegt haben, wird diese mit Namen im Reiter angezeigt. Wenn sie auf den Namen einer Karte klicken, öffnet sich eine Ansicht in der Mitte des Fensters, welche die Karte mitsamt Event-Markern anzeigt. Auf der rechten Seite werden sie ein Panel zum Hinzufügen, Editieren, sowie Entfernen von Events für die aktuelle Karte finden.
+Dies können sie auf der linken Seite der Website sehen. Nachdem sie eine Map angelegt haben, wird diese mit Namen im Reiter angezeigt. Wenn sie auf den Namen einer Karte klicken, öffnet sich eine Ansicht in der Mitte des Fensters, welche die Karte mitsamt Event-Markern anzeigt. Auf der rechten Seite werden sie ein Panel zum Hinzufügen, Editieren, sowie Entfernen von Events für die aktuelle Karte finden.
 
-Sie finden zwei Bilder welche sie als Karten verwenden können im Root Verzeichnis.
+Sie finden zwei Bilder, welche sie als Karten verwenden können im Root Verzeichnis.
 
 1.  ![img](fantasy-map-1.jpeg)
 2.  ![img](fantasy-map-2.jpeg)
