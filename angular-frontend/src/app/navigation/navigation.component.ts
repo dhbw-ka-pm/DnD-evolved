@@ -29,8 +29,8 @@ export class NavigationComponent implements OnInit {
         this.updateMaps();
         const currentUrl = this.router.url; // Get the current URL
         this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
-          // Navigating to the same URL with skipLocationChange set to true triggers component reload
-          this.router.navigateByUrl(currentUrl);
+          // Navigating to the starting route (in our case this is EventEditingComponent)
+          this.router.navigateByUrl('/');
         });
         console.log('Confirmed deletion');
       }
