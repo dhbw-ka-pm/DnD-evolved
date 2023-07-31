@@ -55,7 +55,7 @@ export class EditEventDialogComponent {
 
     if (this.data.serial === '') {
       let newSerial = '';
-      this.http.post('http://localhost:8080/DnDEvolved/v1/events/' + this.data.mapSerial, body, {
+      this.http.post('http://193.196.37.17/8080/DnDEvolved/v1/events/' + this.data.mapSerial, body, {
         headers: contentType,
         responseType: "text"
       })
@@ -63,7 +63,7 @@ export class EditEventDialogComponent {
           response => {
             console.log(response);
             newSerial = response;
-            this.http.patch('http://127.0.0.1:8080/DnDEvolved/v1/maps/' + this.data.mapSerial + '/events/' + newSerial + '/' + this.data.locationX + ',' + this.data.locationY, body, { headers: contentType })
+            this.http.patch('http://193.196.37.17/8080/DnDEvolved/v1/maps/' + this.data.mapSerial + '/events/' + newSerial + '/' + this.data.locationX + ',' + this.data.locationY, body, { headers: contentType })
               .subscribe(
                 response => console.log(response), // Handle success here
                 error => console.log(error) // Handle error here
@@ -72,12 +72,12 @@ export class EditEventDialogComponent {
           error => console.log(error) // Handle error here
         );
     } else {
-      this.http.patch('http://localhost:8080/DnDEvolved/v1/events/edit/' + this.data.serial, body, { headers: contentType })
+      this.http.patch('http://193.196.37.17/8080/DnDEvolved/v1/events/edit/' + this.data.serial, body, { headers: contentType })
         .subscribe(
           response => console.log(response), // Handle success here
           error => console.log(error) // Handle error here
         );
-      this.http.patch('http://127.0.0.1:8080/DnDEvolved/v1/maps/' + this.data.mapSerial + '/events/' + this.data.serial + '/' + this.data.locationX + ',' + this.data.locationY, body, { headers: contentType })
+      this.http.patch('http://193.196.37.17/8080/DnDEvolved/v1/maps/' + this.data.mapSerial + '/events/' + this.data.serial + '/' + this.data.locationX + ',' + this.data.locationY, body, { headers: contentType })
         .subscribe(
           response => console.log(response), // Handle success here
           error => console.log(error) // Handle error here
